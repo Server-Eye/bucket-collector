@@ -1,0 +1,29 @@
+{
+    "name": "bucket-collector",
+    "version": "0.0.1",
+    "description": "Empties Server-Eye buckets and posts data to a destination URL.",
+    "main": "app.js",
+    "dependencies": {
+        "express": "4.12.x",
+        "request": "2.40.x",
+        "q": "1.0.x",
+        "log4js": "0.6.x"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Server-Eye/bucket-collector.git"
+    },
+    "keywords": [
+        "Server-Eye",
+        "bucket-collector"
+    ],
+    "author": "Roland Paltz",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Server-Eye/bucket-collector/issues"
+    },
+    "homepage": "https://github.com/Server-Eye/bucket-collector#readme"
+}
