@@ -1,0 +1,35 @@
+{
+    "appenders": [
+        {
+        "type": "file",
+        "filename": "log/dbLog.log",
+        "maxLogSize": 104857600,
+        "backups": 10,
+        "pollInterval": 0.1,
+        "category": "DB"
+        }, {
+        "type": "file",
+        "filename": "log/webLog.log",
+        "maxLogSize": 104857600,
+        "backups": 10,
+        "pollInterval": 0.1,
+        "category": "WEB"
+        }, {
+        "type": "file",
+        "filename": "log/bucketLog.log",
+        "maxLogSize": 104857600,
+        "backups": 10,
+        "pollInterval": 0.1,
+        "category": "BUCKET"
+        }, {
+        "type": "file",
+        "filename": "log/appLog.log",
+        "maxLogSize": 104857600,
+        "backups": 10,
+        "pollInterval": 0.1,
+        "category": "APP"
+        }, {
+        "type": "console"
+        }
+    ]
+}
