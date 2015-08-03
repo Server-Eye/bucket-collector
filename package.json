@@ -5,9 +5,11 @@
     "main": "app.js",
     "dependencies": {
         "express": "4.12.x",
+        "jade": "^1.11.0",
         "request": "2.40.x",
         "q": "1.0.x",
-        "log4js": "0.6.x"
+        "log4js": "0.6.x",
+        "jsop": "0.3.x"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
