@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    | Settings
+  .panel-body
+    form
+      .form-group
+        label(for='apiKey') API key
+        input#apiKey.form-control(type='text', readonly)
+      .form-group
+        label(for='url') URL
+        input#url.form-control(type='text')
+      .form-group
+        label(for='interval') Interval (min)
+        input#interval.form-control(type='number', min='1')
+      button.btn.btn-default(type='button', ng-click='apply()') apply

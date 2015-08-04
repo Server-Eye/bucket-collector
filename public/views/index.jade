@@ -3,3 +3,24 @@ extends layout
 block content
   .container-fluid(ng-controller='MainController')
     se-header
+    .row
+      .col-sm-4
+        login(ng-if='false')
+        settings(ng-if='true')
+      .col-sm-8    
+        .panel.panel-default
+          .panel-heading
+            | Buckets
+          .panel-body
+            table.table.m-t-lg
+              tr
+                th.col-sm-7
+                  | ISP
+                th.col-sm-4
+                  | ZIP
+                th.col-sm-1.text-right
+                  | Heartbeats
+                th.text-right
+                  | Diff
+                th.text-right
+                  | Activated        
