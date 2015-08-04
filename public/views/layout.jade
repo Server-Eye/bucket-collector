@@ -1,14 +1,20 @@
 doctype html
-html(ng-app='admin')
+html(ng-app='bucket-collector')
   head
     title Server-Eye | bucket-collector
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.css')
     link(rel='stylesheet', href='/angular-bootstrap/ui-bootstrap-csp.css')
+    link(rel='stylesheet', href='/css/style.css')
     script(src='/jquery/dist/jquery.js')
     script(src='/angular/angular.js')
     script(src='/angular-bootstrap/ui-bootstrap.min.js')
     script(src='/angular-bootstrap/ui-bootstrap-tpls.min.js')
     script(src='/bootstrap/dist/js/bootstrap.js')
+    
+    script(src='/js/app.js')
+    script(src='/js/data/ApiKeyService.js')
+    script(src='/js/main/MainController.js')
+    script(src='/js/utils/SeHeaderDirective.js')
   body
     block content

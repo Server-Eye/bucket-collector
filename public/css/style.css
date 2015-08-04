@@ -1,0 +1,10 @@
+body {
+    margin-top: 10px;
+}
+
+.logo {
+    text-align: right;
+    border-bottom: 4px solid #ed872f;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+}
