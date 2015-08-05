@@ -19,8 +19,8 @@
         input#apiKey.form-control(type='text', ng-model='settings.apiKey',readonly)
       .form-group
         label(for='url') URL
-        input#url.form-control(type='text')
+        input#url.form-control(type='text', ng-model='settings.url')
       .form-group
         label(for='interval') Interval (min)
-        input#interval.form-control(type='number', min='1')
+        input#interval.form-control(type='number', min='1', ng-model='settings.interval')
       button.btn.btn-default(type='button', ng-click='apply()') apply
