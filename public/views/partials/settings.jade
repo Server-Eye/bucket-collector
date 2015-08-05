@@ -2,10 +2,21 @@
   .panel-heading
     | Settings
   .panel-body
+    .panel.panel-default(ng-if="!settings.apiKey")
+      .panel-heading
+        | Login
+      .panel-body
+        form
+          .form-group
+            label(for='email') E-Mail
+            input#email.form-control(type='email')
+          .form-group
+            label(for='password') Password
+            input#password.form-control(type='password')
     form
-      .form-group
+      .form-group(ng-if="settings.apiKey")
         label(for='apiKey') API key
-        input#apiKey.form-control(type='text', readonly)
+        input#apiKey.form-control(type='text', ng-model='settings.apiKey',readonly)
       .form-group
         label(for='url') URL
         input#url.form-control(type='text')
