@@ -40,7 +40,7 @@
                 var data = result.data;
 
                 if (data.success) {
-                    setKey(data.apiKey);
+                    _apiKey = data.apiKey;
                     deferred.resolve(data.apiKey);
                 } else {
                     deferred.reject(data.message);
