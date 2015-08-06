@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  .container-fluid(ng-controller='SettingsController')
+    se-header
+    .row(ng-if='!loaded')
+      .col-sm-12.jumbotron.text-center
+        h1
+          span.glyphicon.glyphicon-refresh.gly-spin
+    .row(ng-if='loaded')
+      .col-sm-4
+        .panel.panel-default
+          .panel-heading API Key
+          .panel-body
+            form(ng-show='!settings.apiKey')
+              .form-group
+                label(for='email') E-Mail
+                input#email.form-control(type='email', ng-model='login.email')
+              .form-group
+                label(for='password') Password
+                input#password.form-control(type='password', ng-model='login.password')
+              .form-group
+                label(for='keyName') Key-Name
+                input#password.form-control(type='text', ng-model='login.name')
+              .form-group
+                button.btn.btn-default(type='button', ng-click='newKey()') Generate API-Key
+              .text-danger(ng-show='login.error') ERROR: {{login.error}}
+            form(ng-show='settings.apiKey')
+              .form-group
+                label(for='apiKey') API key
+                input#apiKey.form-control(type='text', ng-model='settings.apiKey', readonly='readonly')
+              .form-group
+                button.btn.btn-default(type='button', ng-click='resetKey()') New Key 
+        .panel.panel-default
+          .panel-heading Bucketaction
+          .panel-body
+            form
+              .form-group
+                label(for='url') Type
+                input#url.form-control(type='text', ng-model='settings.type')
+              .form-group
+                label(for='url') URL
+                input#url.form-control(type='text', ng-model='settings.url')
+        .panel.panel-default
+          .panel-heading Interval
+          .panel-body
+            form
+              .form-group
+                label(for='interval') Minutes
+                input#interval.form-control(type='number', min='1', ng-model='settings.interval')
+        button.btn.btn-default(type='button', ng-click='applySettings()') apply
+      .col-sm-8
+        .panel.panel-default
+          .panel-heading Buckets
+          .panel-body
+            table.table.m-t-lg
+              tr
+                th.col-sm-7 ISP
+                th.col-sm-4 ZIP
+                th.col-sm-1.text-right Heartbeats
+                th.text-right Diff
+                th.text-right Activated        

@@ -11,11 +11,49 @@
         init();
 
         return {
-            get: getSettings
+            get: getSettings,
+            getNewApiKey: getNewApiKey,
+            set: setSettings
         };
+
+        function setSettings(settings) {
+            var deferred = $q.defer();
+
+            _settings = settings;
+
+            var promises = [];
+
+            if (_settings.apiKey && angular.isString(_settings.apiKey)) {
+                promises.push(ApiKey.set(_settings.apiKey));
+            }
+            if (_settings.url && angular.isString(_settings.url)) {
+                promises.push(Url.set(_settings.url));
+            }
+            if (_settings.type && angular.isString(_settings.type)) {
+                promises.push(Type.set(_settings.type));
+            }
+            if (_settings.interval && angular.isNumber(_settings.interval)) {
+                promises.push(Interval.set(_settings.interval));
+            }
+            if (_settings.activeBucketIds && angular.isArray(_settings.activeBucketIds)) {
+                promises.push(ActiveBucketIds.set(_settings.activeBucketIds));
+            }
+
+            $q.all(promises).then(function (res) {
+                deferred.resolve(res);
+            }, function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
 
         function getSettings() {
             return _deferred.promise;
+        }
+
+        function getNewApiKey(email, password, name) {
+            return ApiKey.getNew(email, password, name);
         }
 
         function init() {

@@ -52,8 +52,12 @@
             return deferred.promise;
         }
 
-        function getNewKey(email, password) {
+        function getNewKey(email, password, keyName) {
             var deferred = $q.defer();
+
+            if(!keyName || !angular.isString(keyName) || keyName===""){
+                keyName = "bucket-collector-" + Math.random().toString(36);
+            }
 
             $http({
                 method: 'POST',
@@ -61,12 +65,13 @@
                 data: {
                     email: email,
                     password: password,
-                    name: 'bucket-collector'
+                    name: keyName
                 }
             }).then(function (result) {
                 var data = result.data;
                 if (data.success) {
-                    setKey(data.apiKey).then(function (key) {
+                    var key = data.data.apiKey;
+                    setKey(key).then(function (key) {
                         deferred.resolve(key);
                     }, function (err) {
                         deferred.reject(err);
@@ -84,6 +89,7 @@
 
         function setKey(key) {
             var deferred = $q.defer();
+            console.log(key);
 
             $http({
                 method: 'GET',
