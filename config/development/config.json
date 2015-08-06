@@ -1,3 +1,4 @@
 {
-    "webinterfacePort": 8082
+    "webinterfacePort": 8082,
+    "logLevel": "debug"
 }

@@ -2,11 +2,11 @@
     "appenders": [
         {
         "type": "file",
-        "filename": "log/dbLog.log",
+        "filename": "log/settignsLog.log",
         "maxLogSize": 104857600,
         "backups": 10,
         "pollInterval": 0.1,
-        "category": "DB"
+        "category": "SETTINGS"
         }, {
         "type": "file",
         "filename": "log/webLog.log",

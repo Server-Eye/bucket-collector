@@ -1,3 +1,4 @@
 {
-    "webinterfacePort": 8080
+    "webinterfacePort": 8080,
+    "logLevel": "info"
 }

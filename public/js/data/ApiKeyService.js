@@ -61,7 +61,7 @@
 
             $http({
                 method: 'POST',
-                url: API_URL + '/auth/key',
+                url: API_URL.v1 + '/auth/key',
                 data: {
                     email: email,
                     password: password,

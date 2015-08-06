@@ -51,12 +51,20 @@ block content
         button.btn.btn-default(type='button', ng-click='applySettings()') apply
       .col-sm-8
         .panel.panel-default
-          .panel-heading Buckets
+          .panel-heading Available Buckets
           .panel-body
-            table.table.m-t-lg
+            table.table.m-t-lg(ng-show="settings.apiKey && buckets")
               tr
-                th.col-sm-7 ISP
-                th.col-sm-4 ZIP
-                th.col-sm-1.text-right Heartbeats
-                th.text-right Diff
-                th.text-right Activated        
+                th.col-sm-2 Name
+                th.col-sm-4 ID
+                th.col-sm-5 Users
+                th.col-sm-1.text-right Active
+              tr(ng-repeat="bucket in buckets")
+                td {{bucket.name}}
+                td {{bucket.bId}}
+                td(ng-show="bucket.users")
+                  p(ng-repeat="user in bucket.users") {{user.surname}} {{user.prename}} 
+                td(ng-show="!bucket.users") -
+                td 
+                  input(type="checkbox", ng-model="bucket.active")
+            h2.text-center(ng-show="!settings.apiKey") Please generate a API Key
