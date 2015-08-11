@@ -23,6 +23,13 @@
         "category": "BUCKET"
         }, {
         "type": "file",
+        "filename": "log/reactionLog.log",
+        "maxLogSize": 104857600,
+        "backups": 10,
+        "pollInterval": 0.1,
+        "category": "REACTION"
+        }, {
+        "type": "file",
         "filename": "log/appLog.log",
         "maxLogSize": 104857600,
         "backups": 10,
