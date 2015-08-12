@@ -3,7 +3,7 @@ var webinterface = require('./lib/webinterface');
 var bucketCollector = require('./lib/bucketCollector');
 
 function start(){
-    logger.info("starting bucket-collector");
+    logger.info("Starting application");
     webinterface.start();
     bucketCollector.start();
 }

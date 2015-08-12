@@ -2,35 +2,35 @@
     "appenders": [
         {
         "type": "file",
-        "filename": "log/settignsLog.log",
+        "filename": "log/bucket-collector.log",
         "maxLogSize": 104857600,
         "backups": 10,
         "pollInterval": 0.1,
         "category": "SETTINGS"
         }, {
         "type": "file",
-        "filename": "log/webLog.log",
+        "filename": "log/bucket-collector.log",
         "maxLogSize": 104857600,
         "backups": 10,
         "pollInterval": 0.1,
         "category": "WEB"
         }, {
         "type": "file",
-        "filename": "log/bucketLog.log",
+        "filename": "log/bucket-collector.log",
         "maxLogSize": 104857600,
         "backups": 10,
         "pollInterval": 0.1,
         "category": "BUCKET"
         }, {
         "type": "file",
-        "filename": "log/reactionLog.log",
+        "filename": "log/bucket-collector.log",
         "maxLogSize": 104857600,
         "backups": 10,
         "pollInterval": 0.1,
         "category": "REACTION"
         }, {
         "type": "file",
-        "filename": "log/appLog.log",
+        "filename": "log/bucket-collector.log",
         "maxLogSize": 104857600,
         "backups": 10,
         "pollInterval": 0.1,
