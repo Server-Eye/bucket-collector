@@ -3,9 +3,9 @@
 
     angular.module('bucket-collector').factory('SettingsService', SettingsService);
 
-    SettingsService.$inject = ['ActiveBucketIdsService', 'ApiKeyService', 'IntervalService', 'TypeService', 'UrlService', '$q'];
+    SettingsService.$inject = ['ActiveBucketIdsService', 'ApiKeyService', 'IntervalService', 'TypeService', 'UrlService', '$q', '$http'];
 
-    function SettingsService(ActiveBucketIds, ApiKey, Interval, Type, Url, $q) {
+    function SettingsService(ActiveBucketIds, ApiKey, Interval, Type, Url, $q, $http) {
         var _deferred = $q.defer();
         var _settings = {};
         init();
@@ -21,26 +21,18 @@
 
             _settings = settings;
 
-            var promises = [];
+            $http({
+                method: 'GET',
+                url: '/settings/setSettings',
+                params: settings
+            }).then(function (result) {
+                var data = result.data;
 
-            if (_settings.apiKey && angular.isString(_settings.apiKey)) {
-                promises.push(ApiKey.set(_settings.apiKey));
-            }
-            if (_settings.url && angular.isString(_settings.url)) {
-                promises.push(Url.set(_settings.url));
-            }
-            if (_settings.type && angular.isString(_settings.type)) {
-                promises.push(Type.set(_settings.type));
-            }
-            if (_settings.interval && angular.isNumber(_settings.interval)) {
-                promises.push(Interval.set(_settings.interval));
-            }
-            if (_settings.activeBucketIds && angular.isArray(_settings.activeBucketIds)) {
-                promises.push(ActiveBucketIds.set(_settings.activeBucketIds));
-            }
-
-            $q.all(promises).then(function (res) {
-                deferred.resolve(res);
+                if (data.success) {
+                    deferred.resolve(settings);
+                } else {
+                    deferred.reject(data.message);
+                }
             }, function (err) {
                 deferred.reject(err);
             });
