@@ -3,9 +3,9 @@
 
     angular.module('bucket-collector').factory('SettingsService', SettingsService);
 
-    SettingsService.$inject = ['ActiveBucketIdsService', 'ApiKeyService', 'IntervalService', 'TypeService', 'UrlService', '$q', '$http'];
+    SettingsService.$inject = ['ActiveBucketIdsService', 'ApiKeyService', 'IntervalService', 'TypeService', '$q', '$http'];
 
-    function SettingsService(ActiveBucketIds, ApiKey, Interval, Type, Url, $q, $http) {
+    function SettingsService(ActiveBucketIds, ApiKey, Interval, Type, $q, $http) {
         var _deferred = $q.defer();
         var _settings = {};
         init();
@@ -77,14 +77,6 @@
 
             promises.push(Type.get().then(function (res) {
                 _settings.type = res;
-                return res;
-            }, function (err) {
-                console.log(err);
-                return err;
-            }));
-
-            promises.push(Url.get().then(function (res) {
-                _settings.url = res;
                 return res;
             }, function (err) {
                 console.log(err);
