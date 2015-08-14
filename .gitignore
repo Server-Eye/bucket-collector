@@ -34,3 +34,4 @@ node_modules
 
 #data direcory
 /data/*
+lib/reactiontypes/tanss/tanss-settings.json
