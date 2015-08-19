@@ -12,20 +12,25 @@ block content
         .panel.panel-default
           .panel-heading Bucketsstats
           .panel-body
-            table.table.m-t-lg(ng-show="settings.apiKey && buckets")
+            table.table.m-t-lg(ng-show="buckets.length")
               tr
-                th.col-sm-2 Name
-                th.col-sm-4 ID
-                th.col-sm-5 Users
-                th.col-sm-1.text-right Success
-                th.col-sm-1.text-right Failed
-                th.col-sm-1.text-right Last result
-                th.col-sm-1.text-right Last date
+                th.col-sm-1 Name
+                th.col-sm-3 ID
+                th.col-sm-2 Users
+                th.col-sm-1 Success
+                th.col-sm-1 Failed
+                th.col-sm-1 Last received
+                th.col-sm-1 Last result
+                th.col-sm-1 Last checked
               tr(ng-repeat="bucket in buckets")
                 td {{bucket.name}}
                 td {{bucket.bId}}
                 td(ng-show="bucket.users")
                   p(ng-repeat="user in bucket.users") {{user.surname}} {{user.prename}} 
                 td(ng-show="!bucket.users") -
+                td {{bucket.stats.messages.success}}
+                td {{bucket.stats.messages.failed}}
+                td {{bucket.stats.lastReceived | date : "HH:mm - d.MM.yy"}}
                 td 
-                  input(type="checkbox", ng-model="bucket.active")
+                  span(ng-class="getLastResultIcon(bucket.stats.lastResult)", aria-hidden="true")
+                td {{bucket.stats.lastChecked | date : "HH:mm - d.MM.yy"}}

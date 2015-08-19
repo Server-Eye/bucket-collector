@@ -8,3 +8,13 @@ body {
     padding-bottom: 4px;
     margin-bottom: 10px;
 }
+
+.color-ok {
+    color: #8ACA8B;
+}
+.color-error {
+    color: #FF7700;
+}
+.color-working{
+    color: #C8C8C8;
+}

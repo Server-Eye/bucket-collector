@@ -8,8 +8,8 @@
     function BucketsService(API_URL, Settings, $http, $q) {
         return {
             getAll: getAll,
-            getStats: getStats,
-            getActive: getActive
+            getActive: getActive,
+            getActiveStats: getActiveStats
         };
 
         function getAll(apiKey) {
@@ -137,8 +137,48 @@
             return deferred.promise;
         }
         
-        function getStats(bId){
+        function getActiveStats(apiKey){
+            var deferred = $q.defer();
             
+            getActive(apiKey).then(function (buckets){
+                var promises = [];
+                
+                angular.forEach(buckets, function(bucket){
+                    promises.push(getStats(bucket.bId).then(function(stats){
+                        bucket.stats = stats;
+                    }));
+                });
+                
+                $q.all(promises).then(function (res){
+                    deferred.resolve(buckets);
+                }, function(err){
+                    
+                });
+            });
+            
+            return deferred.promise;
+        }
+        
+        function getStats(bId){
+            var deferred = $q.defer();
+            
+            if(bId && angular.isString(bId)){
+                $http({
+                    method: 'GET',
+                    url: '/stats/' + bId,
+                }).then(function (result) {
+                    var data = result.data;
+                    if(data.success){
+                        deferred.resolve(data.stats);
+                    } else {
+                        deferred.reject(data.message);
+                    }
+                }, function (err) {
+                    deferred.reject(err);
+                });
+            }            
+            
+            return deferred.promise;
         }
     }
 })();
