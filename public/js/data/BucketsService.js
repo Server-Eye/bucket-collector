@@ -7,7 +7,9 @@
 
     function BucketsService(API_URL, Settings, $http, $q) {
         return {
-            getAll: getAll
+            getAll: getAll,
+            getStats: getStats,
+            getActive: getActive
         };
 
         function getAll(apiKey) {
@@ -117,6 +119,26 @@
             });
 
             return deferred.promise;
+        }
+        
+        function getActive(apiKey){
+            var deferred = $q.defer();
+            var activeBuckets = [];
+            
+            getAll(apiKey).then(function(buckets){
+                angular.forEach(buckets, function(bucket){
+                    if(bucket.active){
+                        activeBuckets.push(bucket);
+                    }
+                });
+                deferred.resolve(activeBuckets);
+            });
+            
+            return deferred.promise;
+        }
+        
+        function getStats(bId){
+            
         }
     }
 })();
