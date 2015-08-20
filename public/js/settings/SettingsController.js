@@ -3,9 +3,9 @@
 
     angular.module('bucket-collector').controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['SettingsService', 'BucketsService', '$scope'];
+    SettingsController.$inject = ['SettingsService', 'BucketsService', '$window', '$scope'];
 
-    function SettingsController(Settings, Buckets, $scope) {
+    function SettingsController(Settings, Buckets, $window, $scope) {
         $scope.loaded = false;
         $scope.settings = {};
         $scope.login = {
@@ -65,6 +65,7 @@
         function applySettings() {
             Settings.set($scope.settings).then(function (res) {
                 console.log(res);
+                $window.location.href = '/';
             }, function (err) {
                 console.log(err);
             });

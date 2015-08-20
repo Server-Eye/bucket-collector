@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container-fluid(ng-controller='ErrorsController')
+    se-header
+    .row(ng-if='!loaded')
+      .col-sm-12.jumbotron.text-center
+        h1
+          span.glyphicon.glyphicon-refresh.gly-spin
+    .row(ng-if='loaded')
+      .col-sm-12
+        .panel.panel-default
+          .panel-heading Failed Messages
+          .panel-body
+            table.table.table-hover.m-t-lg(ng-show="errors.length")
+              tr
+                th.col-sm-2 Date
+                th.col-sm-1 Try
+                th.col-sm-9 Error
+              tr(ng-repeat="error in errors")
+                td {{error.date | date : "HH:mm - d.MM.yy"}}
+                td {{error.try}}
+                td
+                  pre(style="margin: 0px;") {{getResponse(error.response)}}

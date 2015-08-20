@@ -3,12 +3,13 @@
 
     angular.module('bucket-collector').controller('MainController', MainController);
 
-    MainController.$inject = ['BucketsService', 'SettingsService', '$scope'];
+    MainController.$inject = ['BucketsService', 'SettingsService', '$window', '$scope'];
 
-    function MainController(Buckets, Settings, $scope) {
+    function MainController(Buckets, Settings, $window, $scope) {
         $scope.loaded = false;
         $scope.buckets = [];
         $scope.getLastResultIcon = getLastResultIcon;
+        $scope.redirect = redirect;
 
         function getLastResultIcon(lastResult){
             var base = "glyphicon ";
@@ -19,9 +20,13 @@
             if(lastResult === "SUCCESS"){
                 return base + "glyphicon-ok-sign color-ok";
             }
-            if(lastResult === "NONE"){
+            if(lastResult === "FAILED"){
                 return base + "glyphicon-remove-sign color-error";
             }
+        }
+        
+        function redirect(path){
+            $window.location.href = path;
         }
 
         function refresh() {

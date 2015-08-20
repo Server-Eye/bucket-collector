@@ -22,7 +22,7 @@ block content
                 th.col-sm-1 Last received
                 th.col-sm-1 Last result
                 th.col-sm-1 Last checked
-              tr(ng-repeat="bucket in buckets")
+              tr(ng-repeat="bucket in buckets", ng-click="redirect('/errors/' + bucket.bId)")
                 td {{bucket.name}}
                 td {{bucket.bId}}
                 td(ng-show="bucket.users")

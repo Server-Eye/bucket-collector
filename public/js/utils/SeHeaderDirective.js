@@ -5,7 +5,7 @@
     function seHeader() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/seHeader'
+            templateUrl: '/partials/seHeader'
         };
     }
 })();
