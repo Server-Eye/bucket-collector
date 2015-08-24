@@ -19,9 +19,9 @@ block content
                 th.col-sm-2 Users
                 th.col-sm-1 Success
                 th.col-sm-1 Failed
-                th.col-sm-1 Last received
-                th.col-sm-1 Last result
                 th.col-sm-1 Last checked
+                th.col-sm-1 Last received
+                th.text-center.col-sm-1 Last result
               tr(ng-repeat="bucket in buckets", ng-click="redirect('/errors/' + bucket.bId)")
                 td {{bucket.name}}
                 td {{bucket.bId}}
@@ -30,7 +30,7 @@ block content
                 td(ng-show="!bucket.users") -
                 td {{bucket.stats.messages.success}}
                 td {{bucket.stats.messages.failed}}
-                td {{bucket.stats.lastReceived | date : "HH:mm - d.MM.yy"}}
-                td 
-                  span(ng-class="getLastResultIcon(bucket.stats.lastResult)", aria-hidden="true")
                 td {{bucket.stats.lastChecked | date : "HH:mm - d.MM.yy"}}
+                td {{bucket.stats.lastReceived | date : "HH:mm - d.MM.yy"}}
+                td.text-center 
+                  span(ng-class="getLastResultIcon(bucket.stats.lastResult)", aria-hidden="true")

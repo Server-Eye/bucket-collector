@@ -17,24 +17,43 @@
         $scope.resetKey = resetKey;
         $scope.newKey = newKey;
         $scope.applySettings = applySettings;
+        $scope.apiKeyAvailable = false;
 
         $scope.$watch("buckets", function (newVal, oldVal) {
-
             $scope.settings.activeBucketIds = [];
             angular.forEach(newVal, function (bucket) {
                 if (bucket.active) {
                     $scope.settings.activeBucketIds.push(bucket.bId);
                 }
             });
-
         }, true);
+        
+        $scope.$watch("settings.maxRetries", function(newVal,oldVal){
+            if(!angular.isNumber(newVal)){
+                $scope.settings.maxRetries = 1;
+            } else {
+                $scope.settings.maxRetries = newVal;
+            }
+        });
+        
+        $scope.$watch("settings.interval", function(newVal,oldVal){
+            if(!angular.isNumber(newVal)){
+                $scope.settings.interval = 1;
+            } else {
+                $scope.settings.interval = newVal;
+            }
+        });
 
         function init() {
             Settings.get().then(function (settings) {
                 $scope.settings = settings;
+                if(settings.apiKey){
+                    $scope.apiKeyAvailable = true;
+                }else{
+                    $scope.apiKeyAvailable = false;
+                }
                 $scope.loaded = true;
             }).then(function () {
-                console.log("here");
                 if ($scope.settings.apiKey) {
                     Buckets.getAll($scope.settings.apiKey).then(function (buckets) {
                         $scope.buckets = buckets;
@@ -46,7 +65,7 @@
         init();
 
         function resetKey() {
-            $scope.settings.apiKey = null;
+            $scope.apiKeyAvailable = !$scope.apiKeyAvailable;
         }
 
         function newKey() {
@@ -57,14 +76,13 @@
                 $scope.login.error = "";
                 init();
             }, function (err) {
-                console.log("ERR", err);
+                console.log(err);
                 $scope.login.error = err;
             });
         }
 
         function applySettings() {
             Settings.set($scope.settings).then(function (res) {
-                console.log(res);
                 $window.location.href = '/';
             }, function (err) {
                 console.log(err);

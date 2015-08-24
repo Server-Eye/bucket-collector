@@ -55,7 +55,7 @@
         function getNewKey(email, password, keyName) {
             var deferred = $q.defer();
 
-            if(!keyName || !angular.isString(keyName) || keyName===""){
+            if (!keyName || !angular.isString(keyName) || keyName === "") {
                 keyName = "bucket-collector-" + Math.random().toString(36);
             }
 
@@ -89,7 +89,6 @@
 
         function setKey(key) {
             var deferred = $q.defer();
-            console.log(key);
 
             $http({
                 method: 'GET',

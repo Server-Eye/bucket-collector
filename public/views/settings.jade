@@ -12,7 +12,7 @@ block content
         .panel.panel-default
           .panel-heading API Key
           .panel-body
-            form(ng-show='!settings.apiKey')
+            form(ng-show='!apiKeyAvailable')
               .form-group
                 label(for='email') E-Mail
                 input#email.form-control(type='email', ng-model='login.email')
@@ -22,24 +22,28 @@ block content
               .form-group
                 label(for='keyName') Key-Name
                 input#password.form-control(type='text', ng-model='login.name')
-              .form-group
-                button.btn.btn-default(type='button', ng-click='newKey()') Generate API-Key
+              .form-inline
+                .form-group
+                  button.btn.btn-default(type='button', ng-click='newKey()') Generate API-Key
+                .form-group(ng-if='settings.apiKey', style='float:right;')
+                  button.btn.btn-default(type='button', ng-click='resetKey()') Back
               .text-danger(ng-show='login.error') ERROR: {{login.error}}
-            form(ng-show='settings.apiKey')
+            form(ng-show='apiKeyAvailable')
               .form-group
                 label(for='apiKey') API key
                 input#apiKey.form-control(type='text', ng-model='settings.apiKey', readonly='readonly')
-              .form-group
-                button.btn.btn-default(type='button', ng-click='resetKey()') New Key 
+              .form-group-inline
+                button.btn.btn-default(type='button', ng-click='resetKey()') Generate New Key
         .panel.panel-default
           .panel-heading Bucketaction
           .panel-body
             form
               .form-group
                 label(for='type') Type
-                input#type.form-control(type='text', ng-model='settings.type')
+                select#type.form-control(ng-model='settings.type')
+                  option(ng-repeat='type in settings.availableTypes', value='{{type}}') {{type}}
         .panel.panel-default
-          .panel-heading Interval
+          .panel-heading Poll-Interval
           .panel-body
             form
               .form-group
@@ -53,18 +57,18 @@ block content
         .panel.panel-default
           .panel-heading Available Buckets
           .panel-body
-            table.table.m-t-lg(ng-show="settings.apiKey && buckets")
+            table.table.m-t-lg(ng-show="apiKeyAvailable && buckets")
               tr
                 th.col-sm-2 Name
                 th.col-sm-4 ID
                 th.col-sm-5 Users
-                th.col-sm-1.text-right Active
+                th.col-sm-1.text-center Active
               tr(ng-repeat="bucket in buckets")
                 td {{bucket.name}}
                 td {{bucket.bId}}
                 td(ng-show="bucket.users")
                   p(ng-repeat="user in bucket.users") {{user.surname}} {{user.prename}} 
                 td(ng-show="!bucket.users") -
-                td 
+                td.text-center
                   input(type="checkbox", ng-model="bucket.active")
-            h2.text-center(ng-show="!settings.apiKey") Please generate a API Key
+            h2.text-center(ng-show="!apiKeyAvailable") Please generate a API Key

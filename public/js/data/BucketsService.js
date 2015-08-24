@@ -27,8 +27,6 @@
                     if (!angular.isArray(data)) {
                         result = [data];
                     }
-                    console.log(data);
-
                     addBucketUsers(apiKey, data).then(function (buckets) {
                         return buckets;
                     }, function (err) {
@@ -89,7 +87,6 @@
             });
 
             $q.all(promises).then(function (res) {
-                console.log(buckets);
                 deferred.resolve(buckets);
             }, function (err) {
                 deferred.reject(err);
@@ -120,55 +117,55 @@
 
             return deferred.promise;
         }
-        
-        function getActive(apiKey){
+
+        function getActive(apiKey) {
             var deferred = $q.defer();
             var activeBuckets = [];
-            
-            getAll(apiKey).then(function(buckets){
-                angular.forEach(buckets, function(bucket){
-                    if(bucket.active){
+
+            getAll(apiKey).then(function (buckets) {
+                angular.forEach(buckets, function (bucket) {
+                    if (bucket.active) {
                         activeBuckets.push(bucket);
                     }
                 });
                 deferred.resolve(activeBuckets);
             });
-            
+
             return deferred.promise;
         }
-        
-        function getActiveStats(apiKey){
+
+        function getActiveStats(apiKey) {
             var deferred = $q.defer();
-            
-            getActive(apiKey).then(function (buckets){
+
+            getActive(apiKey).then(function (buckets) {
                 var promises = [];
-                
-                angular.forEach(buckets, function(bucket){
-                    promises.push(getStats(bucket.bId).then(function(stats){
+
+                angular.forEach(buckets, function (bucket) {
+                    promises.push(getStats(bucket.bId).then(function (stats) {
                         bucket.stats = stats;
                     }));
                 });
-                
-                $q.all(promises).then(function (res){
+
+                $q.all(promises).then(function (res) {
                     deferred.resolve(buckets);
-                }, function(err){
-                    
+                }, function (err) {
+
                 });
             });
-            
+
             return deferred.promise;
         }
-        
-        function getStats(bId){
+
+        function getStats(bId) {
             var deferred = $q.defer();
-            
-            if(bId && angular.isString(bId)){
+
+            if (bId && angular.isString(bId)) {
                 $http({
                     method: 'GET',
-                    url: '/stats/' + bId,
+                    url: '/stats/' + bId
                 }).then(function (result) {
                     var data = result.data;
-                    if(data.success){
+                    if (data.success) {
                         deferred.resolve(data.stats);
                     } else {
                         deferred.reject(data.message);
@@ -176,8 +173,8 @@
                 }, function (err) {
                     deferred.reject(err);
                 });
-            }            
-            
+            }
+
             return deferred.promise;
         }
     }

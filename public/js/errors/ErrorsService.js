@@ -19,7 +19,6 @@
                     method: 'GET'
                 }).then(function(result){
                     var data = result.data;
-                    console.log(data);
                     if (data.success) {
                         deferred.resolve(data.errors);
                     } else {

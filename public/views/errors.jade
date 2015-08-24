@@ -12,13 +12,13 @@ block content
         .panel.panel-default
           .panel-heading Failed Messages
           .panel-body
-            table.table.table-hover.m-t-lg(ng-show="errors.length")
+            table.table.table-hover.m-t-lg(ng-show='errors.length')
               tr
                 th.col-sm-2 Date
                 th.col-sm-1 Try
                 th.col-sm-9 Error
-              tr(ng-repeat="error in errors")
-                td {{error.date | date : "HH:mm - d.MM.yy"}}
+              tr(ng-repeat='error in errors', ng-click='expand(error)')
+                td {{error.date | date : 'HH:mm - d.MM.yy'}}
                 td {{error.try}}
                 td
-                  pre(style="margin: 0px;") {{getResponse(error.response)}}
+                  pre(style='margin: 0px;') {{getErrorString(error)}}

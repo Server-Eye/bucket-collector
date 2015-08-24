@@ -3,9 +3,9 @@
 
     angular.module('bucket-collector').factory('SettingsService', SettingsService);
 
-    SettingsService.$inject = ['ActiveBucketIdsService', 'ApiKeyService', 'IntervalService', 'TypeService', 'MaxRetriesService', '$q', '$http'];
+    SettingsService.$inject = ['ActiveBucketIdsService', 'ApiKeyService','AvailableTypesService' ,'IntervalService', 'TypeService', 'MaxRetriesService', '$q', '$http'];
 
-    function SettingsService(ActiveBucketIds, ApiKey, Interval, Type, MaxRetries, $q, $http) {
+    function SettingsService(ActiveBucketIds, ApiKey, AvailableTypes, Interval, Type, MaxRetries, $q, $http) {
         var _deferred = $q.defer();
         var _settings = {};
         init();
@@ -66,6 +66,14 @@
                 console.log(err);
                 return err;
             }));
+            
+            promises.push(AvailableTypes.get().then(function (res) {
+                _settings.availableTypes = res;
+                return res;
+            }, function (err) {
+                console.log(err);
+                return err;
+            }));
 
             promises.push(Interval.get().then(function (res) {
                 _settings.interval = res;
@@ -92,10 +100,8 @@
             }));
 
             $q.all(promises).then(function (val) {
-                console.log("HERE", val);
                 _deferred.resolve(_settings);
             }, function (err) {
-
                 console.log(err);
             });
         }
