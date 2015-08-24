@@ -1,0 +1,8 @@
+{
+    "tanssUrl": "INSERT YOUR TANSS-URL HERE",
+    "apiKeys": {
+        "SE-CUSTOMER-ID": "SE-API-KEY",
+        "NEXT-SE-CUSTOMER-ID": "NEXT-SE-API-KEY",
+        "NEXT-SE-CUSTOMER-ID": "NEXT-SE-API-KEY"
+    }
+}

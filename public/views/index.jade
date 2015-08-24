@@ -3,12 +3,17 @@ extends layout
 block content
   .container-fluid(ng-controller='MainController')
     se-header
-    .row(ng-if='!loaded')
-      .col-sm-12.jumbotron.text-center
+    .row
+      .col-sm-2
+        .panel.panel-default
+          .panel-heading Menu
+          .panel-body
+            button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click="redirect('/settings')") Change Settings
+            button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click='refresh()') Refresh
+      .col-sm-10.jumbotron.text-center(ng-if='!loaded')
         h1
           span.glyphicon.glyphicon-refresh.gly-spin
-    .row(ng-if='loaded')
-      .col-sm-12
+      .col-sm-10(ng-if='loaded')
         .panel.panel-default
           .panel-heading Bucketsstats
           .panel-body

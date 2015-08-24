@@ -11,6 +11,7 @@
         $scope.buckets = [];
         $scope.getLastResultIcon = getLastResultIcon;
         $scope.redirect = redirect;
+        $scope.refresh = refresh;
 
         function getLastResultIcon(lastResult) {
             var base = "glyphicon ";
@@ -34,12 +35,13 @@
             Settings.get().then(function (settings) {
                 _settings = settings;
                 refresh();
-                $interval(refresh, 10000);
+                $interval(refresh, 60000);
             });
         }
 
         function refresh() {
             console.log("refresh");
+            $scope.loaded = false;
             Buckets.getActiveStats(_settings.apiKey).then(function (buckets) {
                 $scope.buckets = buckets;
                 $scope.loaded = true;
