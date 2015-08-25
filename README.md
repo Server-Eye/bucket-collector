@@ -39,10 +39,13 @@ After all settings are set, the webinterface can be used to view statistics for 
 
 ## Reactions
 
+A reaction describes the action taken for each received message.
 All reactions are loaded from `./lib/reactiontypes/`. New reactions have to be added there.
+By default this application only has a reaction for the tanss-ticket-system.
 
 ### Tanss-Reaction
 
+This reaction tries to create/update a tanss-ticket with the given bucket-message.
 To use the tanss-reaction, additional data is required.
 Add your tanss-url as well as your customer-ids and api-keys to the `./data/tanss-settings.json`-file.
 This file has to be conform to the [JSON-format](http://json.org/).
