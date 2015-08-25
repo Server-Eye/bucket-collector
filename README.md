@@ -8,9 +8,13 @@ Reacts the received messages depending on the selected reactiontype.
 
 ## Installation
 
-After forking the project, install the required node-modules via `npm install -d`.
+To run this application [NodeJS](https://nodejs.org/) is required.
+
+After installing NodeJS, use the command `npm install bower -g` to install bower.
+
+After downloading the project, install the required node-modules via `npm install -d`.
 Call `bower install -d` to download the required bower components.
-Depending on the desired reation, additional configuration is required (see [Reactions](#Reactions)).
+Depending on the desired reation, additional configuration is required (see [Reactions](#reactions)).
 
 ## Starting application
 
@@ -33,6 +37,7 @@ Use `/settings` to edit your current settings:
 2. Select your desired bucketaction from the dropdown-menu.
 3. Edit the poll-interval to match your desired settings.
 4. Select the buckets you want to use from the available buckets.
+  * Buckets can be created/updated/deleted using the occ. Currently buckets are only implemented in the [beta-occ](https://beta.server-eye.de/#/settings/distributor/buckets)
 5. **Do not forget to apply your settings by clicking the `Save Settings`-Button**
 
 After all settings are set, the webinterface can be used to view statistics for the active buckets.
