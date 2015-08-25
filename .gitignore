@@ -32,7 +32,9 @@ node_modules
 # bower components
 /bower_components/
 
-#data direcory
+# data-direcory
 /data/*
 !/data/tanss-data.json
-lib/reactiontypes/tanss/tanss-settings.json
+
+# documentation
+/docs/
