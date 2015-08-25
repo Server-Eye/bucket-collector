@@ -33,7 +33,7 @@ Use `/settings` to edit your current settings:
 2. Select your desired bucketaction from the dropdown-menu.
 3. Edit the poll-interval to match your desired settings.
 4. Select the buckets you want to use from the available buckets.
-5. **Do not forget to apply your settings by pushing the `Save Settings`-Button**
+5. **Do not forget to apply your settings by clicking the `Save Settings`-Button**
 
 After all settings are set, the webinterface can be used to view statistics for the active buckets.
 
