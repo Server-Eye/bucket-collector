@@ -1,6 +1,6 @@
 {
   "name": "bucket-collector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty). Reacts the received messages depending on the selected reactiontype.",
   "main": "app.js",
   "bin": {
@@ -17,11 +17,11 @@
     "request": "^2.40.0"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install"
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Server-Eye/bucket-collector.git"
+    "url": "git+https://github.com/Server-Eye/bucket-collector.git"
   },
   "keywords": [
     "Server-Eye",
@@ -32,5 +32,6 @@
   "bugs": {
     "url": "https://github.com/Server-Eye/bucket-collector/issues"
   },
-  "homepage": "https://github.com/Server-Eye/bucket-collector#readme"
+  "homepage": "https://github.com/Server-Eye/bucket-collector#readme",
+  "devDependencies": {}
 }
