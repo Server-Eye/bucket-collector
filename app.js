@@ -1,11 +1,19 @@
-var logger = require('./lib/config').appLogger;
-var webinterface = require('./lib/webinterface');
-var bucketCollector = require('./lib/bucketCollector');
+var app = require('commander');
 
-function start(){
-    logger.info("Starting application");
-    webinterface.start();
-    bucketCollector.start();
+app.version(require('./package.json').version)
+        .option('-d, --development', 'Starts the application in development mode, which enables additional logging')
+        .option('-c, --clean', 'Removes all settings and saved bucket data')
+        .option('-P, --port <n>', 'Set the port of the webinterface to <n>. Default: 8080')
+        .option('-R, --reactionDir [path]', 'Set the path from which all reactions are loaded')
+        .option('-D, --dataDir [path]', 'Set the path where the runtime-data is saved')
+        .option('-L, --logDir [path]', 'Set the path where the logfiles are saved')
+        .parse(process.argv);
+
+function start() {
+    require('./lib/config').setConfig(app);
+    require('./lib/config').appLogger.info("Starting application");
+    require('./lib/webinterface').start();
+    require('./lib/bucketCollector').start();
 }
 
 start();

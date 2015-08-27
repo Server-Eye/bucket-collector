@@ -10,21 +10,26 @@ Reacts the received messages depending on the selected reactiontype.
 
 To run this application [NodeJS](https://nodejs.org/) is required.
 
-After installing NodeJS, use the command `npm install bower -g` to install bower.
+After installing NodeJS, use the command `npm install bucket-collector` to download the current version of the bucket-collector and its depending modules.
 
-After downloading the project, install the required node-modules via `npm install -d`.
-Call `bower install -d` to download the required bower components.
-Depending on the desired reation, additional configuration is required (see [Reactions](#reactions)).
+Depending on the desired reaction, additional configuration is required (see [Reactions](#reactions)).
 
 ## Starting application
 
-Start the appllication in development mode via `NODE_ENV='development' node app.js`.
-In development-mode, debug-messages are enabled and the webinterface is by default started on port `8082`.
+Run the command `node node_modules/bucket-collector` to start the bucket-collector in production-mode. In production-mode the webinterface runs by default on port `8080`.
 
-Start the appllication in production mode via `NODE_ENV='production' node app.js`.
-In production-mode, debug-messages are disabled and the webinterface is by default started on port `8080`.
+### Command-line options
 
-If no `NODE_ENV`-parameter is given, the application starts in production-mode.
+The following command-line options are available:
+
+* `-h, --help`: outputs the usage information
+* `-V, --version`:  outputs the version number of the currently installed version
+* `-d, --development`: starts the application in development-mode, which enables additional logging. In development mode, the webinterface defaults to port `8082`.
+* `-c, --clean`: Removes all settings and saved bucket data. The bucket collector has to be configured again using the webinterface (see [Configuration](#configuration)).
+* `-P, --port <n>`: Overrides the default-port of the webinterface with the given port.
+* `-R, --reactionDir [path]`: Overrides the path from which all reactions are loaded. Absolute pathing is recommended.
+* `-D, --dataDir [path]`: Overrides the path where all runtime-data is saved. Absolute pathing is recommended.
+* `-L, --logDir [path]`: Overrides the path where the logFile is created. Absolute pathing is recommended.
 
 ### Configuration
 
@@ -45,13 +50,13 @@ After all settings are set, the webinterface can be used to view statistics for 
 ## Reactions
 
 A reaction describes the action taken for each received message.
-All reactions are loaded from `./lib/reactiontypes/`. New reactions have to be added there.
+All reactions are by default loaded from `./node_modules/bucket-collector/lib/reactiontypes/`. New reactions have to be added there.
 By default this application only has a reaction for the tanss-ticket-system.
 
 ### Tanss-Reaction
 
 This reaction tries to create or update a tanss-ticket with the given bucket-message.
 To use the tanss-reaction, additional data is required.
-Add your tanss-url as well as your customer-ids and api-keys to the `./data/tanss-settings.json`-file.
+Add your tanss-url as well as your customer-ids and api-keys to the `./node_modules/bucket-collector/data/tanss-settings.json`-file.
 This file has to be conform to the [JSON-format](http://json.org/).
 For changes to this file to take effect, a restart of the application is required.

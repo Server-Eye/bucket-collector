@@ -1,31 +1,36 @@
 {
-    "name": "bucket-collector",
-    "version": "0.0.1",
-    "description": "Empties Server-Eye buckets and posts data to a destination URL.",
-    "main": "app.js",
-    "dependencies": {
-        "express": "4.12.x",
-        "jade": "^1.11.0",
-        "request": "2.40.x",
-        "q": "1.0.x",
-        "log4js": "0.6.x",
-        "jsop": "0.3.x"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Server-Eye/bucket-collector.git"
-    },
-    "keywords": [
-        "Server-Eye",
-        "bucket-collector"
-    ],
-    "author": "Roland Paltz",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Server-Eye/bucket-collector/issues"
-    },
-    "homepage": "https://github.com/Server-Eye/bucket-collector#readme"
+  "name": "bucket-collector",
+  "version": "1.0.0",
+  "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty). Reacts the received messages depending on the selected reactiontype.",
+  "main": "app.js",
+  "bin": {
+    "bucket-collector": "bin/bucket-collector.js"
+  },
+  "dependencies": {
+    "bower": "^1.5.2",
+    "commander": "^2.8.1",
+    "express": "^4.12.4",
+    "jade": "^1.11.0",
+    "jsop": "^0.3.1",
+    "log4js": "^0.6.26",
+    "q": "^1.0.1",
+    "request": "^2.40.0"
+  },
+  "scripts": {
+    "postinstall": "node_modules/.bin/bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Server-Eye/bucket-collector.git"
+  },
+  "keywords": [
+    "Server-Eye",
+    "bucket-collector"
+  ],
+  "author": "Roland Paltz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Server-Eye/bucket-collector/issues"
+  },
+  "homepage": "https://github.com/Server-Eye/bucket-collector#readme"
 }
