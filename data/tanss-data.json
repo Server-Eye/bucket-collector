@@ -1,7 +1,7 @@
 {
-    "tanssUrl": "INSERT YOUR TANSS-URL HERE",
+    "tanssUrl": "INSERT YOUR TANSS-URL HERE, something like: https://tanss.something.de",
     "apiKeys": {
-        "SE-CUSTOMER-ID": "SE-API-KEY",
+        "SERVER-EYE-CUSTOMER-ID HERE": "MATCHING SERVER-EYE-API-KEY HERE",
         "NEXT-SE-CUSTOMER-ID": "NEXT-SE-API-KEY",
         "NEXT-SE-CUSTOMER-ID": "NEXT-SE-API-KEY"
     }
