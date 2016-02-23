@@ -1,0 +1,21 @@
+{
+    "query": [
+        "<queryxml>",
+        "   {{~#each this ~}} {{! For each entity}}",
+        "       <entity>{{@key}}</entity> {{! set entity-name}}",
+        "       {{~#each this ~}}",
+        "           <query>",
+        "               {{~#each this ~}}",
+        "                   <field udf='{{this.udf}}'>",
+        "                       {{~@key~}}",
+        "                       {{~#each this ~}}{{!expression}}",
+        "                           {{~#if_ne @key 'udf'}}<expression op='{{@key}}'>{{this}}</expression>{{/if_ne}}",
+        "                       {{~/each ~}}",
+        "                   </field>",
+        "               {{~/each ~}}",
+        "           {{~/each ~}}",
+        "       </query>",
+        "   {{~/each ~}}",
+        "</queryxml>"
+    ]
+}
