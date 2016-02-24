@@ -35,6 +35,10 @@ node_modules
 # data-direcory
 /data/*
 !/data/tanss-data.json
+!/data/autotask-data.json
+
+# debug-directory
+/debug/*
 
 # documentation
 /docs/
