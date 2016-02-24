@@ -1,6 +1,6 @@
 {
   "name": "bucket-collector",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty). Reacts the received messages depending on the selected reactiontype.",
   "main": "app.js",
   "bin": {
