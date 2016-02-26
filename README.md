@@ -8,9 +8,9 @@ Reacts the received messages depending on the selected reactiontype.
 
 ## Installation
 
-To run this application [NodeJS](https://nodejs.org/) is required.
+To install and run this application [Git](https://git-scm.com/) and [NodeJS](https://nodejs.org/) are required.
 
-After installing NodeJS, use the command `npm install bucket-collector` to download the current version of the bucket-collector and its depending modules.
+After installing Git and NodeJS, use the command `npm install bucket-collector` to download the current version of the bucket-collector and its depending modules.
 
 Depending on the desired reaction, additional configuration is required (see [Reactions](#reactions)).
 
@@ -51,13 +51,17 @@ After all settings are set, the webinterface can be used to view statistics for 
 
 A reaction describes the action taken for each received message.
 All reactions are by default loaded from `./node_modules/bucket-collector/lib/reactiontypes/`. New reactions have to be added there.
-By default this application only has a reaction for the tanss-ticket-system.
+By default this application has a reaction for the tanss-ticket-system as well as the autotask-ticket-system.
+
 
 ### Tanss-Reaction
 
 This reaction tries to create or update a tanss-ticket with the given bucket-message.
-To use the tanss-reaction, additional data is required.
-Add your tanss-url as well as your server-eye-customer-ids and api-keys to the `./node_modules/bucket-collector/data/tanss-settings.json`-file.
+Additional data is required to use the tanss-reaction.
+
+#### 1. open config-template
+
+Open the `./node_modules/bucket-collector/data/tanss-data-template.json`-file.
 This file has to be conform to the [JSON-format](http://json.org/) and looks like this by default:
 ```
 {
@@ -69,9 +73,14 @@ This file has to be conform to the [JSON-format](http://json.org/) and looks lik
     }
 }
 ```
+
+#### 2. tanss-url
+
 Insert the url you use to access your tanss into the corresponding placeholder. Your URL should look something like this: `https://tanss.something.de`.
 
-Insert the server-eye-customer-ids of your customer into the corresponding placeholder fields. The customer-ids can be found by using the occ. To do so, follow these steps:
+#### 3. server-eye-customer-ids
+
+Insert the server-eye-customer-ids of your customers into the corresponding placeholder fields. The customer-ids can be found by using the occ. To do so, follow these steps:
 
 1. Select your customer in the occ.
 2. In the right sidebar, click on the info-icon right of the customername.
@@ -79,7 +88,81 @@ Insert the server-eye-customer-ids of your customer into the corresponding place
 
 A server-eye-customer-id is a 32 character string consisting of letters and numbers. 
 
+#### 4. server-eye-api-key
+
 The server-eye-api-key to your customer-ids have to be created using tanss. Follow [these](https://s3-eu-west-1.amazonaws.com/uploads-eu.hipchat.com/43388/291062/5T7O0lo4NYPMK5J/FAQ_Tanssanbindung_neues_OCC.pdf) instructions to do so.
 After creation, insert your api-keys into the corresponding placeholders.
 
-After changing the `tanss-settings.json`-file a restart of the application is required for the changes to take effect.
+#### 5. Apply changes
+
+If you are done inserting the data, save the file as `tanss-data.json` and restart the bucket-collector to make the changes take effect.
+
+
+
+### Autotask-Reaction
+
+This reaction tries to create or update a autotask-ticket with the given bucket-message.
+Additional configuration is required to use the autotask-reaction.
+
+#### 1. create ServerEyeStateID user-defined-field
+//TODO
+First login into autotask and add a user-defined-field called `ServerEyeStateID` with the type `Text (single line)` to the ticket. This field is used by the bucket-collector to identify the corrsponding server-eye agent/container with the autotask ticket.
+
+#### 2. open config-template
+
+Open the `./node_modules/bucket-collector/data/autotask-data-template.json`-file. 
+This file has to be conform to the [JSON-format](http://json.org/) and looks like this by default:
+```
+{
+    "username": "AUTOTASK-USERNAME",
+    "password": "AUTOTASK-PASSWORD",
+    "defaultID": "DEFAULT-AUTOTASK-ACCOUNT-ID",
+    "customerIDs": {
+        "SE-CUSTOMER-ID" : "AUTOTASK-ACCOUNT-ID",
+        "SE-CUSTOMER-ID2" : "AUTOTASK-ACCOUNT-ID"
+    }
+}
+```
+
+#### 3. autotask-user/password
+
+Insert the username and password of the autotask-user you want the bucket-collector to use to create and update tickets into the corresponding fields.
+It is recommended that you create a specific user for the bucket-collector, named `Server-Eye` for example. This user needs the right to create and update tickets.
+
+#### 4. defaultID
+
+Insert the autotask-account-id of the customer you want the bucket-collector to default to as the `defaultID`. All tickets, whose server-eye-customer-id does not correspond to a autotask-account-id will be created for this customer. It is recommended to create a specific customer for this purpose (called Server-Eye-Tickets for example).
+//TODO add description how to get id
+
+#### 5. customerIDs
+
+Insert the server-eye-customer-ids of your customers into the corresponding placeholder fields. The customer-ids can be found by using the occ. To do so, follow these steps:
+
+1. Select your customer in the occ.
+2. In the right sidebar, click on the info-icon right of the customername.
+3. The now displayed cId is the server-eye-customer-id you are looking for.
+
+A server-eye-customer-id is a 32 character string consisting of letters and numbers.
+
+Use autotask to get the autotask-account-id to the corresponding Server-Eye customers.
+//TODO write how to
+
+If you want the bucket-collector to only create tickets for the default-customer you can leave the `customerIDs`-field empty like this `"customerIDs": {}`.
+
+#### 6. Apply changes
+
+Your final `autotask-data-template.json`-file could look like this:
+```
+{
+    "username": "server-eye-bucket-collector@yourcompany.com",
+    "password": "superS3cr3t",
+    "defaultID": 111111111,
+    "customerIDs": {
+        "1234somecoolsecustomerid11111111" : 11111111,
+        "1234somecoolsecustomerid22222222" : 22222222,
+        "1234somecoolsecustomerid33333333" : 33333333,
+    }
+}
+```
+
+If you are done inserting the data, save the file as `autotask-data.json` and restart the bucket-collector to make the changes take effect.
