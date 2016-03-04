@@ -30,9 +30,9 @@
                     return resString;
             } else {
                 if(angular.isString(error.message)){
-                    return error.message;
+                    return error.message.substring(0,500);
                 }else {
-                    return JSON.stringify(error.response, null, 4);
+                    return JSON.stringify(error.response, null, 4).substring(0,500);
                 }
             }
         }

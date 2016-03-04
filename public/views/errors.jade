@@ -20,5 +20,5 @@ block content
               tr(ng-repeat='error in errors', ng-click='expand(error)')
                 td {{error.date | date : 'HH:mm - d.MM.yy'}}
                 td {{error.try}}
-                td
-                  pre(style='margin: 0px;') {{getErrorString(error)}}
+                td.col-sm-9
+                  pre(style='margin: 0px; white-space:pre-wrap;') {{getErrorString(error)}}
