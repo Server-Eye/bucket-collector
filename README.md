@@ -14,6 +14,17 @@ After installing Git and NodeJS, use the command `npm install bucket-collector` 
 
 Depending on the desired reaction, additional configuration is required (see [Reactions](#reactions)).
 
+## Updating
+
+To update the bucket-collector to the most current version follow these steps:
+
+1. Stop the bucket-collector if it is running.
+2. Copy the content of the data-directory (by default `./node_modules/bucket-collector/data/`) to a new directory outside of the `./node_modules/bucket-collector`-directory
+  * All data in the `./node_modules/bucket-collector`-directory will be overwritten in the update-process, so saving your backup here will result in a loss of data!
+3. Use the command `npm install bucket-collector` to download the current version of the bucket-collector and its depending modules.
+4. Copy the files from step 2 back into the data-directory.
+5. Start the bucket-collector. 
+
 ## Starting application
 
 Run the command `node node_modules/bucket-collector` to start the bucket-collector in production-mode. In production-mode the web interface runs by default on port `8080`.
@@ -28,7 +39,7 @@ The following command-line options are available:
 * `-c, --clean`: Removes all settings and saved bucket data. The bucket collector has to be configured again using the web interface (see [Configuration](#configuration)).
 * `-P, --port <n>`: Overrides the default-port of the web interface with the given port.
 * `-R, --reactionDir [path]`: Overrides the path from which all reactions are loaded. Absolute pathing is recommended.
-* `-D, --dataDir [path]`: Overrides the path where all runtime-data is saved. Absolute pathing is recommended.
+* `-D, --dataDir [path]`: Overrides the path where all data is saved. Absolute pathing is recommended.
 * `-L, --logDir [path]`: Overrides the path where the logFile is created. Absolute pathing is recommended.
 
 ### Configuration
