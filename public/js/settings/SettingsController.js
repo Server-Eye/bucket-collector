@@ -8,6 +8,10 @@
     function SettingsController(Settings, Buckets, $window, $scope) {
         $scope.loaded = false;
         $scope.settings = {};
+        
+        Settings.get().then(function(settings){
+            $scope.settings = settings;
+        });
         $scope.login = {
             email: "",
             password: "",
