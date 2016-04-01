@@ -1,0 +1,32 @@
+{
+    "username": {
+        "name": "Username",
+        "description": "The user, which the bucket-collector will use to create and update tickets.",
+        "inputtype": "input",
+        "type": "string",
+        "required": true
+    },
+    "password": {
+        "name": "Password",
+        "description": "The password of the user.",
+        "inputtype": "input",
+        "type": "string",
+        "required": true
+    },
+    "defaultID": {
+        "name": "Default-Customer",
+        "description": "The customer which will be used if the bucket-collector can not find a matching customer.",
+        "inputtype": "select",
+        "type": "number",
+        "required": true,
+        "source": "autotask/getCustomers"
+    },
+    "customerIDs": {
+        "name": "Customers",
+        "desc": "Assignment, which Server-Eye customer corresponds to which autotask customer",
+        "inputtype": "assignment",
+        "multiple": true,
+        "type": "object",
+        "source": ["servereye/getCustomers", "autotask/getCustomers"]
+    }
+}
