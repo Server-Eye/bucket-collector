@@ -33,9 +33,10 @@ node_modules
 /bower_components/
 
 # data-direcory
-/data/*
-!/data/tanss-data-template.json
-!/data/autotask-data-template.json
+/bucket-data/*
+/reaction-data/*
+!/reaction-data/tanss-data-template.json
+!/reaction-data/autotask-data-template.json
 
 # debug-directory
 /debug/*

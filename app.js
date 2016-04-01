@@ -5,7 +5,8 @@ app.version(require('./package.json').version)
         .option('-c, --clean', 'Removes all settings and saved bucket data')
         .option('-P, --port <n>', 'Set the port of the webinterface to <n>. Default: 8080')
         .option('-R, --reactionDir [path]', 'Set the path from which all reactions are loaded')
-        .option('-D, --dataDir [path]', 'Set the path where the runtime-data is saved')
+        .option('-r, --reactionDataDir [path]', 'Set the path where the raction-data is saved')
+        .option('-b, --bucketDataDir [path]', 'Set the path where the runtime-data is saved')
         .option('-L, --logDir [path]', 'Set the path where the logfiles are saved')
         .parse(process.argv);
 
