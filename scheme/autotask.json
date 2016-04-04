@@ -1,32 +1,36 @@
-{
-    "username": {
-        "name": "Username",
+[
+    {
+        "displayName": "Username",
+        "name": "username",
         "description": "The user, which the bucket-collector will use to create and update tickets.",
-        "inputtype": "input",
-        "type": "string",
+        "default": "someone@something.com",
+        "type": "input",
+        "inputtype": "email",
+        "dataType": "string",
         "required": true
-    },
-    "password": {
-        "name": "Password",
+    }, {
+        "displayName": "Password",
+        "name": "password",
         "description": "The password of the user.",
-        "inputtype": "input",
-        "type": "string",
+        "type": "input",
+        "inputtype": "password",
+        "dataType": "string",
         "required": true
-    },
-    "defaultID": {
-        "name": "Default-Customer",
+    }, {
+        "displayName": "Default-Customer",
+        "name": "defaultID",
         "description": "The customer which will be used if the bucket-collector can not find a matching customer.",
-        "inputtype": "select",
-        "type": "number",
+        "type": "select",
+        "dataType": "number",
         "required": true,
         "source": "autotask/getCustomers"
-    },
-    "customerIDs": {
-        "name": "Customers",
+    }, {
+        "displayName": "Customers",
+        "name": "customerIDs",
         "desc": "Assignment, which Server-Eye customer corresponds to which autotask customer",
-        "inputtype": "assignment",
+        "type": "assignment",
         "multiple": true,
-        "type": "object",
+        "dataType": "object",
         "source": ["servereye/getCustomers", "autotask/getCustomers"]
     }
-}
+]

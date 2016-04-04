@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .container-fluid(ng-controller='AdditionalSettingsController')
+    se-header
+    .row(ng-if='!loaded')
+      .col-sm-12.jumbotron.text-center
+        h1
+          span.glyphicon.glyphicon-refresh.gly-spin
+    .row(ng-if='loaded')
+      .col-sm-12
+        .panel.panel-default
+          .panel-heading Additional Settings: {{reactionName}}
+          .panel-body
+            .div(ng-repeat='scheme in schemes')
+              settings-input(ng-if='scheme.type == "input"', scheme='scheme', data='data[scheme.name]')
+              settings-select(ng-if='scheme.type == "select"', scheme='scheme', data='data[scheme.name]')
+              settings-assignment(ng-if='scheme.type == "assignment"', scheme='scheme', data='data[scheme.name]')
