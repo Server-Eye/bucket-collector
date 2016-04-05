@@ -32,19 +32,23 @@
     }, {
         "displayName": "Customers",
         "name": "customerIDs",
-        "desc": "Assignment, which Server-Eye customer corresponds to which autotask customer",
+        "description": "Assignment, which Server-Eye customer corresponds to which autotask customer",
         "type": "assignment",
         "multiple": true,
         "dataType": "object",
         "data": [{
             "source": "reaction",
             "method": "getCustomers",
+            "displayName": "Autotask-Customer",
             "displayValue": "AccountName",
+            "description": "autotask-customer",
             "dataValue": "id"
         },{
             "source": "SE",
             "method": "getCustomers",
+            "displayName": "Server-Eye customer",
             "displayValue": "companyName",
+            "description": "server-eye customer",
             "dataValue": "cId"
         }]
     }

@@ -17,8 +17,9 @@
             console.log(scope);
             
             scope.select = function (data){
+                scope.data = data[scope.scheme.data.dataValue];
                 console.log(data);
-            }
+            };
         
         }
     }

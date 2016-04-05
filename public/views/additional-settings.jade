@@ -16,3 +16,6 @@ block content
               settings-input(ng-if='scheme.type == "input"', scheme='scheme', data='data[scheme.name]')
               settings-select(ng-if='scheme.type == "select"', scheme='scheme', data='data[scheme.name]')
               settings-assignment(ng-if='scheme.type == "assignment"', scheme='scheme', data='data[scheme.name]')
+      .col-sm-12
+        .panel.panel-default
+          button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click='applySettings()') Save Settings

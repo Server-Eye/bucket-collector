@@ -8,6 +8,7 @@
     function AdditionalSettingsController($scope, $location, $q, Scheme, SchemeData, ReactionData) {
         $scope.reactionName = $location.absUrl().split('/').pop();
         $scope.loaded = false;
+        $scope.applySettings = applySettings;
 
 
         function init() {
@@ -30,6 +31,10 @@
                 
                 $scope.loaded = true;
             });
+        }
+        
+        function applySettings(){
+            console.log($scope.data);
         }
         
         init();
