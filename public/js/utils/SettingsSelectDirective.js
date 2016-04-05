@@ -14,6 +14,12 @@
         };
         
         function link(scope, element, attrs){
+            console.log(scope);
+            
+            scope.select = function (data){
+                console.log(data);
+            }
+        
         }
     }
 })();

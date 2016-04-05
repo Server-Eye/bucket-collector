@@ -3,9 +3,9 @@
 
     angular.module('bucket-collector').controller('AdditionalSettingsController', AdditionalSettingsController);
 
-    AdditionalSettingsController.$inject = ['$scope', '$location', '$q', 'SchemeService', 'ReactionDataService'];
+    AdditionalSettingsController.$inject = ['$scope', '$location', '$q', 'SchemeService', 'SchemeDataService', 'ReactionDataService'];
 
-    function AdditionalSettingsController($scope, $location, $q, Scheme, ReactionData) {
+    function AdditionalSettingsController($scope, $location, $q, Scheme, SchemeData, ReactionData) {
         $scope.reactionName = $location.absUrl().split('/').pop();
         $scope.loaded = false;
 
@@ -20,6 +20,14 @@
                     $scope.data = res;
                 })
             ]).then(function () {
+                angular.forEach($scope.schemes, function (scheme) {
+                    if (scheme.data) {
+                        SchemeData($scope.reactionName, scheme.data).then(function(data){
+                            scheme.possibleValues = data;
+                        });
+                    }
+                });
+                
                 $scope.loaded = true;
             });
         }

@@ -21,9 +21,7 @@
             });
             
             return deferred.promise;
-            
         }
-        
         return get;
     }
 })();

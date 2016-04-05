@@ -1,4 +1,7 @@
 form
   .form-group
     label(for='{{scheme.name}}') {{scheme.displayName}} SELECT
-    input.form-control(id='{{scheme.name}}', type='input', ng-model='data')
+    ui-select(id='{{scheme.name}}', ng-model="data", on-select="select($item)")
+      ui-select-match(placeholder="{{scheme.displayName}}", title="scheme.desc") {{$select.selected[scheme.data.displayValue]}}
+      ui-select-choices(repeat="value in scheme.possibleValues | filter: $select.search")
+        span(ng-bind-html="value[scheme.data.displayValue] | highlight: $select.search")

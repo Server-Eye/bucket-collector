@@ -23,7 +23,12 @@
         "type": "select",
         "dataType": "number",
         "required": true,
-        "source": "autotask/getCustomers"
+        "data": {
+            "source": "reaction",
+            "method": "getCustomers",
+            "displayValue": "AccountName",
+            "dataValue": "id"
+        }
     }, {
         "displayName": "Customers",
         "name": "customerIDs",
@@ -31,6 +36,16 @@
         "type": "assignment",
         "multiple": true,
         "dataType": "object",
-        "source": ["servereye/getCustomers", "autotask/getCustomers"]
+        "data": [{
+            "source": "reaction",
+            "method": "getCustomers",
+            "displayValue": "AccountName",
+            "dataValue": "id"
+        },{
+            "source": "SE",
+            "method": "getCustomers",
+            "displayValue": "companyName",
+            "dataValue": "cId"
+        }]
     }
 ]
