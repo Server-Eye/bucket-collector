@@ -1,7 +1,21 @@
 form
   .form-group
-    label(for='{{scheme.name}}') {{scheme.displayName}} SELECT
-    ui-select(id='{{scheme.name}}', ng-model="data", on-select="select($item)")
-      ui-select-match(placeholder="{{scheme.displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data.displayValue]}}
-      ui-select-choices(repeat="value in scheme.possibleValues | filter: $select.search")
-        span(ng-bind-html="value[scheme.data.displayValue] | highlight: $select.search")
+    .row
+      .col-sm-9
+        label(for='{{scheme.name}}') {{scheme.displayName}}
+        ui-select(id='{{scheme.name}}', ng-model="selectData", on-select="select($item)")
+          ui-select-match(placeholder="{{scheme.displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data.displayValue]}}
+          ui-select-choices(repeat="value in scheme.possibleValues | filter: $select.search")
+            span(ng-bind-html="value[scheme.data.displayValue] | highlight: $select.search")
+      .col-sm-3
+        button.btn.btn-block(type='button', ng-click='add()') {{getAddText()}}
+ul.list-group(ng-show="scheme.multiple && (data.length > 0)")
+  li.list-group-item(ng-repeat="dataSet in data") 
+    a(ng-click='remove(dataSet)')
+      span.glyphicon.glyphicon-remove
+    |  {{dataSet[scheme.data.displayValue]}} 
+ul.list-group(ng-show="!scheme.multiple && data")
+  li.list-group-item 
+    a(ng-click='remove(data)')
+      span.glyphicon.glyphicon-remove
+    |  {{data[scheme.data.displayValue]}}

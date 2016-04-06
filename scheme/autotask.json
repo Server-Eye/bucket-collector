@@ -29,6 +29,20 @@
             "displayValue": "AccountName",
             "dataValue": "id"
         }
+    },{
+        "displayName": "Default-Customer Multiple",
+        "name": "defaultIDs",
+        "description": "The customer which will be used if the bucket-collector can not find a matching customer.",
+        "type": "select",
+        "dataType": "number",
+        "required": true,
+        "multiple": true,
+        "data": {
+            "source": "reaction",
+            "method": "getCustomers",
+            "displayValue": "AccountName",
+            "dataValue": "id"
+        }
     }, {
         "displayName": "Customers",
         "name": "customerIDs",

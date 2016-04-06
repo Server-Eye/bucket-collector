@@ -7,14 +7,13 @@
             restrict: 'E',
             scope: {
                 scheme: '=',
-                data: '='
+                returnData: '='
             },
             link: link,
             templateUrl: '/partials/settingsInput'
         };
         
         function link(scope, element, attrs){
-           console.log(scope.data);
         }
     }
 })();

@@ -13,26 +13,31 @@
 
         function init() {
             $scope.loaded = false;
-            $q.all([
-                Scheme($scope.reactionName).then(function (res) {
-                    $scope.schemes = res;
-                }),
-                ReactionData.get($scope.reactionName).then(function (res) {
-                    $scope.data = res;
-                })
-            ]).then(function () {
+            Scheme($scope.reactionName).then(function (res) {
+                $scope.schemes = res;
+                $scope.data = {};
+                angular.forEach($scope.schemes, function (scheme) {
+                    $scope.data[scheme.name] = undefined;
+                });
+                return ReactionData.get($scope.reactionName);
+            }).then(function (res) {
+                angular.forEach(res, function (val, key) {
+                    $scope.data[key] = val;
+                });
+                console.log($scope.data);
+            }).then(function () {
                 angular.forEach($scope.schemes, function (scheme) {
                     if (scheme.data) {
-                        SchemeData($scope.reactionName, scheme.data).then(function(data){
+                        SchemeData($scope.reactionName, scheme.data).then(function (data) {
                             scheme.possibleValues = data;
                         });
                     }
                 });
-                
+
                 $scope.loaded = true;
             });
         }
-        
+
         function applySettings(){
             console.log($scope.data);
         }
