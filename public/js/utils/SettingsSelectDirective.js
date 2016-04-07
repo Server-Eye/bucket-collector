@@ -18,7 +18,6 @@
             
             scope.select = function (data){
                 scope.selected = data;
-                console.log("RT", scope.returnData);
             };
             
             scope.add = function(){
@@ -64,11 +63,8 @@
             };
             
             function getFullDataSet(data){
-                //console.log('scheme, ',scope.scheme);
-                //console.log('data, ',data);
                 var result;
                 angular.forEach(scope.scheme.possibleValues, function(value){
-                    console.log(value[scope.scheme.data.dataValue], data);
                     if(value[scope.scheme.data.dataValue] == data){
                         result = value;
                     }
@@ -96,7 +92,6 @@
             }
             
             scope.$watch('scheme', function(newVal, oldVal){
-                console.log("CALLING INIT");
                 scope.init();
             }, true);
             

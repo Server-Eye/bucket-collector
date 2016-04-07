@@ -1,15 +1,24 @@
 form
   .form-group
     .row
-      .col-lg-6
+      .col-sm-5
         label(for='{{scheme.data[0].dataValue}}') {{scheme.data[0].displayName}}
         ui-select(id='{{scheme.data[0].dataValue}}', ng-model="first", on-select="selectFirst($item)")
           ui-select-match(placeholder="{{scheme.data[0].displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data[0].displayValue]}}
-          ui-select-choices(repeat="value in scheme.possibleValues[0] | filter: $select.search")
+          ui-select-choices(ui-disable-choice="value.disable", repeat="value in scheme.possibleValues[0] | filter: $select.search")
             span(ng-bind-html="value[scheme.data[0].displayValue] | highlight: $select.search")
-      .col-lg-6
+      .col-sm-5
         label(for='{{scheme.data[1].dataValue}}') {{scheme.data[1].displayName}}
         ui-select(id='{{scheme.data[1].dataValue}}', ng-model="second", on-select="selectSecond($item)")
           ui-select-match(placeholder="{{scheme.data[1].displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data[1].displayValue]}}
-          ui-select-choices(repeat="value in scheme.possibleValues[1] | filter: $select.search")
+          ui-select-choices(ui-disable-choice="value.disable", repeat="value in scheme.possibleValues[1] | filter: $select.search")
             span(ng-bind-html="value[scheme.data[1].displayValue] | highlight: $select.search")
+      .col-sm-2
+        button.btn.btn-block(type='button', ng-click='add()') {{getAddText()}}
+table.col-sm-12(ng-show="scheme.multiple && (data.length > 0)")
+  tr(ng-repeat="dataSet in data") 
+    td.col-sm-2
+      a(ng-click='remove(dataSet)')
+         span.glyphicon.glyphicon-remove
+    td.col-sm-5 {{dataSet.first[scheme.data[0].displayValue]}} 
+    td.col-sm-5 {{dataSet.second[scheme.data[1].displayValue]}}
