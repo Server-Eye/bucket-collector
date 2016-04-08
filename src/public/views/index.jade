@@ -8,7 +8,8 @@ block content
         .panel.panel-default
           .panel-heading Menu
           .panel-body
-            button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click="redirect('/settings')") Change Settings
+            button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click="redirect('/settings')") General Settings
+            button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click="redirect('/settings/reaction')") Reaction Settings
             button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click='refresh()') Refresh
       .col-sm-10.jumbotron.text-center(ng-if='!loaded')
         h1

@@ -87,7 +87,7 @@
 
         function applySettings() {
             Settings.set($scope.settings).then(function (res) {
-                $window.location.href = '/';
+                $window.location.href = '/settings/reaction';
             }, function (err) {
                 console.log(err);
             });

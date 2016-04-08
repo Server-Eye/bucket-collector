@@ -19,6 +19,7 @@ function init(app) {
     app.get('/settings/getSettings', interceptor.allowCross, settingsController.getSettings);
     app.post('/settings/setSettings', interceptor.allowCross, settingsController.setSettings);
     
+    app.get('/settings/reaction', interceptor.allowCross, uiController.additionalSettingsSelect);
     app.get('/settings/reaction/:name', interceptor.allowCross, uiController.additionalSettings);
     
     app.get('/partials/seHeader', interceptor.allowCross, uiController.seHeader);

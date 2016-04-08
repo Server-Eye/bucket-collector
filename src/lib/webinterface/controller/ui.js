@@ -47,6 +47,14 @@ function additionalSettings(req, res, next) {
         res.redirect('/');
     }
 }
+function additionalSettingsSelect(req,res,next){
+    var reactionName = settings.getType();
+    if(settings.getType()){
+        res.redirect('/settings/reaction/' + reactionName);
+    } else {
+        res.redirect('/');
+    }
+}
 
 /**
  * Renders the se-header-partial
@@ -76,6 +84,7 @@ function settingsAssignment(req, res, next) {
 (function ($) {
     $.index = index;
     $.additionalSettings = additionalSettings;
+    $.additionalSettingsSelect = additionalSettingsSelect;
     $.errors = errors;
     $.settings = settingsView;
     $.settingsInput = settingsInput;
