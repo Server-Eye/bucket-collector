@@ -1,40 +1,19 @@
 {
   "name": "bucket-collector",
-  "version": "1.1.1",
-  "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty). Reacts the received messages depending on the selected reactiontype.",
-  "main": "app.js",
-  "bin": {
-    "bucket-collector": "bin/bucket-collector.js"
-  },
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "bower": "^1.5.2",
-    "commander": "^2.8.1",
-    "express": "^4.12.4",
-    "handlebars": "^4.0.5",
-    "jade": "^1.11.0",
-    "jsop": "^0.3.1",
-    "log4js": "^0.6.26",
-    "q": "^1.0.1",
-    "request": "^2.40.0",
-    "soap": "^0.13.0"
-  },
+  "version": "1.0.0",
+  "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty) to get notification-messages from Server-Eye.",
+  "main": "gulpfile.js",
   "scripts": {
-    "postinstall": "bower install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Server-Eye/bucket-collector.git"
+    "url": "http://roland.paltz@teamfoundation.kraemerit.de:7990/scm/st/bucket-collector.git"
   },
-  "keywords": [
-    "Server-Eye",
-    "bucket-collector"
-  ],
-  "author": "Roland Paltz",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Server-Eye/bucket-collector/issues"
-  },
-  "homepage": "https://github.com/Server-Eye/bucket-collector#readme",
-  "devDependencies": {}
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-electron": "0.0.15"
+  }
 }

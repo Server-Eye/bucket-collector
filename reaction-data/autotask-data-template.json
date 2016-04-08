@@ -1,9 +1,0 @@
-{
-    "username": "AUTOTASK-USERNAME",
-    "password": "AUTOTASK-PASSWORD",
-    "defaultID": "DEFAULT-AUTOTASK-ACCOUNT-ID",
-    "customerIDs": {
-        "SE-CUSTOMER-ID" : "AUTOTASK-ACCOUNT-ID",
-        "SE-CUSTOMER-ID2" : "AUTOTASK-ACCOUNT-ID"
-    }
-}
