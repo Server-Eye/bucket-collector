@@ -1,8 +1,10 @@
 var gulp = require('gulp');
+var del = require('del');
 var electron = require('gulp-electron');
+var install = require('gulp-install');
 var packageJson = require('./src/package.json');
 
-gulp.task('electron', function() {
+gulp.task('electron', ['clean', 'install'], function() {
 
     gulp.src("")
     .pipe(electron({
@@ -30,4 +32,26 @@ gulp.task('electron', function() {
         }
     }))
     .pipe(gulp.dest(""));
+});
+
+gulp.task('clean-settings', function(){
+    return del([
+        'src/reaction-data',
+        'src/bucket-data'
+    ]);
+});
+
+gulp.task('clean',['clean-settings'], function(){
+    return del([
+        'src/node_modules',
+        'src/bower_components',
+        'release',
+        'cache'
+    ]);
+});
+
+gulp.task('install', function(){
+    return gulp.src([
+        './src/package.json'
+    ]).pipe(install());
 });
