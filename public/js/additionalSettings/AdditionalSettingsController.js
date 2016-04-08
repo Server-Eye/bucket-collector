@@ -3,9 +3,9 @@
 
     angular.module('bucket-collector').controller('AdditionalSettingsController', AdditionalSettingsController);
 
-    AdditionalSettingsController.$inject = ['$scope', '$location', '$q', 'SchemeService', 'SchemeDataService', 'ReactionDataService'];
+    AdditionalSettingsController.$inject = ['$scope', '$location','$window', '$q', 'SchemeService', 'SchemeDataService', 'ReactionDataService'];
 
-    function AdditionalSettingsController($scope, $location, $q, Scheme, SchemeData, ReactionData) {
+    function AdditionalSettingsController($scope, $location, $window, $q, Scheme, SchemeData, ReactionData) {
         $scope.reactionName = $location.absUrl().split('/').pop();
         $scope.loaded = false;
         $scope.applySettings = applySettings;
@@ -40,6 +40,10 @@
 
         function applySettings(){
             console.log($scope.data);
+            
+            ReactionData.set($scope.reactionName, $scope.data).then(function(){
+                $window.location.reload();
+            })
         }
         
         init();

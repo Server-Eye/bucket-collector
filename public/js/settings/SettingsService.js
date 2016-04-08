@@ -3,9 +3,9 @@
 
     angular.module('bucket-collector').factory('SettingsService', SettingsService);
 
-    SettingsService.$inject = ['$q', '$http'];
+    SettingsService.$inject = ['$q', '$http', 'ApiKeyService'];
 
-    function SettingsService($q, $http) {
+    function SettingsService($q, $http, ApiKey) {
         var _settings = {};
         
         return {
@@ -61,10 +61,6 @@
 
         function getNewApiKey(email, password, name) {
             return ApiKey.getNew(email, password, name);
-        }
-
-        function init() {
-            
         }
     }
 })();
