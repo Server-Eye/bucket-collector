@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-var app = require('../app');
+var app = require('../node');

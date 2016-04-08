@@ -4,7 +4,7 @@
   "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty) to get notification-messages from Server-Eye.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "cd src && npm install --production"
   },
   "repository": {
     "type": "git",

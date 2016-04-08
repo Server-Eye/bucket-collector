@@ -11,7 +11,7 @@ gulp.task('electron', function() {
         release: './release',
         cache: './cache',
         version: 'v0.37.4',
-        platforms: ['win32-ia32', 'darwin-x64'],
+        platforms: ['win32-ia32'], //, 'darwin-x64'],
         platformResources: {
             darwin: {
                 CFBundleDisplayName: packageJson.name,

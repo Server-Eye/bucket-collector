@@ -2,14 +2,14 @@
   "name": "bucket-collector",
   "version": "1.1.1",
   "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty). Reacts the received messages depending on the selected reactiontype.",
-  "main": "app.js",
+  "main": "electron.js",
   "bin": {
     "bucket-collector": "bin/bucket-collector.js"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
     "bower": "^1.5.2",
-    "commander": "^2.8.1",
+    "commander": "^2.9.0",
     "express": "^4.12.4",
     "handlebars": "^4.0.5",
     "jade": "^1.11.0",
@@ -36,5 +36,7 @@
     "url": "https://github.com/Server-Eye/bucket-collector/issues"
   },
   "homepage": "https://github.com/Server-Eye/bucket-collector#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.5"
+  }
 }
