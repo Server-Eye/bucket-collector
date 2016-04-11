@@ -14,14 +14,14 @@ gulp.task('electron', ['clean', 'install'], function() {
         cache: './cache',
         version: 'v0.37.4',
         packaging: false,
-        platforms: ['win32-ia32'], //, 'darwin-x64'],
+        platforms: ['win32-ia32', 'darwin-x64'],
         platformResources: {
             darwin: {
                 CFBundleDisplayName: packageJson.name,
                 CFBundleIdentifier: packageJson.name,
                 CFBundleName: packageJson.name,
                 CFBundleVersion: packageJson.version,
-                icon: 'gulp-electron.icns'
+                icon: 'se-icon.icns'
             },
             win: {
                 "version-string": packageJson.version,

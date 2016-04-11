@@ -30,6 +30,8 @@
                     if (scheme.data) {
                         SchemeData($scope.reactionName, scheme.data).then(function (data) {
                             scheme.possibleValues = data;
+                        }, function (error) {
+                            scheme.possibleValues = [error];
                         });
                     }
                 });

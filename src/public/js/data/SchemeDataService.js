@@ -12,6 +12,9 @@
             var deferred = $q.defer();
             
             if(!angular.isArray(dataScheme)){
+                if(!dataScheme.source){
+                    deferred.resolve([]);
+                }
                 if(dataScheme.source == "reaction"){
                     deferred.resolve(ReactionMethod(reactionName, dataScheme.method));
                 } 

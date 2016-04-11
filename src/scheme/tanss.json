@@ -1,0 +1,32 @@
+[
+    {
+        "displayName": "Tanss-URL",
+        "name": "tanssUrl",
+        "description": "The URL you use to access your tanss.",
+        "default": "https://tanss.something.de",
+        "type": "input",
+        "inputtype": "text",
+        "dataType": "string",
+        "required": true
+    }, {
+        "displayName": "Tanss-Api-Keys",
+        "name": "apiKeys",
+        "description": "The Api-Keys corresponding to the server-eye-customers.",
+        "type": "assignment",
+        "multiple": true,
+        "dataType": "object",
+        "data": [{
+                "source": "SE",
+                "method": "getCustomers",
+                "displayName": "Server-Eye customer",
+                "displayValue": "companyName",
+                "description": "server-eye customer",
+                "dataValue": "cId"
+            }, {
+                "type": "input",
+                "displayName": "ApiKey",
+                "inputtype": "text",
+                "description": "tanss-apiKey"
+            }]
+    }
+]
