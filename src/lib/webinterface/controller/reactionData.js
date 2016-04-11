@@ -9,8 +9,6 @@ function method(req, res, next) {
     if (reactionName && (dataStore.settings.getAvailableTypes().indexOf(reactionName) >= 0)) {
         if (reactions[reactionName] && reactions[reactionName][methodName]) {
             reactions[reactionName][methodName]().then(function (result) {
-                console.log(result);
-
                 res.send({
                     success: true,
                     data: result
@@ -35,13 +33,13 @@ function method(req, res, next) {
     }
 }
 
-function get(req,res,next){
+function get(req, res, next) {
     var reactionName = req.params.name;
-    if(reactionName && (dataStore.settings.getAvailableTypes().indexOf(reactionName) >= 0)){
+    if (reactionName && (dataStore.settings.getAvailableTypes().indexOf(reactionName) >= 0)) {
         var data = dataStore.reactions(reactionName).get();
         res.send({
             success: true,
-            data:data
+            data: data
         });
     } else {
         res.send({
@@ -51,11 +49,11 @@ function get(req,res,next){
     }
 }
 
-function set(req,res,next){
+function set(req, res, next) {
     var reactionName = req.params.name;
     var data = req.body;
-    
-    if(reactionName && (dataStore.settings.getAvailableTypes().indexOf(reactionName) >= 0)){
+
+    if (reactionName && (dataStore.settings.getAvailableTypes().indexOf(reactionName) >= 0)) {
         dataStore.reactions(reactionName).set(data);
         res.send({
             success: true,

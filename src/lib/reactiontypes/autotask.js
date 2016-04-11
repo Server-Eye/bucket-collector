@@ -28,17 +28,17 @@ function react(message) {
     return deferred.promise;
 }
 
-function getCustomers(){
+function getCustomers() {
     var deferred = Q.defer();
-    
-    data.customers().then(function(customers){
+
+    data.customers().then(function (customers) {
         deferred.resolve(customers);
-    }).fail(function(error){
+    }).fail(function (error) {
         deferred.reject(error);
     });
-    
+
     return deferred.promise;
-};
+}
 
 //react(require('/dev/bucket-collector/debug/bucket-single-STATE-error')).then(function (message) {
 //    var util = require('util');

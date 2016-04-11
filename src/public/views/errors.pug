@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div(ng-controller='ErrorsController')
+  .container-fluid(ng-controller='ErrorsController')
     se-header
     .row(ng-if='!loaded')
       .col-sm-12.jumbotron.text-center

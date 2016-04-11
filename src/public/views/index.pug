@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  div(ng-controller='MainController')
+  .container-fluid(ng-controller='MainController')
     se-header
-    .col-sm-12.col-lg-3
+    .col-sm-12.col-lg-3(style="padding-left:0; padding-right:0;")
       .panel.panel-default.panel-primary
         .panel-heading Menu
         .panel-body
@@ -13,16 +13,16 @@ block content
               button.btn.btn-lg.btn-primary.btn-block(type='button', ng-click="redirect('/settings/reaction')") Reaction Settings
           div.col-sm-4.col-lg-12
               button.btn.btn-lg.btn-primary.btn-block(type='button', ng-click="refresh()") Refresh
-    .col-sm-12.col-lg-9.jumbotron.text-center(ng-if='!loaded')
+    .col-sm-12.col-lg-9.jumbotron.text-center(style="padding-left:0; padding-right:0;", ng-if='!loaded')
         h1
           span.glyphicon.glyphicon-refresh.gly-spin
-    .col-sm-12.col-lg-9(ng-if='loaded')
+    .col-sm-12.col-lg-9(style="padding-left:0; padding-right:0;", ng-if='loaded')
         .panel.panel-default.panel-primary
           .panel-heading Bucketsstats
           .panel-body
             table.table.m-t-lg(ng-show="buckets.length")
               tr
-                th.col-sm-1 Name
+                th.col-sm-1 Name 
                 th.col-sm-3 ID
                 th.col-sm-2 Users
                 th.col-sm-1 Success
