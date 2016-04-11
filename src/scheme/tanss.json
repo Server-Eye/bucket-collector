@@ -16,6 +16,7 @@
         "multiple": true,
         "dataType": "object",
         "data": [{
+                "type": "select",
                 "source": "SE",
                 "method": "getCustomers",
                 "displayName": "Server-Eye customer",
@@ -25,6 +26,7 @@
             }, {
                 "type": "input",
                 "displayName": "ApiKey",
+                "dataValue": "apiKey",
                 "inputtype": "text",
                 "description": "tanss-apiKey"
             }]
