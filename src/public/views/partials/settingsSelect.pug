@@ -1,20 +1,20 @@
 form
   .form-group
     .row
-      .col-sm-9
+      .col-sm-10
         label(for='{{scheme.name}}') {{scheme.displayName}}
         ui-select(id='{{scheme.name}}', ng-model="selectData", on-select="select($item)")
           ui-select-match(placeholder="{{scheme.displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data.displayValue]}}
           ui-select-choices(repeat="value in scheme.possibleValues | filter: $select.search")
             span(ng-bind-html="value[scheme.data.displayValue] | highlight: $select.search")
-      .col-sm-3
-        button.btn.btn-block(type='button', ng-click='add()') {{getAddText()}}
-ul.list-group(ng-show="scheme.multiple && (data.length > 0)")
+      .col-sm-2
+        button.btn.btn-block.btn-primary(style="margin-top:25px", type='button', ng-click='add()') {{getAddText()}}
+ul.list-group(style="margin-bottom:0;", ng-if="scheme.multiple && (data.length > 0)")
   li.list-group-item(ng-repeat="dataSet in data") 
     a(ng-click='remove(dataSet)')
       span.glyphicon.glyphicon-remove
     |  {{dataSet[scheme.data.displayValue]}} 
-ul.list-group(ng-show="!scheme.multiple && data")
+ul.list-group(style="margin-bottom:0;",ng-if="!scheme.multiple && data")
   li.list-group-item 
     a(ng-click='remove(data)')
       span.glyphicon.glyphicon-remove

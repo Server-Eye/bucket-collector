@@ -2,17 +2,6 @@ var Q = require('q');
 var request = require('request');
 var url = require('url');
 var _settings = require('../dataStore').reactions('tanss');
-var settings = _settings.get();
-
-if(settings.tanssUrl &&settings.apiKeys){
-    settings = {
-        tanssUrl: "",
-        apiKeys: []
-    };
-    _settings.set(settings);
-    console.log("COULD NOT LOAD 'tanss-data'");
-    console.log("USING EMPTY DATASET");
-}
 
 var tanssAPI = "/serverEye/index.php";
 var types = {
@@ -32,7 +21,7 @@ var types = {
 function react(message) {
     var deferred = Q.defer();
 
-    var tanss = url.resolve(settings.tanssUrl, tanssAPI);
+    var tanss = url.resolve(_settings.get().tanssUrl, tanssAPI);
     var data = buildFormData(message);
 
     request({
@@ -71,10 +60,15 @@ function react(message) {
  * @return {Object}
  */
 function buildFormData(message) {
+    var apiKeys = _settings.get().apiKeys;
+    var apiKey;
+    if(apiKeys && apiKeys[message.customer.cId])
+        apiKey = apiKeys[message.customer.cId];
+    
     var data = {
         customer: message.customer.number,
         time: message.state.date,
-        apiKey: settings.apiKeys[message.customer.cId]
+        apiKey: apiKey
     };
 
     if (message.user) {

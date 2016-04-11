@@ -4,12 +4,12 @@ block content
   .container-fluid(ng-controller='SettingsController')
     se-header
     .row(ng-if='!loaded')
-      .col-sm-12.jumbotron.text-center
+      .col-sm-12.col-lg-12.jumbotron.text-center
         h1
           span.glyphicon.glyphicon-refresh.gly-spin
     .row(ng-if='loaded')
-      .col-sm-4
-        .panel.panel-default
+      .col-lg-4.col-sm-12
+        .panel.panel-default.panel-primary
           .panel-heading API Key
           .panel-body
             form(ng-show='!apiKeyAvailable')
@@ -34,14 +34,14 @@ block content
                 input#apiKey.form-control(type='text', ng-model='settings.apiKey', readonly='readonly')
               .form-group-inline
                 button.btn.btn-default(type='button', ng-click='resetKey()') Generate New Key
-        .panel.panel-default
+        .panel.panel-default.panel-primary
           .panel-heading Bucketaction
           .panel-body
             form
               .form-group
                 label(for='type') Type
                 select#type.form-control(ng-model='settings.type', ng-options='v for v in settings.availableTypes')
-        .panel.panel-default
+        .panel.panel-default.panel-primary
           .panel-heading Poll-Interval
           .panel-body
             form
@@ -51,9 +51,8 @@ block content
               .form-group
                 label(for='retries') Max-Retries
                 input#retries.form-control(type='number', min='1', ng-model='settings.maxRetries')
-        button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click='applySettings()') Save Settings
-      .col-sm-8
-        .panel.panel-default
+      .col-lg-8.col-sm-12
+        .panel.panel-default.panel-primary
           .panel-heading Available Buckets
           .panel-body
             table.table.m-t-lg(ng-show="apiKeyAvailable && buckets")
@@ -71,3 +70,4 @@ block content
                 td.text-center
                   input(type="checkbox", ng-model="bucket.active")
             h2.text-center(ng-show="!apiKeyAvailable") Please generate a API Key
+    button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click='applySettings()') Save Settings

@@ -9,13 +9,17 @@ block content
           span.glyphicon.glyphicon-refresh.gly-spin
     .row(ng-if='loaded')
       .col-sm-12
-        .panel.panel-default
+        .panel.panel-default.panel-primary
           .panel-heading Additional Settings: {{reactionName}}
           .panel-body
-            .div(ng-repeat='scheme in schemes')
-              settings-input(ng-if='scheme.type == "input"', scheme='scheme', return-data='data[scheme.name]')
-              settings-select(ng-if='scheme.type == "select"', scheme='scheme', return-data='data[scheme.name]')
-              settings-assignment(ng-if='scheme.type == "assignment"', scheme='scheme', return-data='data[scheme.name]')
-      .col-sm-12
-        .panel.panel-default
+            .panel.panel-default(ng-repeat='scheme in schemes')
+              .panel-heading {{scheme.caption}}
+              .panel-body
+                settings-input(ng-if='scheme.type == "input"', scheme='scheme', return-data='data[scheme.name]')
+                settings-select(ng-if='scheme.type == "select"', scheme='scheme', return-data='data[scheme.name]')
+                settings-assignment(ng-if='scheme.type == "assignment"', scheme='scheme', return-data='data[scheme.name]')
+    .row  
+      .col-sm-6
           button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click='applySettings()') Save Settings
+      .col-sm-6
+          a(href='/').btn.btn-lg.btn-block.btn-primary Cancel

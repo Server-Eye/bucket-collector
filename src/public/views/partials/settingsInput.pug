@@ -4,8 +4,8 @@ form(name='form')
       div(ng-class='getClass()')
         label(for='{{scheme.name}}') {{scheme.displayName}}
         input.form-control(id='{{scheme.name}}', type='{{scheme.inputtype}}', name='input', ng-class='getInputClass()', ng-model='data.input')
-      div.col-sm-3(ng-if='scheme.multiple')
-        button.btn.btn-block(type='button', ng-click='add()') add
+      div.col-sm-2(ng-if='scheme.multiple')
+        button.btn.btn-block(style="margin-top:25px;", type='button', ng-click='add()') add
 ul.list-group(ng-if="scheme.multiple && (returnData.length > 0)")
   li.list-group-item(ng-repeat="value in returnData") 
     a(ng-click='remove(value)')

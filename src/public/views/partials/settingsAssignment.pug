@@ -7,7 +7,7 @@ form
           ui-select-match(placeholder="{{scheme.data[0].displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data[0].displayValue]}}
           ui-select-choices(ui-disable-choice="value.disable", repeat="value in scheme.possibleValues[0] | filter: $select.search")
             span(ng-bind-html="value[scheme.data[0].displayValue] | highlight: $select.search")
-        input.form-control(ng-if="scheme.data[0].type == 'input'", id='{{scheme.data[0].dataValue}}', type='{{scheme.inputtype}}', ng-class='getInputClass()', ng-model='input.first')
+        input.form-control(ng-if="scheme.data[0].type == 'input'", id='{{scheme.data[0].dataValue}}', type='{{scheme.inputtype}}', ng-class='getInputClass()', ng-model='input.first')  
       .col-sm-5
         label(for='{{scheme.data[1].dataValue}}') {{scheme.data[1].displayName}}
         ui-select(ng-if="scheme.data[1].type == 'select'", id='{{scheme.data[1].dataValue}}', ng-model="input.second", on-select="selectSecond($item)")
@@ -16,11 +16,12 @@ form
             span(ng-bind-html="value[scheme.data[1].displayValue] | highlight: $select.search")
         input.form-control(ng-if="scheme.data[1].type == 'input'", id='{{scheme.data[1].dataValue}}', type='{{scheme.data[1].inputtype}}', ng-class='getInputClass()', ng-model='input.second')
       .col-sm-2
-        button.btn.btn-block(type='button', ng-click='add()') {{getAddText()}}
+        button.btn.btn-block.btn-primary(style="margin-top:25px;", type='button', ng-click='add()') {{getAddText()}}
 table.col-sm-12(ng-show="scheme.multiple && (data.length > 0)")
   tr(ng-repeat="dataSet in data") 
-    td.col-sm-2
+    td
       a(ng-click='remove(dataSet)')
          span.glyphicon.glyphicon-remove
-    td.col-sm-5 {{(scheme.data[0].type == 'select') ? dataSet.first[scheme.data[0].displayValue] : dataSet.first}} 
+      |   {{(scheme.data[0].type == 'select') ? dataSet.first[scheme.data[0].displayValue] : dataSet.first}} 
     td.col-sm-5 {{(scheme.data[1].type == 'select') ? dataSet.second[scheme.data[1].displayValue] : dataSet.second}}
+    td.col-sm-2

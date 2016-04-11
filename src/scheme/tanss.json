@@ -1,6 +1,7 @@
 [
     {
         "displayName": "Tanss-URL",
+        "caption": "URL to the tanss-system",
         "name": "tanssUrl",
         "description": "The URL you use to access your tanss.",
         "default": "https://tanss.something.de",
@@ -10,6 +11,7 @@
         "required": true
     }, {
         "displayName": "Tanss-Api-Keys",
+        "caption": "Matching Server-Eye-customers with Tanss-Api-Keys",
         "name": "apiKeys",
         "description": "The Api-Keys corresponding to the server-eye-customers.",
         "type": "assignment",
