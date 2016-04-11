@@ -20,7 +20,7 @@ function config() {
     app.use(bodyParser.json());
 
     app.set('views', path.resolve(__dirname, '../public/views'));
-    app.set('view engine', 'jade');
+    app.set('view engine', 'pug');
 
     return app;
 }

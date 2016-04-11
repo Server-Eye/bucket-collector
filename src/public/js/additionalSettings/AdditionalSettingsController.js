@@ -45,7 +45,7 @@
             
             ReactionData.set($scope.reactionName, $scope.data).then(function(){
                 $window.location.reload();
-            })
+            });
         }
         
         init();

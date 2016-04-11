@@ -9,7 +9,7 @@ var settings = require('../../dataStore').settings;
  */
 function index(req, res, next) {
     if (typeof settings.checkSettings() === 'boolean' && settings.checkSettings()) {
-        res.render('index.jade');
+        res.render('index.pug');
     } else {
         res.redirect('/settings');
     }
@@ -23,7 +23,7 @@ function index(req, res, next) {
  * @param {Function} next Follow-up-function, called on successful completion
  */
 function errors(req, res, next) {
-    res.render('errors.jade');
+    res.render('errors.pug');
 }
 
 /**
@@ -34,14 +34,14 @@ function errors(req, res, next) {
  * @param {Function} next Follow-up-function, called on successful completion
  */
 function settingsView(req, res, next) {
-    res.render('settings.jade');
+    res.render('settings.pug');
 }
 
 function additionalSettings(req, res, next) {
     var reactionName = req.params.name;
     
     if (reactionName && (settings.getAvailableTypes().indexOf(reactionName) >= 0)) {
-        res.render('additional-settings.jade');
+        res.render('additional-settings.pug');
     } else {
         
         res.redirect('/');
@@ -64,19 +64,19 @@ function additionalSettingsSelect(req,res,next){
  * @param {Function} next Follow-up-function, called on successful completion
  */
 function seHeader(req, res, next) {
-    res.render('partials/seHeader.jade');
+    res.render('partials/seHeader.pug');
 }
 
 function settingsInput(req, res, next) {
-    res.render('partials/settingsInput.jade');
+    res.render('partials/settingsInput.pug');
 }
 
 function settingsSelect(req, res, next) {
-    res.render('partials/settingsSelect.jade');
+    res.render('partials/settingsSelect.pug');
 }
 
 function settingsAssignment(req, res, next) {
-    res.render('partials/settingsAssignment.jade');
+    res.render('partials/settingsAssignment.pug');
 }
 /**
  * @ignore
