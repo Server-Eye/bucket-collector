@@ -2,9 +2,14 @@ var gulp = require('gulp');
 var del = require('del');
 var electron = require('gulp-electron');
 var install = require('gulp-install');
+var tasks = require('gulp-task-listing');
 var packageJson = require('./src/package.json');
 
-gulp.task('electron', ['clean', 'install'], function() {
+gulp.task('default', function(){
+    return tasks.withFilters(null, 'default')();
+});
+
+gulp.task('build', ['clean', 'install'], function() {
 
     gulp.src("")
     .pipe(electron({
@@ -41,14 +46,21 @@ gulp.task('clean-settings', function(){
     ]);
 });
 
-gulp.task('clean',['clean-settings'], function(){
+gulp.task('clean-install', function(){
     return del([
-        'src/node_modules',
         'src/bower_components',
+        'src/node_modules'
+    ]);
+});
+
+gulp.task('clean-build', function(){
+	return del([
         'release',
         'cache'
     ]);
-});
+})
+
+gulp.task('clean',['clean-settings', 'clean-install', 'clean-build']);
 
 gulp.task('install', function(){
     return gulp.src([
