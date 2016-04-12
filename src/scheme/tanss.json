@@ -3,7 +3,7 @@
         "displayName": "Tanss-URL",
         "caption": "URL to the tanss-system",
         "name": "tanssUrl",
-        "description": "The URL you use to access your tanss.",
+        "helpHtml": "<span>The URL you use to access your tanss-system. <br>Has the form https://tanss.something.de</span>",
         "default": "https://tanss.something.de",
         "type": "input",
         "inputtype": "text",
@@ -14,6 +14,7 @@
         "caption": "Matching Server-Eye-customers with Tanss-Api-Keys",
         "name": "apiKeys",
         "description": "The Api-Keys corresponding to the server-eye-customers.",
+        "helpText": "Associates a Server-Eye customer with a Tanss-customer",
         "type": "assignment",
         "multiple": true,
         "dataType": "object",
@@ -27,6 +28,8 @@
                 "dataValue": "cId"
             }, {
                 "type": "input",
+                "default": "1111-22223333-AAAABBBB-CCCC",
+                "helpHtml": "<span>These keys have to be generated. See <a href='https://s3-eu-west-1.amazonaws.com/uploads-eu.hipchat.com/43388/291062/5T7O0lo4NYPMK5J/FAQ_Tanssanbindung_neues_OCC.pdf'> HERE </a></span>",
                 "displayName": "ApiKey",
                 "dataValue": "apiKey",
                 "inputtype": "text",

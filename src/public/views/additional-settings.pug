@@ -13,7 +13,7 @@ block content
           .panel-heading Additional Settings: {{reactionName}}
           .panel-body
             .panel.panel-default(ng-repeat='scheme in schemes')
-              .panel-heading {{scheme.caption}}
+              .panel-heading {{scheme.caption}}  
               .panel-body
                 settings-input(ng-if='scheme.type == "input"', scheme='scheme', return-data='data[scheme.name]')
                 settings-select(ng-if='scheme.type == "select"', scheme='scheme', return-data='data[scheme.name]')
