@@ -161,6 +161,8 @@ function getCustomers(){
             }
         });
 
+    }).fail(function(err){
+        deferred.reject(err);
     });
 
     return deferred.promise;

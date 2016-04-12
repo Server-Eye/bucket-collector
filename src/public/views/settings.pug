@@ -10,7 +10,7 @@ block content
     .row(ng-if='loaded')
       .col-lg-4.col-sm-12
         .panel.panel-default.panel-primary
-          .panel-heading API Key
+          .panel-heading Server-Eye API Key
           .panel-body
             form(ng-show='!apiKeyAvailable')
               .form-group
@@ -20,11 +20,11 @@ block content
                 label(for='password') Password
                 input#password.form-control(type='password', ng-model='login.password')
               .form-group
-                label(for='keyName') Key-Name
+                label(for='keyName') Key-Name (optional)
                 input#password.form-control(type='text', ng-model='login.name')
               .form-inline
                 .form-group
-                  button.btn.btn-default(type='button', ng-click='newKey()') Generate API-Key
+                  button.btn.btn-default.btn-primary(type='button', ng-click='newKey()') Generate API-Key
                 .form-group(ng-if='settings.apiKey', style='float:right;')
                   button.btn.btn-default(type='button', ng-click='resetKey()') Back
               .text-danger(ng-show='login.error') ERROR: {{login.error}}
@@ -35,21 +35,29 @@ block content
               .form-group-inline
                 button.btn.btn-default(type='button', ng-click='resetKey()') Generate New Key
         .panel.panel-default.panel-primary
-          .panel-heading Bucketaction
+          .panel-heading Bucketaction  
           .panel-body
             form
               .form-group
-                label(for='type') Type
+                label(for='type') Type  
+                  a(uib-popover="Which action should be taken if a new message is received from a bucket?")
+                    span.glyphicon.glyphicon-question-sign
                 select#type.form-control(ng-model='settings.type', ng-options='v for v in settings.availableTypes')
         .panel.panel-default.panel-primary
-          .panel-heading Poll-Interval
+          .panel-heading Poll-Interval  
+            a(uib-popover='')
+              span.glyphicon.glyphicon-question-sign
           .panel-body
             form
               .form-group
-                label(for='interval') Minutes
+                label(for='interval') Minutes  
+                  a(uib-popover="How long should the bucket-collector wait before checking for new messages?")
+                    span.glyphicon.glyphicon-question-sign
                 input#interval.form-control(type='number', min='1', ng-model='settings.interval')
               .form-group
-                label(for='retries') Max-Retries
+                label(for='retries') Max-Retries  
+                  a(uib-popover="How often should the bucket-collector retry to process messages if they fail?")
+                    span.glyphicon.glyphicon-question-sign
                 input#retries.form-control(type='number', min='1', ng-model='settings.maxRetries')
       .col-lg-8.col-sm-12
         .panel.panel-default.panel-primary
@@ -70,4 +78,4 @@ block content
                 td.text-center
                   input(type="checkbox", ng-model="bucket.active")
             h2.text-center(ng-show="!apiKeyAvailable") Please generate a API Key
-    button.btn.btn-lg.btn-block.btn-primary(type='button', ng-click='applySettings()') Save Settings
+    button.btn.btn-lg.btn-block.btn-primary(style="margin-bottom:20px;", type='button', ng-click='applySettings()') Save Settings

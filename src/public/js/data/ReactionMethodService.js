@@ -21,7 +21,8 @@
                     if (result.success) {
                         deferred.resolve(result.data);
                     } else {
-                        deferred.reject(result.message);
+                        console.log(result.message);
+                        deferred.resolve([]);
                     }
                 }, function (error) {
                     deferred.reject(error);
