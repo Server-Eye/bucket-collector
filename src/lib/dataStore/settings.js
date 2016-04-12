@@ -12,7 +12,7 @@ if(!_settings.interval){
 }
 
 if(!_settings.maxRetries){
-    _settings.maxRetries = 3;
+    _settings.maxRetries = 2;
 }
 
 /**

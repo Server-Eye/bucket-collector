@@ -7,12 +7,13 @@ var _settings;
  * @return {String}
  */
 function getSeStateId(message) {
-    var sId;
+    var sId = "DEFAULT_STATE_ID";
 
-    if (message.agent) {
+    if (message.agent && message.agent.aId) {
         sId = message.agent.aId;
     } else {
-        sId = message.container.cId;
+        if (message.container && message.container.cId)
+            sId = message.container.cId;
     }
 
     return sId;
@@ -25,16 +26,18 @@ function getSeStateId(message) {
  * @return {String}
  */
 function getTitle(message) {
-    var settings = settings.get();
+    var settings = _settings.get();
     var title = "SE - ";
 
     if (message.autotaskAccountID == settings.defaultID) {
-        title += message.customer.name + " - ";
+        if (message.customer && message.customer.name)
+            title += message.customer.name + " - ";
     }
 
-    title += message.container.name;
+    if (message.container && message.container.name)
+        title += message.container.name;
 
-    if (message.agent) {
+    if (message.agent && message.agent.name) {
         title += " - " + message.agent.name;
     }
 
@@ -47,10 +50,14 @@ function getTitle(message) {
  * @param {string} cId
  * @return {string}
  */
-function getAccountID(cId) {
+function getAccountID(message) {
     var settings = _settings.get();
-    if (settings.customerIDs[cId]) {
-        return settings.customerIDs[cId];
+    if (message.customer && message.customer.cId) {
+        var cId = message.customer.cId;
+
+        if (settings.customerIDs && settings.customerIDs[cId]) {
+            return settings.customerIDs[cId];
+        }
     }
     return settings.defaultID;
 }
@@ -62,7 +69,13 @@ function getAccountID(cId) {
  * @return {String}
  */
 function getTicketNoteMessage(message) {
-    return message.user.prename + " " + message.user.surname + ": " + message.note.message;
+    var note = "";
+    if(message.user && message.user.prename && message.user.surname)
+        note += message.user.prename + " " + message.user.surname + ": ";
+    if(message.note && message.note.message)
+        note += message.note.message;
+    
+    return note;
 }
 
 /**

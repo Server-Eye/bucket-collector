@@ -1,4 +1,6 @@
 var soap, _settings, utils;
+
+var Q = require('q');
 var parser = require('./helper/parser');
 
 
@@ -9,19 +11,21 @@ var parser = require('./helper/parser');
  * @return {promise}
  */
 function hint(message) {
-    message.autotaskAccountID = utils.getAccountID(message.customer.cId);
-
+    var deferred = Q.defer();
+    
+    message.autotaskAccountID = utils.getAccountID(message);
+    
     var title = utils.getTitle(message);
-
+    
     message.seStateId = utils.getSeStateId(message);
 
     var ticketNodeMessage = utils.getTicketNoteMessage(message);
 
-    return soap.getTicketIdBySEStateId(message.seStateId).then(function (ticketId) {
+    soap.getTicketIdBySEStateId(message.seStateId).then(function (ticketId) {
         if (!ticketId || ticketId.error) {
             message.error = (ticketId && ticketId.error) ? ticketId.error : "No matching ticket found";
             message.response = (ticketId &&ticketId.response) ? ticketId.resonse : "No matching ticket found";
-            return message;
+            deferred.resolve(message);
         } else {
             var note = {
                 attributes: {
@@ -42,9 +46,13 @@ function hint(message) {
             };
 
             message.data = data;
-            return soap.createTicketNote(message);
+            soap.createTicketNote(message).then(function(result){
+                deferred.resolve(result);
+            });
         }
     });
+    
+    return deferred.promise;
 }
 
 /**
@@ -54,8 +62,7 @@ function hint(message) {
  * @return {function}
  */
 function init(_settings) {
-    _settings = _settings;
-
+    
     soap = require('./helper/soap')(_settings);
     utils = require('./helper/utils')(_settings);
 

@@ -1,4 +1,5 @@
-var hint, soap, _settings, utils;
+var hint, soap, utils;
+var Q = require('q');
 var parser = require('./helper/parser');
 
 /**
@@ -10,13 +11,15 @@ var parser = require('./helper/parser');
  * @return {promise}
  */
 function state(message) {
-    message.autotaskAccountID = utils.getAccountID(message.customer.cId);
+    var deferred = Q.defer();
+    
+    message.autotaskAccountID = utils.getAccountID(message);
 
     var title = utils.getTitle(message);
 
     message.seStateId = utils.getSeStateId(message);
 
-    if (message.state.error) {
+    if (message.state && message.state.error) {
 
         var ticket = {
             attributes: {
@@ -37,7 +40,7 @@ function state(message) {
             Status: 1,
             Source: 8,
             Title: title,
-            Description: message.state.message
+            Description: (message.state && message.state.message) ? message.state.message : "ERROR, NO MESSAGE IN BUCKETMESSAGE"
         };
         var data = {
             Entities: [{
@@ -47,17 +50,26 @@ function state(message) {
 
         message.data = data;
 
-        return soap.createTicket(message);
+        soap.createTicket(message).then(function(result){
+            deferred.resolve(result);
+        });
     } else {
         message.note = {
-            message: message.state.message
+            message: (message.state && message.state.message) ? message.state.message: "ERROR, NO MESSAGE IN BUCKETMESSAGE"
         };
 
-        message.user.prename = "Server-Eye";
-        message.user.surname = "";
+        message.user = {
+            prename: "Server-Eye",
+            surname: ""
+        };
+            
 
-        return hint(message);
+        hint(message).then(function(result){
+            deferred.resolve(result);
+        });
     }
+    
+    return deferred.promise;
 }
 
 /**
@@ -67,8 +79,6 @@ function state(message) {
  * @return {function}
  */
 function init(_settings) {
-    _settings = _settings;
-
     utils = require('./helper/utils')(_settings);
     soap = require('./helper/soap')(_settings);
     hint = require('./autotask-hint')(_settings);

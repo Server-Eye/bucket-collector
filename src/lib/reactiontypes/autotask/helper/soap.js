@@ -71,7 +71,6 @@ function getClient() {
  */
 function createTicket(message) {
     var deferred = Q.defer();
-
     getClient().then(function (_client) {
         _client.ATWS.ATWSSoap.create(message.data, function (err, res) {
             if (err) {
@@ -176,7 +175,6 @@ function getCustomers(){
  */
 function getTicketIdBySEStateId(seStateId) {
     var deferred = Q.defer();
-
     var query = {
         Ticket: [
             {

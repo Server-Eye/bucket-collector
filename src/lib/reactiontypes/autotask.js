@@ -21,10 +21,9 @@ function react(message) {
     types[message.type](message).then(function (res) {
         message.error = res.error;
         message.response = res.response;
-
         deferred.resolve(message);
     });
-
+    
     return deferred.promise;
 }
 
@@ -39,11 +38,6 @@ function getCustomers() {
 
     return deferred.promise;
 }
-
-//react(require('/dev/bucket-collector/debug/bucket-single-STATE-error')).then(function (message) {
-//    var util = require('util');
-//    console.log(util.inspect(message, {depth:null,colors:true}));
-//});
 
 /**
  * @ignore
