@@ -9,6 +9,7 @@ var path = require('path');
 function initLoggers(config, $) {
     var log4js = require('log4js');
     
+    //logDir
     var logDir;
     if(config.logDir){
         logDir = path.resolve(config.logDir);
@@ -68,6 +69,7 @@ function setConfig(config, $){
     bucketLogger.setLevel($.config.logLevel);
     reactionLogger.setLevel($.config.logLevel);
     
+    //reactionData
     var reactionDataDir;
     if(config.reactionDataDir){
         reactionDataDir = path.resolve(config.reactionDataDir);
@@ -86,6 +88,7 @@ function setConfig(config, $){
     }
     $.config.reactionDataDir = reactionDataDir;
     
+    //bucketData
     var bucketDataDir;
     if(config.bucketDataDir){
         bucketDataDir = path.resolve(config.bucketDataDir);
@@ -104,6 +107,7 @@ function setConfig(config, $){
     }
     $.config.bucketDataDir = bucketDataDir;
     
+    //reactionDir
     var reactionDir;
     if(config.reactionDir){
         reactionDir = path.normalize(config.reactionDir);
@@ -125,22 +129,7 @@ function setConfig(config, $){
     if(config.port){
         $.config.webinterfacePort = config.port;
     }
-    
-    if(config.clean){
-        appLogger.warn("CLEARING CACHE");
-        try{
-            fs.unlinkSync(path.resolve(bucketDataDir,"buckets.json"));
-        }catch(e){
-            appLogger.warn("Could not remove", bucketDataDir,"buckets.json");
-            appLogger.warn(e);
-        }
-        try{
-            fs.unlinkSync(path.resolve(bucketDataDir,"settings.json"));
-        }catch(e){
-            appLogger.warn("Could not remove", bucketDataDir,"settings.json");
-            appLogger.warn(e);
-        }
-    }
+
     $.config.apiUrl = "https://api.server-eye.de/2/";
 }
 

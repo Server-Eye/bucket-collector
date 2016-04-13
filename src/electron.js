@@ -8,7 +8,8 @@ var window = null;
 
 var config = {
     reactionDataDir: './reaction-data',
-    bucketDataDir: './bucket-data'
+    bucketDataDir: './bucket-data',
+    logDir: './log'
 };
 
 function start() {

@@ -42,7 +42,8 @@ gulp.task('build', ['clean', 'install'], function () {
 gulp.task('clean-settings', function () {
     return del([
         'src/reaction-data',
-        'src/bucket-data'
+        'src/bucket-data',
+        'src/log'
     ]);
 });
 
