@@ -9,7 +9,7 @@ var window = null;
 var config = {
     reactionDataDir: './reaction-data',
     bucketDataDir: './bucket-data',
-    logDir: './log'
+    logDir: './logs'
 };
 
 function start() {

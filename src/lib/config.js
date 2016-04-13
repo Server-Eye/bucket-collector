@@ -14,7 +14,7 @@ function initLoggers(config, $) {
     if(config.logDir){
         logDir = path.resolve(config.logDir);
     } else {
-        logDir = path.join(__dirname, '../log');
+        logDir = path.join(__dirname, '../logs');
     }
 
     try {
