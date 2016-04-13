@@ -8,6 +8,7 @@ var path = require('path');
 var Q = require('q');
 
 var reactor = {};
+var timeout = 10000;
 
 /**
  * Calls bucketService.get() with the given bId, performes given reaction for each received message.
@@ -40,7 +41,14 @@ function react(bId, type) {
 
                 var nextMessage = getCallbackFunction(type, bucket, failedMessages, promises);
                 logger.debug("Starting reaction of first message");
-                promises.push(reactor[type].react(message).then(nextMessage));
+                promises.push(reactor[type].react(message).timeout(timeout).fail(function (err) {
+                    logger.warning('ERROR in reaction ' + type, err)
+                    var _message = JSON.parse(JSON.stringify(message));
+                    _message.error = true;
+                    _message.response = err;
+
+                    return Q.resolve(_message);
+                }).then(nextMessage));
             }
 
             Q.allSettled(promises).then(function () {
@@ -120,6 +128,7 @@ function loadReactions() {
 function getCallbackFunction(type, bucket, failedMessages, promises) {
     var nextMessage = function (message) {
         logger.debug('Finished reaction!');
+
         if (!message.error) {
             bucket.stats.lastResult = "SUCCESS";
             bucket.stats.reactCalls.success++;
@@ -138,16 +147,23 @@ function getCallbackFunction(type, bucket, failedMessages, promises) {
                 message.try = 0;
             }
             message.try++;
-            
+
             logger.debug('Starting next reaction!');
-            var promise = reactor[type].react(message).then(nextMessage);
+            var promise = reactor[type].react(message).timeout(timeout).fail(function (err) {
+                logger.warning('ERROR in reaction ' + type, err)
+                var _message = JSON.parse(JSON.stringify(message));
+                _message.error = true;
+                _message.response = err;
+
+                return Q.resolve(message);
+            }).then(nextMessage);
 
             promises.push(promise);
 
             return promise;
         }
     };
-    
+
     return nextMessage;
 }
 
@@ -156,7 +172,7 @@ function getCallbackFunction(type, bucket, failedMessages, promises) {
  */
 (function ($) {
     loadReactions();
-    
+
     $.reactor = reactor;
     $.react = react;
 })(exports);
