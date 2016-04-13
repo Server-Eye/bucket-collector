@@ -18,6 +18,7 @@
     "gulp": "^3.9.1",
     "gulp-electron": "0.0.15",
     "gulp-install": "^0.6.0",
-    "gulp-task-listing": "^1.0.1"
+    "gulp-task-listing": "^1.0.1",
+    "mr-doc": "^3.2.1"
   }
 }

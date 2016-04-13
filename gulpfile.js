@@ -3,6 +3,8 @@ var del = require('del');
 var electron = require('gulp-electron');
 var install = require('gulp-install');
 var tasks = require('gulp-task-listing');
+var exec = require('child_process').execFile;
+var path = require('path');
 var packageJson = require('./src/package.json');
 
 gulp.task('default', function () {
@@ -10,7 +12,6 @@ gulp.task('default', function () {
 });
 
 gulp.task('build', ['clean', 'install'], function () {
-
     return gulp.src("")
             .pipe(electron({
                 src: './src',
@@ -61,7 +62,13 @@ gulp.task('clean-build', function () {
     ]);
 });
 
-gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build']);
+gulp.task('clean-docs', function () {
+    return del([
+        'docs'
+    ]);
+});
+
+gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs']);
 
 gulp.task('install', function () {
     return gulp.src([
@@ -79,4 +86,26 @@ gulp.task('install-dev', function () {
     ]).pipe(install({
         production: false
     }));
+});
+
+gulp.task('docs', function (cb) {
+    var command = [
+        '--source', './src',
+        '--output', './docs',
+        '--name', 'Server-Eye bucket-collector',
+        '--ignore', 'node_modules,bower_components,reaction-data,bucket-data,logs'
+    ];
+
+    var mrDoc;
+    if (process.platform === 'win32') {
+        mrDoc = path.resolve('./node_modules/.bin/mr-doc.cmd');
+    } else {
+        mrDoc = path.resolve('./node_modules/.bin/mr-doc');
+    }
+
+    exec(mrDoc, command, function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
 });
