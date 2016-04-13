@@ -6,8 +6,13 @@ const BrowserWindow = electron.BrowserWindow;
 
 var window = null;
 
+var config = {
+    reactionDataDir: './reaction-data',
+    bucketDataDir: './bucket-data'
+};
+
 function start() {
-    require('./lib/config').setConfig({});
+    require('./lib/config').setConfig(config);
     require('./lib/config').appLogger.info("Starting application");
     require('./lib/webinterface').start();
     require('./lib/bucketCollector').start();
