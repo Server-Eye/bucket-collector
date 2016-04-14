@@ -3,6 +3,10 @@ extends layout
 block content
   .container-fluid(ng-controller='AdditionalSettingsController')
     se-header
+    .row
+      .col-sm-12
+            a(style="margin-bottom:20px;", href='{{wikiLink}}', target='_blank').btn.btn-lg.btn-block.btn-warning OPEN INSTRUCTIONS
+          
     .row(ng-if='!loaded')
       .col-sm-12.jumbotron.text-center
         h1

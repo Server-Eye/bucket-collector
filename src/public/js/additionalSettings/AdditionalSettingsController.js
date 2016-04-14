@@ -3,10 +3,11 @@
 
     angular.module('bucket-collector').controller('AdditionalSettingsController', AdditionalSettingsController);
 
-    AdditionalSettingsController.$inject = ['$scope', '$location', '$window', '$q', 'SchemeService', 'SchemeDataService', 'ReactionDataService'];
+    AdditionalSettingsController.$inject = ['$scope', '$location', '$window', '$q', 'SchemeService', 'SchemeDataService', 'ReactionDataService', 'WIKI_URL'];
 
-    function AdditionalSettingsController($scope, $location, $window, $q, Scheme, SchemeData, ReactionData) {
+    function AdditionalSettingsController($scope, $location, $window, $q, Scheme, SchemeData, ReactionData, WIKI_URL) {
         $scope.reactionName = $location.absUrl().split('/').pop();
+        $scope.wikiLink = WIKI_URL + '/' + $scope.reactionName;
         $scope.loaded = false;
         $scope.applySettings = applySettings;
 

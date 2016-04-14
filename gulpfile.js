@@ -69,7 +69,9 @@ gulp.task('clean-docs', function () {
     ]);
 });
 
-gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs', 'beautify']);
+gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs', 'beautify'], function (cb){
+    cb();
+});
 
 gulp.task('install', function () {
     return gulp.src([
@@ -111,7 +113,7 @@ gulp.task('docs', function (cb) {
     });
 });
 
-gulp.task('beautify', function () {
+gulp.task('beautify', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs'],function () {
     return gulp.src([
         './src/**/*.js',
         './src/**/*.json',
