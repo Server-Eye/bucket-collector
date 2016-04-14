@@ -27,13 +27,21 @@
                     }).then(function (result) {
                         var data = result.data;
                         if (data) {
-                            deferred.resolve(data);
+                            console.log(data);
+                            if(data.message){
+                                deferred.reject(data.message);
+                            } else {
+                                deferred.resolve(data);
+                            }
                         } else {
                             deferred.reject("NO DATA RECEIVED");
                         }
                     }, function (error) {
-                        console.log(error);
-                        deferred.reject(error);
+                        if(error.data && error.data.message){
+                            deferred.reject(error.data.message);
+                        } else {
+                            deferred.reject(error.data);
+                        }
                     });
                 }
             });

@@ -7,7 +7,9 @@ form
             span.glyphicon.glyphicon-question-sign
           a(ng-if='scheme.data[0].helpText', uib-popover='{{scheme.data[0].helpText}}')
             span.glyphicon.glyphicon-question-sign
-        ui-select(ng-if="scheme.data[0].type == 'select'",id='{{scheme.data[0].dataValue}}', ng-model="input.first", on-select="selectFirst($item)")
+          a(ng-if='scheme.error[0]', uib-popover='{{scheme.error[0]}}').btn.btn-xs.btn-danger
+            span.glyphicon.glyphicon-warning-sign
+        ui-select(ng-if="scheme.data[0].type == 'select'", id='{{scheme.data[0].dataValue}}', ng-model="input.first", on-select="selectFirst($item)")
           ui-select-match(placeholder="{{scheme.data[0].displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data[0].displayValue]}}
           ui-select-choices(ui-disable-choice="value.disable", repeat="value in scheme.possibleValues[0] | filter: $select.search")
             span(ng-bind-html="value[scheme.data[0].displayValue] | highlight: $select.search")
@@ -18,6 +20,8 @@ form
             span.glyphicon.glyphicon-question-sign
           a(ng-if='scheme.data[1].helpText', uib-popover='{{scheme.data[1].helpText}}')
             span.glyphicon.glyphicon-question-sign
+          a(ng-if='scheme.error[1]', uib-popover='{{scheme.error[1]}}').btn.btn-xs.btn-danger
+            span.glyphicon.glyphicon-warning-sign
         ui-select(ng-if="scheme.data[1].type == 'select'", id='{{scheme.data[1].dataValue}}', ng-model="input.second", on-select="selectSecond($item)")
           ui-select-match(placeholder="{{scheme.data[1].displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data[1].displayValue]}}
           ui-select-choices(ui-disable-choice="value.disable", repeat="value in scheme.possibleValues[1] | filter: $select.search")

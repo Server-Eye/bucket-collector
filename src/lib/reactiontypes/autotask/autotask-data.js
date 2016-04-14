@@ -4,10 +4,11 @@ var _settings, soap, utils;
 function customers(){
     var deferred = Q.defer();
     
+    console.log("Requesting autotask-customers");
     soap.getCustomers().then(function(customers){
         deferred.resolve(customers);
     }).fail(function(err){
-        deferred.reject(err);
+        deferred.reject("COULD NOT GET CUSTOMERS. PLEASE SAVE CORRECT LOGIN DATA.");
     });
     
     return deferred.promise;

@@ -47,16 +47,16 @@
                     }
                     if (checkDuplicate(scope.input.first, scope.input.second))
                         return;
-                    if(scope.scheme.data[0].type == 'select')
+                    if (scope.scheme.data[0].type == 'select')
                         scope.input.first.disable = true;
-                    if(scope.scheme.data[1].type == 'select')
+                    if (scope.scheme.data[1].type == 'select')
                         scope.input.second.disable = true;
                     scope.data.push({
                         first: scope.input.first,
                         second: scope.input.second
                     });
                 }
-                
+
                 console.log(scope.data);
                 updateReturnValue();
             };
@@ -85,7 +85,7 @@
                 console.log(dataSet);
                 if (scope.scheme.data[0].type == 'select')
                     dataSet.first.disable = false;
-                if(scope.scheme.data[1].type == 'select')
+                if (scope.scheme.data[1].type == 'select')
                     dataSet.second.disable = false;
                 var idx = scope.data.indexOf(dataSet);
                 if (idx >= 0) {
@@ -97,13 +97,13 @@
             function updateReturnValue() {
                 scope.returnData = {};
                 angular.forEach(scope.data, function (dataSet) {
-                    if(scope.scheme.data[0].type == 'select'){
+                    if (scope.scheme.data[0].type == 'select') {
                         scope.returnData[dataSet.first[scope.scheme.data[0].dataValue]] = (scope.scheme.data[1].type == 'select') ? dataSet.second[scope.scheme.data[1].dataValue] : dataSet.second;
                     } else {
                         scope.returnData[dataSet.first] = (scope.scheme.data[1].type == 'select') ? dataSet.second[scope.scheme.data[1].dataValue] : dataSet.second;
                     }
                 });
-                
+
                 console.log(scope.returnData);
             }
 
@@ -113,7 +113,7 @@
 
             scope.init = function () {
                 scope.data = [];
-                
+
                 angular.forEach(scope.returnData, function (value, key) {
                     var first, second;
                     if (scope.scheme.data[0].type == 'select') {
@@ -164,6 +164,10 @@
             scope.$watch('scheme', function (newVal, oldVal) {
                 scope.init();
             }, true);
+            
+            scope.getErrorClass = function (error) {
+                return error ? 'has-error' : '';
+            };
         }
     }
 })();

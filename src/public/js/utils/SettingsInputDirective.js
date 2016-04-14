@@ -47,6 +47,10 @@
                 return scope.form.input.$valid ? "" : "has-error";
             };
             
+            scope.getErrorClass = function (error) {
+                return error ? 'has-error' : '';
+            };
+            
             scope.getClass = function(){
                 return scope.scheme.multiple ? "col-sm-9" : "col-sm-12";
             };

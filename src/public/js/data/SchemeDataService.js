@@ -22,7 +22,7 @@
                     if (SEData[dataScheme.method]) {
                         deferred.resolve(SEData[dataScheme.method]());
                     } else {
-                        deferred.resolve([]);
+                        deferred.resolve("UNKNOWN METHOD");
                     }
                 }
             } else {

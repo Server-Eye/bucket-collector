@@ -3,10 +3,8 @@ form
     .row
       .col-sm-10
         label(for='{{scheme.name}}') {{scheme.displayName}}  
-          a(ng-if='scheme.helpHtml', uib-popover-html='scheme.helpHtml')
-            span.glyphicon.glyphicon-question-sign
-          a(ng-if='scheme.helpText', uib-popover='{{scheme.helpText}}')
-            span.glyphicon.glyphicon-question-sign
+          a(ng-if='scheme.error', uib-popover='{{scheme.error}}').btn.btn-xs.btn-danger
+            span.glyphicon.glyphicon-warning-sign
         ui-select(id='{{scheme.name}}', ng-model="selectData", on-select="select($item)")
           ui-select-match(placeholder="{{scheme.displayName}}", title="{{scheme.description}}") {{$select.selected[scheme.data.displayValue]}}
           ui-select-choices(repeat="value in scheme.possibleValues | filter: $select.search")

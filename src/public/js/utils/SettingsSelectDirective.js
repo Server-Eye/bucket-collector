@@ -95,6 +95,10 @@
                 scope.init();
             }, true);
             
+            scope.getErrorClass = function (error) {
+                return error ? 'has-error' : '';
+            };
+            
             scope.init();
         }
     }

@@ -28,11 +28,30 @@
             }).then(function () {
                 angular.forEach($scope.schemes, function (scheme) {
                     if (scheme.data) {
-                        SchemeData($scope.reactionName, scheme.data).then(function (data) {
-                            scheme.possibleValues = data;
-                        }, function (error) {
-                            scheme.possibleValues = [error];
-                        });
+                        if(angular.isArray(scheme.data)){
+                            scheme.possibleValues = [];
+                            scheme.error = [];
+                            angular.forEach(scheme.data, function(value, key){
+                                SchemeData($scope.reactionName, value).then(function (data) {
+                                    console.log(key);
+                                    console.log(data);
+                                    scheme.possibleValues[key] = data;
+                                },function(error){
+                                    console.log(key);
+                                    console.log('ERROR');
+                                    console.log(error);
+                                    scheme.possibleValues[key] = [];
+                                    scheme.error[key] = error;
+                                });
+                            });
+                        } else {
+                            SchemeData($scope.reactionName, scheme.data).then(function (data) {
+                                scheme.possibleValues = data;
+                            }, function (error) {
+                                scheme.possibleValues = [];
+                                scheme.error = error;
+                            });
+                        }
                     }
                 });
 

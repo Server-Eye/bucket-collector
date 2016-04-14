@@ -14,6 +14,10 @@ block content
           .panel-body
             .panel.panel-default(ng-repeat='scheme in schemes')
               .panel-heading {{scheme.caption}}  
+                a(ng-if='scheme.helpText', uib-popover='{{scheme.helpText}}')
+                  span.glyphicon.glyphicon-question-sign
+                a(ng-if='scheme.helpHtml', uib-popover-html='scheme.helpHtml')
+                  span.glyphicon.glyphicon-question-sign
               .panel-body
                 settings-input(ng-if='scheme.type == "input"', scheme='scheme', return-data='data[scheme.name]')
                 settings-select(ng-if='scheme.type == "select"', scheme='scheme', return-data='data[scheme.name]')
