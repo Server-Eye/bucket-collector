@@ -15,24 +15,24 @@ var request = require('request');
 function get(bId) {
     var deferred = Q.defer();
     var bucket = buckets[bId];
-    
-    getNew(bId).then(function (messages) {
+
+    getNew(bId).then(function(messages) {
         if (messages.length > 0) {
             bucket.stats.lastReceived = new Date().getTime();
         }
-        messages.forEach(function (message) {
+        messages.forEach(function(message) {
             message.date = new Date().getTime();
             bucket.messages.active.push(message);
             bucket.stats.messages.total++;
         });
-    }).fail(function (reason) {
+    }).fail(function(reason) {
         bucket.messages.failed.push({
             error: true,
             response: reason,
             ts: new Date().getTime()
         });
         bucket.stats.messages.failed++;
-    }).finally(function () {
+    }).finally(function() {
         deferred.resolve(bucket);
     });
 
@@ -55,21 +55,21 @@ function getNew(bId) {
             apiKey: settings.getApiKey()
         }
     };
-    
+
     buckets[bId].stats.lastChecked = new Date().getTime();
 
     logger.debug("Loading new messages from bucket", bId);
 
-    request(options, function (err, res, body) {
+    request(options, function(err, res, body) {
         if (err) {
             logger.warn("Could not load new messages from", bId, ":", err);
             deferred.reject(err);
         } else {
             try {
                 var result = JSON.parse(body);
-                logger.debug(result.length.toString(),  "new messages loaded from", bId);
-                               
-                result.forEach(function(message){
+                logger.debug(result.length.toString(), "new messages loaded from", bId);
+
+                result.forEach(function(message) {
                     message.try = 0;
                 });
                 deferred.resolve(result);
@@ -89,7 +89,7 @@ function getNew(bId) {
 function init() {
     logger.info('Initializing buckets');
     var activeBIds = settings.getActiveBucketIds();
-    activeBIds.forEach(function (bId) {
+    activeBIds.forEach(function(bId) {
         if (!buckets[bId]) {
             logger.info("Adding bucket", bId, "to active buckets");
             buckets[bId] = {
@@ -128,7 +128,7 @@ function init() {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     init();
     $.get = get;
     $.getNew = getNew;

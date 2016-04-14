@@ -1,26 +1,26 @@
 {
-  "name": "bucket-collector",
-  "version": "0.0.1",
-  "authors": [
-    "Kim Schneider <kim.schneider@kraemer-it.de>",
-    "Roland Paltz <roland.paltz@kraemer-it.de>"
-  ],
-  "moduleType": [
-    "node"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "^1.5.3",
-    "bootstrap": "~3.3.4",
-    "ui-select": "angular-ui-select#^0.16.1",
-    "angular-sanitize": "^1.5.3",
-    "angular-bootstrap": "^1.3.1"
-  }
+    "name": "bucket-collector",
+    "version": "0.0.1",
+    "authors": [
+        "Kim Schneider <kim.schneider@kraemer-it.de>",
+        "Roland Paltz <roland.paltz@kraemer-it.de>"
+    ],
+    "moduleType": [
+        "node"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "^1.5.3",
+        "bootstrap": "~3.3.4",
+        "ui-select": "angular-ui-select#^0.16.1",
+        "angular-sanitize": "^1.5.3",
+        "angular-bootstrap": "^1.3.1"
+    }
 }

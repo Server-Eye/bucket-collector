@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').factory('BucketsService', BucketsService);
@@ -22,24 +22,24 @@
                     params: {
                         apiKey: apiKey
                     }
-                }).then(function (result) {
+                }).then(function(result) {
                     var data = result.data;
                     if (!angular.isArray(data)) {
                         result = [data];
                     }
-                    addBucketUsers(apiKey, data).then(function (buckets) {
+                    addBucketUsers(apiKey, data).then(function(buckets) {
                         return buckets;
-                    }, function (err) {
+                    }, function(err) {
                         console.log(err);
                         return data;
-                    }).then(function (buckets) {
-                        addActiveState(apiKey, buckets).then(function (buckets) {
+                    }).then(function(buckets) {
+                        addActiveState(apiKey, buckets).then(function(buckets) {
                             deferred.resolve(buckets);
-                        }, function () {
+                        }, function() {
                             deferred.resolve(buckets);
                         });
                     });
-                }, function (err) {
+                }, function(err) {
                     deferred.reject(err);
                 });
             } else {
@@ -58,10 +58,10 @@
                     params: {
                         apiKey: apiKey
                     }
-                }).then(function (result) {
+                }).then(function(result) {
                     var data = result.data;
                     deferred.resolve(data);
-                }, function (err) {
+                }, function(err) {
                     deferred.reject(err);
                 });
             } else {
@@ -75,20 +75,20 @@
 
             var promises = [];
 
-            angular.forEach(buckets, function (bucket) {
-                promises.push(getBucketUsers(apiKey, bucket.bId).then(function (users) {
+            angular.forEach(buckets, function(bucket) {
+                promises.push(getBucketUsers(apiKey, bucket.bId).then(function(users) {
                     if (angular.isArray(users) && users.length) {
                         bucket.users = users;
                     }
                     return users;
-                }, function (err) {
+                }, function(err) {
                     return err;
                 }));
             });
 
-            $q.all(promises).then(function (res) {
+            $q.all(promises).then(function(res) {
                 deferred.resolve(buckets);
-            }, function (err) {
+            }, function(err) {
                 deferred.reject(err);
             });
 
@@ -98,10 +98,10 @@
         function addActiveState(apiKey, buckets) {
             var deferred = $q.defer();
 
-            Settings.get().then(function (settings) {
+            Settings.get().then(function(settings) {
                 var activeIds = settings.activeBucketIds;
 
-                angular.forEach(buckets, function (bucket) {
+                angular.forEach(buckets, function(bucket) {
                     if (activeIds.indexOf(bucket.bId) > -1) {
                         bucket.active = true;
                     } else {
@@ -110,7 +110,7 @@
                 });
 
                 deferred.resolve(buckets);
-            }, function (err) {
+            }, function(err) {
                 console.log(err);
                 deferred.resolve(buckets);
             });
@@ -122,8 +122,8 @@
             var deferred = $q.defer();
             var activeBuckets = [];
 
-            getAll(apiKey).then(function (buckets) {
-                angular.forEach(buckets, function (bucket) {
+            getAll(apiKey).then(function(buckets) {
+                angular.forEach(buckets, function(bucket) {
                     if (bucket.active) {
                         activeBuckets.push(bucket);
                     }
@@ -137,18 +137,18 @@
         function getActiveStats(apiKey) {
             var deferred = $q.defer();
 
-            getActive(apiKey).then(function (buckets) {
+            getActive(apiKey).then(function(buckets) {
                 var promises = [];
 
-                angular.forEach(buckets, function (bucket) {
-                    promises.push(getStats(bucket.bId).then(function (stats) {
+                angular.forEach(buckets, function(bucket) {
+                    promises.push(getStats(bucket.bId).then(function(stats) {
                         bucket.stats = stats;
                     }));
                 });
 
-                $q.all(promises).then(function (res) {
+                $q.all(promises).then(function(res) {
                     deferred.resolve(buckets);
-                }, function (err) {
+                }, function(err) {
 
                 });
             });
@@ -163,14 +163,14 @@
                 $http({
                     method: 'GET',
                     url: '/stats/' + bId
-                }).then(function (result) {
+                }).then(function(result) {
                     var data = result.data;
                     if (data.success) {
                         deferred.resolve(data.stats);
                     } else {
                         deferred.reject(data.message);
                     }
-                }, function (err) {
+                }, function(err) {
                     deferred.reject(err);
                 });
             }

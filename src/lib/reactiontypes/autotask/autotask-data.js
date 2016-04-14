@@ -1,16 +1,16 @@
 var Q = require('q');
 var _settings, soap, utils;
 
-function customers(){
+function customers() {
     var deferred = Q.defer();
-    
+
     console.log("Requesting autotask-customers");
-    soap.getCustomers().then(function(customers){
+    soap.getCustomers().then(function(customers) {
         deferred.resolve(customers);
-    }).fail(function(err){
+    }).fail(function(err) {
         deferred.reject("COULD NOT GET CUSTOMERS. PLEASE SAVE CORRECT LOGIN DATA.");
     });
-    
+
     return deferred.promise;
 }
 

@@ -28,7 +28,7 @@ function start() {
         logger.warn("Collection interval not started:", settingsOK);
     } else {
         if (instanceFinished) {
-            instanceFinished.then(function () {
+            instanceFinished.then(function() {
                 init(settings.getInterv());
             });
         } else {
@@ -51,12 +51,12 @@ function instance() {
         var promises = [];
 
         logger.info("Starting bucket collection");
-        settings.getActiveBucketIds().forEach(function (bId) {
+        settings.getActiveBucketIds().forEach(function(bId) {
             logger.debug("Starting reactor for", bId);
             promises.push(reactor.react(bId, settings.getType()));
         });
 
-        Q.allSettled(promises).then(function () {
+        Q.allSettled(promises).then(function() {
             logger.info("Bucket collection finished");
             deferred.resolve();
         });
@@ -86,6 +86,6 @@ function init(interval) {
  * @param {exports} $
  * @return {undefined}
  */
-(function ($) {
+(function($) {
     $.start = start;
 })(exports);

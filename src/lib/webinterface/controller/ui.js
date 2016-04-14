@@ -39,17 +39,18 @@ function settingsView(req, res, next) {
 
 function additionalSettings(req, res, next) {
     var reactionName = req.params.name;
-    
+
     if (reactionName && (settings.getAvailableTypes().indexOf(reactionName) >= 0)) {
         res.render('additional-settings.pug');
     } else {
-        
+
         res.redirect('/');
     }
 }
-function additionalSettingsSelect(req,res,next){
+
+function additionalSettingsSelect(req, res, next) {
     var reactionName = settings.getType();
-    if(settings.getType()){
+    if (settings.getType()) {
         res.redirect('/settings/reaction/' + reactionName);
     } else {
         res.redirect('/');
@@ -81,7 +82,7 @@ function settingsAssignment(req, res, next) {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     $.index = index;
     $.additionalSettings = additionalSettings;
     $.additionalSettingsSelect = additionalSettingsSelect;

@@ -38,6 +38,6 @@ function start() {
     logger.info("webinterface running on port " + port);
 }
 
-(function ($) {
+(function($) {
     $.start = start;
 })(exports);

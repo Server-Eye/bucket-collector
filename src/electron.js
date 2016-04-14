@@ -17,22 +17,22 @@ function start() {
     require('./lib/config').appLogger.info("Starting application");
     require('./lib/webinterface').start();
     require('./lib/bucketCollector').start();
-    
-    app.on('ready', function(){
+
+    app.on('ready', function() {
         window = new BrowserWindow({
             width: 800,
             height: 600
         });
         window.loadURL('http://127.0.0.1:8080/');
-        
-        window.on('closed', function(){
+
+        window.on('closed', function() {
             window = null;
         });
     });
 }
 
-app.on('window-all-closed', function(){
-    if(process.platform != 'darwin'){
+app.on('window-all-closed', function() {
+    if (process.platform != 'darwin') {
         app.quit();
     }
 });

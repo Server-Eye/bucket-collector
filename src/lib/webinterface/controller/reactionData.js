@@ -8,12 +8,12 @@ function method(req, res, next) {
 
     if (reactionName && (dataStore.settings.getAvailableTypes().indexOf(reactionName) >= 0)) {
         if (reactions[reactionName] && reactions[reactionName][methodName]) {
-            reactions[reactionName][methodName]().then(function (result) {
+            reactions[reactionName][methodName]().then(function(result) {
                 res.send({
                     success: true,
                     data: result
                 });
-            }).fail(function (error) {
+            }).fail(function(error) {
                 res.send({
                     success: false,
                     message: error
@@ -70,7 +70,7 @@ function set(req, res, next) {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     $.getData = get;
     $.setData = set;
     $.method = method;

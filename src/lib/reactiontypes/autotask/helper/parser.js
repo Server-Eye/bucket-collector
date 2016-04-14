@@ -3,7 +3,7 @@ var Handlebars = require('handlebars');
 /**
  * Handlebars helperfunction
  */
-Handlebars.registerHelper('if_ne', function (a, b, opts) {
+Handlebars.registerHelper('if_ne', function(a, b, opts) {
     if (a != b)
         return opts.fn(this);
     else
@@ -99,17 +99,17 @@ function parseResultObj(obj) {
  */
 function formatDate(date) {
     var hr = date.getHours(),
-            min = date.getMinutes(),
-            secs = date.getSeconds(),
-            milSecs = date.getMilliseconds();
+        min = date.getMinutes(),
+        secs = date.getSeconds(),
+        milSecs = date.getMilliseconds();
 
     return date.getFullYear() + "-" +
-            padZero(date.getMonth() + 1) + "-" +
-            padZero(date.getDate()) + 'T' +
-            padZero(hr) + ':' +
-            padZero(min) + ':' +
-            padZero(secs) + '.' +
-            padMiliSecs(milSecs) + 'Z';
+        padZero(date.getMonth() + 1) + "-" +
+        padZero(date.getDate()) + 'T' +
+        padZero(hr) + ':' +
+        padZero(min) + ':' +
+        padZero(secs) + '.' +
+        padMiliSecs(milSecs) + 'Z';
 }
 
 /**
@@ -147,7 +147,7 @@ function padMiliSecs(num) {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     $.formatDate = formatDate;
     $.query = query;
     $.result = result;

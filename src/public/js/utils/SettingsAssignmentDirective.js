@@ -1,7 +1,8 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').directive('settingsAssignment', settingsAssignment);
+
     function settingsAssignment() {
         return {
             restrict: 'E',
@@ -21,13 +22,13 @@
             };
             console.log(scope);
 
-            scope.selectFirst = function (data) {
+            scope.selectFirst = function(data) {
                 scope.input.first = data;
                 console.log(data);
                 checkComplete();
             };
 
-            scope.selectSecond = function (data) {
+            scope.selectSecond = function(data) {
                 scope.input.second = data;
                 console.log(data);
                 checkComplete();
@@ -40,7 +41,7 @@
                 return false;
             }
 
-            scope.add = function () {
+            scope.add = function() {
                 if (checkComplete()) {
                     if (!scope.scheme.multiple) {
                         scope.data = [];
@@ -81,7 +82,7 @@
                 return false;
             }
 
-            scope.remove = function (dataSet) {
+            scope.remove = function(dataSet) {
                 console.log(dataSet);
                 if (scope.scheme.data[0].type == 'select')
                     dataSet.first.disable = false;
@@ -96,7 +97,7 @@
 
             function updateReturnValue() {
                 scope.returnData = {};
-                angular.forEach(scope.data, function (dataSet) {
+                angular.forEach(scope.data, function(dataSet) {
                     if (scope.scheme.data[0].type == 'select') {
                         scope.returnData[dataSet.first[scope.scheme.data[0].dataValue]] = (scope.scheme.data[1].type == 'select') ? dataSet.second[scope.scheme.data[1].dataValue] : dataSet.second;
                     } else {
@@ -107,14 +108,14 @@
                 console.log(scope.returnData);
             }
 
-            scope.getAddText = function () {
+            scope.getAddText = function() {
                 return scope.scheme.multiple ? "add" : "select";
             };
 
-            scope.init = function () {
+            scope.init = function() {
                 scope.data = [];
 
-                angular.forEach(scope.returnData, function (value, key) {
+                angular.forEach(scope.returnData, function(value, key) {
                     var first, second;
                     if (scope.scheme.data[0].type == 'select') {
                         first = getFirstDataSet(key);
@@ -140,7 +141,7 @@
                 var result;
 
                 if (scope.scheme.possibleValues) {
-                    angular.forEach(scope.scheme.possibleValues[0], function (dataSet) {
+                    angular.forEach(scope.scheme.possibleValues[0], function(dataSet) {
                         if (dataSet[scope.scheme.data[0].dataValue] == value)
                             result = dataSet;
                     });
@@ -152,7 +153,7 @@
             function getSecondDataSet(value) {
                 var result;
                 if (scope.scheme.possibleValues) {
-                    angular.forEach(scope.scheme.possibleValues[1], function (dataSet) {
+                    angular.forEach(scope.scheme.possibleValues[1], function(dataSet) {
                         if (dataSet[scope.scheme.data[1].dataValue] == value)
                             result = dataSet;
                     });
@@ -161,14 +162,13 @@
                 return result;
             }
 
-            scope.$watch('scheme', function (newVal, oldVal) {
+            scope.$watch('scheme', function(newVal, oldVal) {
                 scope.init();
             }, true);
-            
-            scope.getErrorClass = function (error) {
+
+            scope.getErrorClass = function(error) {
                 return error ? 'has-error' : '';
             };
         }
     }
 })();
-

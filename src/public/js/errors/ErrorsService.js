@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').factory('ErrorsService', ErrorsService);
@@ -17,14 +17,14 @@
                 $http({
                     url: '/stats/errors/' + bId,
                     method: 'GET'
-                }).then(function(result){
+                }).then(function(result) {
                     var data = result.data;
                     if (data.success) {
                         deferred.resolve(data.errors);
                     } else {
                         deferred.reject(data.message);
                     }
-                }, function(err){
+                }, function(err) {
                     deferred.reject(err);
                 })
             } else {

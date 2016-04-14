@@ -26,7 +26,7 @@ function react(bId, type) {
         logger.error("No reaction for", type, "defined!");
         deferred.reject("No reaction for", type, "defined!");
     } else {
-        buckets.get(bId).then(function (bucket) {
+        buckets.get(bId).then(function(bucket) {
             var promises = [];
             var failedMessages = [];
             logger.info("Starting reaction for bucket", bId);
@@ -41,7 +41,7 @@ function react(bId, type) {
 
                 var nextMessage = getCallbackFunction(type, bucket, failedMessages, promises);
                 logger.debug("Starting reaction of first message");
-                promises.push(reactor[type].react(message).timeout(timeout).fail(function (err) {
+                promises.push(reactor[type].react(message).timeout(timeout).fail(function(err) {
                     logger.warning('ERROR in reaction ' + type, err)
                     var _message = JSON.parse(JSON.stringify(message));
                     _message.error = true;
@@ -51,10 +51,10 @@ function react(bId, type) {
                 }).then(nextMessage));
             }
 
-            Q.allSettled(promises).then(function () {
+            Q.allSettled(promises).then(function() {
                 logger.debug("All promises settled in reactor!");
                 if (failedMessages.length) {
-                    failedMessages.forEach(function (failedMessage) {
+                    failedMessages.forEach(function(failedMessage) {
                         if (failedMessage.try >= settings.getMaxRetries()) {
                             bucket.stats.messages.failed++;
                             bucket.messages.failed.push(failedMessage);
@@ -74,7 +74,7 @@ function react(bId, type) {
                 logger.debug(bucket.messages.active.length.toString(), "Message(s) in bucket", bId);
                 deferred.resolve();
             });
-        }).fail(function (err) {
+        }).fail(function(err) {
             deferred.reject(err);
         });
     }
@@ -94,7 +94,7 @@ function loadReactions() {
     var count = 0;
     var reactiontypes = [];
 
-    names.forEach(function (name) {
+    names.forEach(function(name) {
         if (name[0] == '-') {
             logger.warn('scipping reactiontype: ' + name);
             return;
@@ -126,7 +126,7 @@ function loadReactions() {
  * @returns {Function}
  */
 function getCallbackFunction(type, bucket, failedMessages, promises) {
-    var nextMessage = function (message) {
+    var nextMessage = function(message) {
         logger.debug('Finished reaction!');
 
         if (!message.error) {
@@ -149,7 +149,7 @@ function getCallbackFunction(type, bucket, failedMessages, promises) {
             message.try++;
 
             logger.debug('Starting next reaction!');
-            var promise = reactor[type].react(message).timeout(timeout).fail(function (err) {
+            var promise = reactor[type].react(message).timeout(timeout).fail(function(err) {
                 logger.warning('ERROR in reaction ' + type, err)
                 var _message = JSON.parse(JSON.stringify(message));
                 _message.error = true;
@@ -170,7 +170,7 @@ function getCallbackFunction(type, bucket, failedMessages, promises) {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     loadReactions();
 
     $.reactor = reactor;

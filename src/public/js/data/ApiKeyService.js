@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').factory('ApiKeyService', ApiKeyService);
@@ -20,9 +20,9 @@
             if (_apiKey) {
                 deferred.resolve(_apiKey);
             } else {
-                getOldKey().then(function (key) {
+                getOldKey().then(function(key) {
                     deferred.resolve(key);
-                }, function (err) {
+                }, function(err) {
                     deferred.reject(err);
                 });
             }
@@ -36,7 +36,7 @@
             $http({
                 method: 'GET',
                 url: '/settings/getApiKey'
-            }).then(function (result) {
+            }).then(function(result) {
                 var data = result.data;
 
                 if (data.success) {
@@ -45,7 +45,7 @@
                 } else {
                     deferred.reject(data.message);
                 }
-            }, function (err) {
+            }, function(err) {
                 deferred.reject(err);
             });
 
@@ -67,19 +67,19 @@
                     password: password,
                     name: keyName
                 }
-            }).then(function (result) {
+            }).then(function(result) {
                 var data = result.data;
                 if (data.success) {
                     var key = data.data.apiKey;
-                    setKey(key).then(function(key){
-                        deferred.resolve(key);   
-                    }, function(error){
+                    setKey(key).then(function(key) {
+                        deferred.resolve(key);
+                    }, function(error) {
                         deferred.reject(error);
                     })
                 } else {
                     deferred.reject(data.message);
                 }
-            }, function (error) {
+            }, function(error) {
                 console.log(error);
                 deferred.reject(error);
             });
@@ -96,7 +96,7 @@
                 params: {
                     apiKey: key
                 }
-            }).then(function (result) {
+            }).then(function(result) {
                 var data = result.data;
 
                 if (data.success) {
@@ -105,7 +105,7 @@
                 } else {
                     deferred.reject(data.message);
                 }
-            }, function (err) {
+            }, function(err) {
                 deferred.reject(err);
             });
 

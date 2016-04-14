@@ -1,7 +1,8 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').directive('settingsSelect', settingsSelect);
+
     function settingsSelect() {
         return {
             restrict: 'E',
@@ -12,17 +13,17 @@
             link: link,
             templateUrl: '/partials/settingsSelect'
         };
-        
-        function link(scope, element, attrs){
+
+        function link(scope, element, attrs) {
             scope.data = scope.scheme.multiple ? [] : undefined;
-            
-            scope.select = function (data){
+
+            scope.select = function(data) {
                 scope.selected = data;
             };
-            
-            scope.add = function(){
-                if(scope.scheme.multiple){
-                    if(scope.data.indexOf(scope.selected) <= -1){
+
+            scope.add = function() {
+                if (scope.scheme.multiple) {
+                    if (scope.data.indexOf(scope.selected) <= -1) {
                         scope.data.push(scope.selected);
                     }
                 } else {
@@ -30,29 +31,29 @@
                 }
                 updateReturnValue();
             };
-            
-            scope.remove = function(data){
-                if(scope.scheme.multiple){
+
+            scope.remove = function(data) {
+                if (scope.scheme.multiple) {
                     var idx = scope.data.indexOf(data);
-                    
-                    if(idx >= 0){
-                        scope.data.splice(idx,1);
+
+                    if (idx >= 0) {
+                        scope.data.splice(idx, 1);
                     }
                 } else {
                     scope.data = undefined;
                 }
                 updateReturnValue();
             };
-            
-            scope.getAddText = function(){
+
+            scope.getAddText = function() {
                 return scope.scheme.multiple ? "add" : "select";
             };
-            
-            scope.init = function(){
-                if(scope.scheme.multiple){
-                    angular.forEach(scope.returnData, function(dataSet){
+
+            scope.init = function() {
+                if (scope.scheme.multiple) {
+                    angular.forEach(scope.returnData, function(dataSet) {
                         var fullData = getFullDataSet(dataSet);
-                        if(fullData){
+                        if (fullData) {
                             scope.data.push(fullData);
                         }
                     });
@@ -61,24 +62,24 @@
                     console.log("d", scope.data);
                 }
             };
-            
-            function getFullDataSet(data){
+
+            function getFullDataSet(data) {
                 var result;
-                angular.forEach(scope.scheme.possibleValues, function(value){
-                    if(value[scope.scheme.data.dataValue] == data){
+                angular.forEach(scope.scheme.possibleValues, function(value) {
+                    if (value[scope.scheme.data.dataValue] == data) {
                         result = value;
                     }
                 });
                 return result;
             }
-            
-            function updateReturnValue(){
-                if(scope.scheme.multiple){
+
+            function updateReturnValue() {
+                if (scope.scheme.multiple) {
                     scope.returnData = [];
-                    
-                    angular.forEach(scope.data, function(dataSet){
+
+                    angular.forEach(scope.data, function(dataSet) {
                         var value = dataSet[scope.scheme.data.dataValue];
-                        if(value){
+                        if (value) {
                             scope.returnData.push(value);
                         }
                     });
@@ -90,17 +91,16 @@
                     }
                 }
             }
-            
-            scope.$watch('scheme', function(newVal, oldVal){
+
+            scope.$watch('scheme', function(newVal, oldVal) {
                 scope.init();
             }, true);
-            
-            scope.getErrorClass = function (error) {
+
+            scope.getErrorClass = function(error) {
                 return error ? 'has-error' : '';
             };
-            
+
             scope.init();
         }
     }
 })();
-

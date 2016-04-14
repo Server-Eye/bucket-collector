@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').factory('ReactionMethodService', ReactionMethodService);
@@ -15,7 +15,7 @@
                 $http({
                     method: 'GET',
                     url: "/reaction/" + reactionName + "/" + methodName
-                }).then(function (res) {
+                }).then(function(res) {
                     var result = res.data;
 
                     if (result.success) {
@@ -23,7 +23,7 @@
                     } else {
                         deferred.reject(result.message);
                     }
-                }, function (error) {
+                }, function(error) {
                     deferred.reject(error);
                 });
             } else {

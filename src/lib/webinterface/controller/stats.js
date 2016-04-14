@@ -63,7 +63,7 @@ function getStats(req, res, next) {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     $.getStats = getStats;
     $.getErrors = getErrors;
 })(exports);

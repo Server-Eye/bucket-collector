@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').factory('SettingsService', SettingsService);
@@ -7,7 +7,7 @@
 
     function SettingsService($q, $http, ApiKey) {
         var _settings = {};
-        
+
         return {
             get: getSettings,
             getNewApiKey: getNewApiKey,
@@ -23,7 +23,7 @@
                 method: 'POST',
                 url: '/settings/setSettings',
                 data: settings
-            }).then(function (result) {
+            }).then(function(result) {
                 var data = result.data;
 
                 if (data.success) {
@@ -31,7 +31,7 @@
                 } else {
                     deferred.reject(data.message);
                 }
-            }, function (error) {
+            }, function(error) {
                 deferred.reject(error);
             });
 
@@ -44,7 +44,7 @@
             $http({
                 method: 'GET',
                 url: '/settings/getSettings'
-            }).then(function (result) {
+            }).then(function(result) {
                 var data = result.data;
 
                 if (data.success) {
@@ -52,7 +52,7 @@
                 } else {
                     deferred.reject(data.message);
                 }
-            }, function (error) {
+            }, function(error) {
                 deferred.reject(error);
             });
 

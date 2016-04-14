@@ -1,61 +1,59 @@
-[
-    {
-        "displayName": "Username",
-        "caption": "Autotask-username",
-        "name": "username",
-        "helpText": "The user, which the bucket-collector will use to create and update tickets.",
-        "default": "someone@something.com",
-        "type": "input",
-        "inputtype": "text",
-        "dataType": "string",
-        "required": true
-    }, {
-        "displayName": "Password",
-        "caption": "Autotask-password",
-        "name": "password",
-        "helpText": "The password of the user given above.",
-        "type": "input",
-        "inputtype": "password",
-        "dataType": "string",
-        "required": true
-    }, {
-        "displayName": "Default-Customer",
-        "caption": "Autotask default-customer",
-        "name": "defaultID",
-        "helpText": "The customer which will be used if the bucket-collector can not find a matching customer.",
-        "type": "select",
-        "dataType": "number",
-        "required": true,
-        "data": {
-            "source": "reaction",
-            "method": "getCustomers",
-            "displayValue": "AccountName",
-            "dataValue": "id"
-        }
-    }, {
-        "displayName": "Customers",
-        "caption": "Server-Eye Autotask customer-matching",
-        "name": "customerIDs",
-        "helpText": "Assignment, which Server-Eye customer corresponds to which autotask customer",
-        "type": "assignment",
-        "multiple": true,
-        "dataType": "object",
-        "data": [{
-                "type": "select",
-                "source": "SE",
-                "method": "getCustomers",
-                "displayName": "Server-Eye customer",
-                "displayValue": "companyName",
-                "description": "server-eye customer",
-                "dataValue": "cId"
-            }, {
-                "type": "select",
-                "source": "reaction",
-                "method": "getCustomers",
-                "displayName": "Autotask-Customer",
-                "displayValue": "AccountName",
-                "description": "autotask-customer",
-                "dataValue": "id"
-            }]
+[{
+    "displayName": "Username",
+    "caption": "Autotask-username",
+    "name": "username",
+    "helpText": "The user, which the bucket-collector will use to create and update tickets.",
+    "default": "someone@something.com",
+    "type": "input",
+    "inputtype": "text",
+    "dataType": "string",
+    "required": true
+}, {
+    "displayName": "Password",
+    "caption": "Autotask-password",
+    "name": "password",
+    "helpText": "The password of the user given above.",
+    "type": "input",
+    "inputtype": "password",
+    "dataType": "string",
+    "required": true
+}, {
+    "displayName": "Default-Customer",
+    "caption": "Autotask default-customer",
+    "name": "defaultID",
+    "helpText": "The customer which will be used if the bucket-collector can not find a matching customer.",
+    "type": "select",
+    "dataType": "number",
+    "required": true,
+    "data": {
+        "source": "reaction",
+        "method": "getCustomers",
+        "displayValue": "AccountName",
+        "dataValue": "id"
     }
-]
+}, {
+    "displayName": "Customers",
+    "caption": "Server-Eye Autotask customer-matching",
+    "name": "customerIDs",
+    "helpText": "Assignment, which Server-Eye customer corresponds to which autotask customer",
+    "type": "assignment",
+    "multiple": true,
+    "dataType": "object",
+    "data": [{
+        "type": "select",
+        "source": "SE",
+        "method": "getCustomers",
+        "displayName": "Server-Eye customer",
+        "displayValue": "companyName",
+        "description": "server-eye customer",
+        "dataValue": "cId"
+    }, {
+        "type": "select",
+        "source": "reaction",
+        "method": "getCustomers",
+        "displayName": "Autotask-Customer",
+        "displayValue": "AccountName",
+        "description": "autotask-customer",
+        "dataValue": "id"
+    }]
+}]

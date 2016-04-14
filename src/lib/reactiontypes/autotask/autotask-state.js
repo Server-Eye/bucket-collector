@@ -12,7 +12,7 @@ var parser = require('./helper/parser');
  */
 function state(message) {
     var deferred = Q.defer();
-    
+
     message.autotaskAccountID = utils.getAccountID(message);
 
     var title = utils.getTitle(message);
@@ -26,12 +26,10 @@ function state(message) {
                 'xsi:type': 'Ticket'
             },
             UserDefinedFields: {
-                UserDefinedField: [
-                    {
-                        Name: "ServerEyeStateID",
-                        Value: message.seStateId
-                    }
-                ]
+                UserDefinedField: [{
+                    Name: "ServerEyeStateID",
+                    Value: message.seStateId
+                }]
             },
             AccountID: message.autotaskAccountID,
             DueDateTime: parser.formatDate(new Date()),
@@ -44,31 +42,31 @@ function state(message) {
         };
         var data = {
             Entities: [{
-                    Entity: ticket
-                }]
+                Entity: ticket
+            }]
         };
 
         message.data = data;
 
-        soap.createTicket(message).then(function(result){
+        soap.createTicket(message).then(function(result) {
             deferred.resolve(result);
         });
     } else {
         message.note = {
-            message: (message.state && message.state.message) ? message.state.message: "ERROR, NO MESSAGE IN BUCKETMESSAGE"
+            message: (message.state && message.state.message) ? message.state.message : "ERROR, NO MESSAGE IN BUCKETMESSAGE"
         };
 
         message.user = {
             prename: "Server-Eye",
             surname: ""
         };
-            
 
-        hint(message).then(function(result){
+
+        hint(message).then(function(result) {
             deferred.resolve(result);
         });
     }
-    
+
     return deferred.promise;
 }
 

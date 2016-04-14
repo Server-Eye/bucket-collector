@@ -18,21 +18,21 @@ var types = {
 function react(message) {
     var deferred = Q.defer();
 
-    types[message.type](message).then(function (res) {
+    types[message.type](message).then(function(res) {
         message.error = res.error;
         message.response = res.response;
         deferred.resolve(message);
     });
-    
+
     return deferred.promise;
 }
 
 function getCustomers() {
     var deferred = Q.defer();
 
-    data.customers().then(function (customers) {
+    data.customers().then(function(customers) {
         deferred.resolve(customers);
-    }).fail(function (error) {
+    }).fail(function(error) {
         deferred.reject(error);
     });
 
@@ -42,7 +42,7 @@ function getCustomers() {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     $.react = react;
     $.getCustomers = getCustomers;
 })(exports);

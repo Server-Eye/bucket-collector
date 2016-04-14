@@ -4,14 +4,14 @@ var dataDir = require('../config').config.bucketDataDir;
 
 var _settings = jsop(path.join(dataDir, 'settings.json'));
 
-if(!_settings.activeBucketIds || !_settings.activeBucketIds.length){
+if (!_settings.activeBucketIds || !_settings.activeBucketIds.length) {
     _settings.activeBucketIds = [];
 }
-if(!_settings.interval){
+if (!_settings.interval) {
     _settings.interval = 5;
 }
 
-if(!_settings.maxRetries){
+if (!_settings.maxRetries) {
     _settings.maxRetries = 2;
 }
 
@@ -20,7 +20,7 @@ if(!_settings.maxRetries){
  * 
  * @return {String}
  */
-function getApiKey(){
+function getApiKey() {
     return _settings.apiKey;
 }
 
@@ -30,7 +30,7 @@ function getApiKey(){
  * @param {String} key new apiKey
  * @return {String}
  */
-function setApiKey(key){
+function setApiKey(key) {
     _settings.apiKey = key;
     return key;
 }
@@ -40,7 +40,7 @@ function setApiKey(key){
  * 
  * @return {Array}
  */
-function getAvailableTypes(){
+function getAvailableTypes() {
     return _settings.availableTypes;
 }
 
@@ -50,12 +50,12 @@ function getAvailableTypes(){
  * @param {String|Array} aTypes New typestring or array of typestrings
  * @return {Array}
  */
-function setAvailableTypes(aTypes){
-    if(typeof aTypes === 'string')
+function setAvailableTypes(aTypes) {
+    if (typeof aTypes === 'string')
         _settings.availableTypes = [aTypes];
     else
         _settings.availableTypes = aTypes;
-    
+
     return _settings.availableTypes;
 }
 
@@ -64,7 +64,7 @@ function setAvailableTypes(aTypes){
  * 
  * @return {String}
  */
-function getType(){
+function getType() {
     return _settings.type;
 }
 
@@ -74,7 +74,7 @@ function getType(){
  * @param {String} type New active type
  * @return {String}
  */
-function setType(type){
+function setType(type) {
     _settings.type = type;
     return type;
 }
@@ -84,7 +84,7 @@ function setType(type){
  * 
  * @return {Number}
  */
-function getInterv(){
+function getInterv() {
     return _settings.interval;
 }
 
@@ -94,7 +94,7 @@ function getInterv(){
  * @param {Number} interval New interval (in minutes)
  * @return {Number}
  */
-function setInterv(interval){
+function setInterv(interval) {
     _settings.interval = interval;
     return interval;
 }
@@ -104,7 +104,7 @@ function setInterv(interval){
  * 
  * @return {Array}
  */
-function getActiveBucketIds(){
+function getActiveBucketIds() {
     return _settings.activeBucketIds;
 }
 
@@ -114,7 +114,7 @@ function getActiveBucketIds(){
  * @param {Array} bidArr
  * @return {Array}
  */
-function setActiveBucketIds(bidArr){
+function setActiveBucketIds(bidArr) {
     _settings.activeBucketIds = bidArr;
     return bidArr;
 }
@@ -124,7 +124,7 @@ function setActiveBucketIds(bidArr){
  * 
  * @return {Number}
  */
-function getMaxRetries(){
+function getMaxRetries() {
     return _settings.maxRetries;
 }
 
@@ -134,7 +134,7 @@ function getMaxRetries(){
  * @param {Number} maxRetries
  * @return {Number}
  */
-function setMaxRetries(maxRetries){
+function setMaxRetries(maxRetries) {
     _settings.maxRetries = maxRetries;
     return maxRetries;
 }
@@ -157,23 +157,23 @@ function checkSettings() {
         return "No active buckets set!";
     }
 
-    if(!Array.isArray(_settings.availableTypes) || _settings.availableTypes.length === 0){
+    if (!Array.isArray(_settings.availableTypes) || _settings.availableTypes.length === 0) {
         return "No reactiontypes available!";
     }
-    
+
     if (typeof _settings.type !== 'string') {
         return "No reactiontype-string set!";
     } else {
-        if(_settings.availableTypes.indexOf(_settings.type) < 0){
+        if (_settings.availableTypes.indexOf(_settings.type) < 0) {
             return "Set reactiontype is unknown!"
         }
     }
-    
+
 
     if (typeof _settings.interval !== 'number') {
         return "No interval set!";
     }
-    
+
     if (typeof _settings.maxRetries !== 'number') {
         return "No maxRetries set!";
     }
@@ -201,4 +201,3 @@ module.exports = {
     getSettings: getSettings,
     checkSettings: checkSettings
 };
-

@@ -70,11 +70,11 @@ function getAccountID(message) {
  */
 function getTicketNoteMessage(message) {
     var note = "";
-    if(message.user && message.user.prename && message.user.surname)
+    if (message.user && message.user.prename && message.user.surname)
         note += message.user.prename + " " + message.user.surname + ": ";
-    if(message.note && message.note.message)
+    if (message.note && message.note.message)
         note += message.note.message;
-    
+
     return note;
 }
 
@@ -96,4 +96,3 @@ function init(settings) {
 }
 
 module.exports = init;
-        

@@ -28,7 +28,7 @@ function react(message) {
         url: tanss,
         method: 'POST',
         form: data
-    }, function (err, res, body) {
+    }, function(err, res, body) {
         if (err) {
             message.error = true;
             message.response = err;
@@ -62,9 +62,9 @@ function react(message) {
 function buildFormData(message) {
     var apiKeys = _settings.get().apiKeys;
     var apiKey;
-    if(apiKeys && apiKeys[message.customer.cId])
+    if (apiKeys && apiKeys[message.customer.cId])
         apiKey = apiKeys[message.customer.cId];
-    
+
     var data = {
         customer: message.customer.number,
         time: message.state.date,
@@ -95,6 +95,6 @@ function buildFormData(message) {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     $.react = react;
 })(exports);

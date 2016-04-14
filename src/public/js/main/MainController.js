@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module('bucket-collector').controller('MainController', MainController);
@@ -32,7 +32,7 @@
         }
 
         function init() {
-            Settings.get().then(function (settings) {
+            Settings.get().then(function(settings) {
                 _settings = settings;
                 refresh();
                 $interval(refresh, 60000);
@@ -42,7 +42,7 @@
         function refresh() {
             console.log("refresh");
             $scope.loaded = false;
-            Buckets.getActiveStats(_settings.apiKey).then(function (buckets) {
+            Buckets.getActiveStats(_settings.apiKey).then(function(buckets) {
                 $scope.buckets = buckets;
                 $scope.loaded = true;
             });

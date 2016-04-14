@@ -156,7 +156,7 @@ function updateSettings() {
 /**
  * @ignore
  */
-(function ($) {
+(function($) {
     $.getApiKey = getApiKey;
     $.setApiKey = setApiKey;
     $.getSettings = getSettings;

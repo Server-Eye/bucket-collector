@@ -20,14 +20,14 @@ function getClient() {
     } else {
         client = deferred.promise;
         console.log("Creating new soapclient");
-        soap.createClient(baseUrl, function (err, _client) {
+        soap.createClient(baseUrl, function(err, _client) {
             if (err) {
                 var errString = JSON.stringify(err, null, 2);
                 deferred.reject(errString);
             } else {
                 _client.ATWS.ATWSSoap.getZoneInfo({
                     UserName: settings.username
-                }, (function (err, res) {
+                }, (function(err, res) {
                     if (err) {
                         var errString = JSON.stringify(err, null, 2);
                         console.log("AUTOTASK ERROR: " + errString);
@@ -39,7 +39,7 @@ function getClient() {
                             _client.setSecurity(new soap.BasicAuthSecurity(settings.username, settings.password));
 
 
-                            _client.ATWS.ATWSSoap.getThresholdAndUsageInfo(function (err, res) {
+                            _client.ATWS.ATWSSoap.getThresholdAndUsageInfo(function(err, res) {
                                 if (!err && (res.getThresholdAndUsageInfoResult.ReturnCode == 1)) {
                                     console.log("AUTOTASK_CONNECT");
                                     deferred.resolve(_client);
@@ -71,8 +71,8 @@ function getClient() {
  */
 function createTicket(message) {
     var deferred = Q.defer();
-    getClient().then(function (_client) {
-        _client.ATWS.ATWSSoap.create(message.data, function (err, res) {
+    getClient().then(function(_client) {
+        _client.ATWS.ATWSSoap.create(message.data, function(err, res) {
             if (err) {
                 message.error = true;
                 message.response = err;
@@ -87,7 +87,7 @@ function createTicket(message) {
             }
             deferred.resolve(message);
         });
-    }).fail(function (reason) {
+    }).fail(function(reason) {
         message.error = true;
         message.response = reason;
         deferred.resolve(message);
@@ -105,9 +105,9 @@ function createTicket(message) {
 function createTicketNote(message) {
     var deferred = Q.defer();
 
-    getClient().then(function (_client) {
+    getClient().then(function(_client) {
 
-        _client.ATWS.ATWSSoap.create(message.data, function (err, res) {
+        _client.ATWS.ATWSSoap.create(message.data, function(err, res) {
             if (err) {
                 message.error = true;
                 message.response = err;
@@ -123,7 +123,7 @@ function createTicketNote(message) {
             deferred.resolve(message);
         });
 
-    }).fail(function (reason) {
+    }).fail(function(reason) {
         message.error = true;
         message.response = reason;
         deferred.resolve(message);
@@ -132,21 +132,21 @@ function createTicketNote(message) {
     return deferred.promise;
 }
 
-function getCustomers(){
+function getCustomers() {
     var deferred = Q.defer();
-    
+
     var query = {
-        Account: [
-            {
-                AccountType: {
-                    equals: 1
-                }
+        Account: [{
+            AccountType: {
+                equals: 1
             }
-        ]
+        }]
     };
-    
-    getClient().then(function (_client) {
-        _client.ATWS.ATWSSoap.query({sXML: parser.query(query)}, function (err, res) {
+
+    getClient().then(function(_client) {
+        _client.ATWS.ATWSSoap.query({
+            sXML: parser.query(query)
+        }, function(err, res) {
             if (err) {
                 var errString = JSON.stringify(err, null, 2);
                 deferred.reject(errString);
@@ -159,7 +159,7 @@ function getCustomers(){
                 }
             }
         });
-    }).fail(function(err){
+    }).fail(function(err) {
         deferred.reject(err);
     });
 
@@ -175,22 +175,22 @@ function getCustomers(){
 function getTicketIdBySEStateId(seStateId) {
     var deferred = Q.defer();
     var query = {
-        Ticket: [
-            {
-                ServerEyeStateID: {
-                    equals: seStateId,
-                    udf: true
-                },
-                Status: {
-                    udf: false,
-                    NotEqual: 5
-                }
+        Ticket: [{
+            ServerEyeStateID: {
+                equals: seStateId,
+                udf: true
+            },
+            Status: {
+                udf: false,
+                NotEqual: 5
             }
-        ]
+        }]
     };
 
-    getClient().then(function (_client) {
-        _client.ATWS.ATWSSoap.query({sXML: parser.query(query)}, function (err, res) {
+    getClient().then(function(_client) {
+        _client.ATWS.ATWSSoap.query({
+            sXML: parser.query(query)
+        }, function(err, res) {
             if (err) {
                 var errString = JSON.stringify(err, null, 2);
                 deferred.reject(errString);
@@ -204,7 +204,7 @@ function getTicketIdBySEStateId(seStateId) {
             }
         });
 
-    }).fail(function (reason) {
+    }).fail(function(reason) {
         var resObj = {};
         resObj.error = true;
         resObj.response = reason;
@@ -228,7 +228,7 @@ function getCurrentTicketId(tickets) {
         createDate: 0
     };
 
-    tickets.forEach(function (ticket) {
+    tickets.forEach(function(ticket) {
         if (ticket.CreateDate > result.createDate) {
             result.createDate = ticket.CreateDate;
             result.id = ticket.id;
