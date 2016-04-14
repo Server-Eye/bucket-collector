@@ -16,6 +16,7 @@
     "bower": "^1.7.9",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-beautify": "^2.0.0",
     "gulp-electron": "0.0.15",
     "gulp-install": "^0.6.0",
     "gulp-task-listing": "^1.0.1",

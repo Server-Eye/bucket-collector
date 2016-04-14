@@ -3,6 +3,7 @@ var del = require('del');
 var electron = require('gulp-electron');
 var install = require('gulp-install');
 var tasks = require('gulp-task-listing');
+var beautify = require('gulp-beautify');
 var exec = require('child_process').execFile;
 var path = require('path');
 var packageJson = require('./src/package.json');
@@ -68,7 +69,7 @@ gulp.task('clean-docs', function () {
     ]);
 });
 
-gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs']);
+gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs', 'beautify']);
 
 gulp.task('install', function () {
     return gulp.src([
@@ -108,4 +109,17 @@ gulp.task('docs', function (cb) {
         console.log(stderr);
         cb(err);
     });
+});
+
+gulp.task('beautify', function () {
+    return gulp.src([
+        './src/**/*.js',
+        './src/**/*.json',
+        '!src/node_modules/**/*.js',
+        '!src/bower_components/**/*.js',
+        '!src/node_modules/**/*.json',
+        '!src/bower_components/**/*.json'
+    ]).pipe(beautify({
+        indentSize: 4
+    })).pipe(gulp.dest('./src'));
 });
