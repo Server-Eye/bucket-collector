@@ -2,6 +2,7 @@ var settingsController = require('../controller/settings');
 var reactionDataController = require('../controller/reactionData');
 var uiController = require('../controller/ui');
 var statsController = require('../controller/stats');
+var serviceController = require('../controller/service');
 var interceptor = require('../controller/interceptor');
 
 /**
@@ -31,10 +32,10 @@ function init(app) {
     app.get('/reactionData/:name/get', interceptor.allowCross, reactionDataController.getData);
     app.post('/reactionData/:name/set', interceptor.allowCross, reactionDataController.setData);
 
-
-
     app.get('/stats/:bId', interceptor.allowCross, statsController.getStats);
     app.get('/stats/errors/:bId', interceptor.allowCross, statsController.getErrors);
+
+    app.get('/service', interceptor.allowCross, serviceController.service);
 }
 
 /**
