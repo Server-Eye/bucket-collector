@@ -4,7 +4,7 @@ block content
   .container-fluid(ng-controller='MainController')
     se-header
     .col-sm-12.col-lg-3(style="padding-left:0; padding-right:0;")
-      .panel.panel-default.panel-primary
+      .panel.panel-default
         .panel-heading Menu
         .panel-body
           div.col-sm-4.col-lg-12
@@ -17,7 +17,7 @@ block content
         h1
           span.glyphicon.glyphicon-refresh.gly-spin
     .col-sm-12.col-lg-9(style="padding-left:0; padding-right:0;", ng-if='loaded')
-        .panel.panel-default.panel-primary
+        .panel.panel-default
           .panel-heading Bucketsstats
           .panel-body
             table.table.m-t-lg(ng-show="buckets.length")
