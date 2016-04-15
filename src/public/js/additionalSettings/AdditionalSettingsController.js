@@ -34,8 +34,6 @@
                             scheme.error = [];
                             angular.forEach(scheme.data, function(value, key) {
                                 SchemeData($scope.reactionName, value).then(function(data) {
-                                    console.log(key);
-                                    console.log(data);
                                     scheme.possibleValues[key] = data;
                                 }, function(error) {
                                     console.log(key);
@@ -60,11 +58,26 @@
             });
         }
 
+        function checkRequired() {
+            var allCorrect = true;
+
+            angular.forEach($scope.schemes, function(scheme) {
+                if (scheme.required)
+                    allCorrect = ($scope.data[scheme.name] && allCorrect) ? true : false;
+            });
+
+            return allCorrect;
+        }
+
         function applySettings() {
             console.log($scope.data);
 
             ReactionData.set($scope.reactionName, $scope.data).then(function() {
-                $window.location.reload();
+                if (checkRequired()) {
+                    $window.location.href = '/';
+                } else {
+                    $window.location.reload();
+                }
             });
         }
 

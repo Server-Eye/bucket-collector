@@ -2,7 +2,8 @@ form
   .form-group
     .row
       .col-sm-10
-        label(for='{{scheme.name}}') {{scheme.displayName}}  
+        label(for='{{scheme.name}}') {{scheme.displayName}} 
+          span(style='color:red', ng-if='scheme.required') *  
           a(ng-if='scheme.error', uib-popover='{{scheme.error}}').btn.btn-xs.btn-danger
             span.glyphicon.glyphicon-warning-sign
         ui-select(id='{{scheme.name}}', ng-model="selectData", on-select="select($item)")

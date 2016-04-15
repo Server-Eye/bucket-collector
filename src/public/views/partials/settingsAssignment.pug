@@ -3,6 +3,7 @@ form
     .row
       .col-sm-5
         label(for='{{scheme.data[0].dataValue}}') {{scheme.data[0].displayName}}  
+          span(style='color:red', ng-if='scheme.data[0].required') *  
           a(ng-if='scheme.data[0].helpHtml', uib-popover-html='scheme.data[0].helpHtml')
             span.glyphicon.glyphicon-question-sign
           a(ng-if='scheme.data[0].helpText', uib-popover='{{scheme.data[0].helpText}}')
@@ -16,6 +17,7 @@ form
         input.form-control(ng-if="scheme.data[0].type == 'input'", id='{{scheme.data[0].dataValue}}', placeholder='{{scheme.data[0].default}}',type='{{scheme.inputtype}}', ng-class='getInputClass()', ng-model='input.first')  
       .col-sm-5
         label(for='{{scheme.data[1].dataValue}}') {{scheme.data[1].displayName}}  
+          span(style='color:red', ng-if='scheme.data[1].required') *  
           a(ng-if='scheme.data[1].helpHtml', uib-popover-html='scheme.data[1].helpHtml')
             span.glyphicon.glyphicon-question-sign
           a(ng-if='scheme.data[1].helpText', uib-popover='{{scheme.data[1].helpText}}')

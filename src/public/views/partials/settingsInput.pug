@@ -3,6 +3,7 @@ form(name='form')
     .row
       div(ng-class='getClass()')
         label(for='{{scheme.name}}') {{scheme.displayName}}  
+          span(style='color:red', ng-if='scheme.required') *  
           a(ng-if='scheme.error', uib-popover='{{scheme.error}}').btn.btn-xs.btn-danger
             span.glyphicon.glyphicon-warning-sign
         input.form-control(id='{{scheme.name}}', type='{{scheme.inputtype}}', placeholder='{{scheme.default}}', name='input', ng-class='getInputClass()', ng-model='data.input')
