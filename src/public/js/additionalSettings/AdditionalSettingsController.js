@@ -3,24 +3,31 @@
 
     angular.module('bucket-collector').controller('AdditionalSettingsController', AdditionalSettingsController);
 
-    AdditionalSettingsController.$inject = ['$scope', '$location', '$window', '$q', 'SchemeService', 'SchemeDataService', 'ReactionDataService', 'WIKI_URL'];
+    AdditionalSettingsController.$inject = ['$scope', '$location', '$window', '$q', 'SchemeService', 'SchemeDataService', 'ReactionDataService'];
 
-    function AdditionalSettingsController($scope, $location, $window, $q, Scheme, SchemeData, ReactionData, WIKI_URL) {
+    function AdditionalSettingsController($scope, $location, $window, $q, Scheme, SchemeData, ReactionData) {
         $scope.reactionName = $location.absUrl().split('/').pop();
-        $scope.wikiLink = WIKI_URL + '/' + $scope.reactionName;
+        $scope.helpURL = "";
         $scope.loaded = false;
+        $scope.schemeDefined = true;
         $scope.applySettings = applySettings;
 
 
         function init() {
             $scope.loaded = false;
             Scheme($scope.reactionName).then(function(res) {
-                $scope.schemes = res;
+                $scope.schemeDefined = true;
+                $scope.schemes = res.dataSets;
+                $scope.helpURL = res.helpURL;
                 $scope.data = {};
                 angular.forEach($scope.schemes, function(scheme) {
                     $scope.data[scheme.name] = undefined;
                 });
                 return ReactionData.get($scope.reactionName);
+            }, function(err) {
+                $scope.schemeDefined = false;
+                $scope.schemeError = err;
+                return;
             }).then(function(res) {
                 angular.forEach(res, function(val, key) {
                     $scope.data[key] = val;

@@ -5,14 +5,15 @@ block content
     se-header
     .row
       .col-sm-12
-            a(style="margin-bottom:20px;", href='{{wikiLink}}', target='_blank').btn.btn-lg.btn-block.btn-warning OPEN INSTRUCTIONS
-          
+            a(style="margin-bottom:20px;", href='{{helpURL}}', target='_blank').btn.btn-lg.btn-block.btn-warning OPEN INSTRUCTIONS      
     .row(ng-if='!loaded')
       .col-sm-12.jumbotron.text-center
         h1
           span.glyphicon.glyphicon-refresh.gly-spin
     .row(ng-if='loaded')
-      .col-sm-12
+      .col-sm-12.jumbotron.text-center(ng-if='!schemeDefined')
+        h1 {{schemeError}}
+      .col-sm-12(ng-if='schemeDefined')
         .panel.panel-default
           .panel-heading Additional Settings: {{reactionName}}
           .panel-body

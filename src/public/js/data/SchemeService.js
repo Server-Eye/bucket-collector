@@ -16,8 +16,12 @@
                 console.log(result.data);
 
                 deferred.resolve(result.data);
-            }, function() {
-                deferred.reject("REACTIONSCHEME NOT FOUND");
+            }, function(err) {
+                if (err.status == 404) {
+                    deferred.reject("No additional data defined.");
+                } else {
+                    deferred.reject(err);
+                }
             });
 
             return deferred.promise;
