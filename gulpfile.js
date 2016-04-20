@@ -69,7 +69,7 @@ gulp.task('clean-docs', function () {
     ]);
 });
 
-gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs', 'beautify'], function (cb){
+gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs', 'beautify'], function (cb) {
     cb();
 });
 
@@ -91,12 +91,12 @@ gulp.task('install-dev', function () {
     }));
 });
 
-gulp.task('docs', function (cb) {
+gulp.task('docs', ['clean-docs'], function (cb) {
     var command = [
         '--source', './src',
         '--output', './docs',
         '--name', 'Server-Eye bucket-collector',
-        '--ignore', 'node_modules,bower_components,reaction-data,bucket-data,logs'
+        '--ignore', 'node_modules,bower_components,reaction-data,bucket-data,logs,public'
     ];
 
     var mrDoc;
@@ -113,7 +113,7 @@ gulp.task('docs', function (cb) {
     });
 });
 
-gulp.task('beautify', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs'],function () {
+gulp.task('beautify', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs'], function () {
     return gulp.src([
         './src/**/*.js',
         './src/**/*.json',

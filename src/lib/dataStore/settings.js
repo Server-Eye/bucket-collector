@@ -1,7 +1,6 @@
 var jsop = require('jsop');
 var path = require('path');
 var dataDir = require('../config').config.bucketDataDir;
-
 var _settings = jsop(path.join(dataDir, 'settings.json'));
 
 if (!_settings.activeBucketIds || !_settings.activeBucketIds.length) {

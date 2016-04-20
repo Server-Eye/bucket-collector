@@ -1,3 +1,10 @@
+/**
+ * Startpoint for the bucket-collector if started as an electron-app
+ */
+
+/**
+ * @ignore
+ */
 'use strict';
 const electron = require('electron');
 const app = electron.app;
@@ -6,10 +13,11 @@ var window = null;
 var request = require('request');
 var options = require('commander');
 var Q = require('q');
-
 var ELECTRON_READY = false;
 
-
+/**
+ * Defines commandline-flags
+ */
 options.version(require('./package.json').version)
     .option('-d, --development', 'Starts the application in development mode, which enables additional logging')
     .option('-r, --reactionDataDir [path]', 'Set the path where the raction-data is saved')
@@ -18,11 +26,23 @@ options.version(require('./package.json').version)
     .option('-s, --service', 'Starts the application without the UI')
     .parse(process.argv);
 
+/**
+ * Sets default-values for the electron-app
+ */
 options.reactionDataDir = options.reactionDataDir || './reaction-data';
 options.bucketDataDir = options.bucketDataDir || './bucket-data';
 options.logDir = options.logDir || './logs';
 options.service = options.service || false;
 
+/**
+ * Checks if an instance of the bucket-collector is already running by makin an request to the bucket-collector-port.
+ * 
+ * Resolves with true if an instance is already running.
+ * Resolves with false if no instance is running
+ * Rejects with an error-message if an error occurs.
+ * 
+ * @returns {promise}
+ */
 function checkRunning() {
     var deferred = Q.defer();
 
@@ -48,6 +68,10 @@ function checkRunning() {
     return deferred.promise;
 }
 
+/**
+ * Starts the bucket-collector. Calls checkRunning. If an instance is already running, only starts a new UI-Window.
+ * Starts no UI if the --service flag is given.
+ */
 function start() {
     checkRunning().then(function(running) {
         if (!running) {
@@ -64,6 +88,9 @@ function start() {
     });
 }
 
+/**
+ * Starts a new UI-Window
+ */
 function startUI() {
     if (ELECTRON_READY) {
         window = new BrowserWindow({
@@ -88,8 +115,14 @@ function startUI() {
     }
 }
 
+/**
+ * Bind ready-event of the electron-app.
+ */
 app.on('ready', function() {
     ELECTRON_READY = true;
 });
 
+/**
+ * @ignore
+ */
 start();

@@ -14,6 +14,7 @@ var timeout = 10000;
  * Calls bucketService.get() with the given bId, performes given reaction for each received message.
  * Readds failed messages to messagequeue if maxRetries is not reached.
  * Resolves the promise when each reaction is finished. Rejects if an error occurs.
+ * Treats messages as failed if a timeout occurs.
  * 
  * @param {string} bId
  * @param {string} type

@@ -1,6 +1,6 @@
 {
     "name": "bucket-collector",
-    "version": "0.0.1",
+    "version": "2.0.1",
     "authors": [
         "Kim Schneider <kim.schneider@kraemer-it.de>",
         "Roland Paltz <roland.paltz@kraemer-it.de>"

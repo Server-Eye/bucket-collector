@@ -1,6 +1,12 @@
 var Q = require('q');
 var _settings, soap, utils;
 
+/**
+ * Gets customers via soap.
+ * Resolves an array of customers or rejects with an error-message.
+ * 
+ * @returns {promise}
+ */
 function customers() {
     var deferred = Q.defer();
 
@@ -14,6 +20,12 @@ function customers() {
     return deferred.promise;
 }
 
+/**
+ * Loads required dependencies with the given settings
+ * 
+ * @param {Object} _settings
+ * @return {function}
+ */
 function init(settings) {
     _settings = settings;
 

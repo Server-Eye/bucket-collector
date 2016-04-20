@@ -132,6 +132,13 @@ function createTicketNote(message) {
     return deferred.promise;
 }
 
+/**
+ * Gets all active customers.
+ * Resolves with an array of customers.
+ * Rejects with an error-message if an error occurs.
+ * 
+ * @returns {promise}
+ */
 function getCustomers() {
     var deferred = Q.defer();
 

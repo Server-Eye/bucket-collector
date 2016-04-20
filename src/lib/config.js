@@ -37,7 +37,7 @@ function initLoggers(config, $) {
 }
 
 /**
- * Applies settings from CLI
+ * Applies settings from CLI, sets default values.
  * 
  * @param {Object} config
  * @param {Exports} $

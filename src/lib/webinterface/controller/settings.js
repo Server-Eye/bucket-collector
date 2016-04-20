@@ -90,6 +90,14 @@ function setSettings(req, res, next) {
     });
 }
 
+/**
+ * Sends the current settings.
+ * Sets success-field to false if no settings exist.
+ * 
+ * @param {Object} req http-request object
+ * @param {Object} res http-response object
+ * @param {Function} next Follow-up-function, called on successful completion
+ */
 function getSettings(req, res, next) {
     var settings = dataStore.settings.getSettings();
 
@@ -108,6 +116,14 @@ function getSettings(req, res, next) {
     }
 }
 
+/**
+ * Sends the current ApiKey
+ * Sets success-field to false if no ApiKey is set.
+ * 
+ * @param {Object} req http-request object
+ * @param {Object} res http-response object
+ * @param {Function} next Follow-up-function, called on successful completion
+ */
 function getApiKey(req, res, next) {
     var key = dataStore.settings.getApiKey();
     logger.debug("ApiKey requested");
@@ -125,6 +141,13 @@ function getApiKey(req, res, next) {
     }
 }
 
+/**
+ * Sets the given ApiKey as the currently active ApiKey.
+ * 
+ * @param {Object} req http-request object
+ * @param {Object} res http-response object
+ * @param {Function} next Follow-up-function, called on successful completion
+ */
 function setApiKey(req, res, next) {
     var apiKey = req.query.apiKey;
     if (apiKey && (typeof apiKey === 'string')) {

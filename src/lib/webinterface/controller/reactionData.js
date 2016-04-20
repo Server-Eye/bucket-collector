@@ -2,6 +2,14 @@ var dataStore = require('../../dataStore');
 var logger = require('../../config').reactionLogger;
 var reactions = require('../../bucketCollector/reactor').reactor;
 
+/**
+ * Calls the given method of the given reaction.
+ * Checks if the reaction exists and sends the result. Sets the success-field to false if an error occurs.
+ * 
+ * @param {Object} req http-request object
+ * @param {Object} res http-response object
+ * @param {Function} next Follow-up-function, called on successful completion
+ */
 function method(req, res, next) {
     var reactionName = req.params.name;
     var methodName = req.params.method;
@@ -33,6 +41,14 @@ function method(req, res, next) {
     }
 }
 
+/**
+ * Sends the reactionData for the given reaction.
+ * Sets the success-field to false if the reaction is unknown.
+ * 
+ * @param {Object} req http-request object
+ * @param {Object} res http-response object
+ * @param {Function} next Follow-up-function, called on successful completion
+ */
 function get(req, res, next) {
     var reactionName = req.params.name;
     if (reactionName && (dataStore.settings.getAvailableTypes().indexOf(reactionName) >= 0)) {
@@ -49,6 +65,14 @@ function get(req, res, next) {
     }
 }
 
+/**
+ * Sets the given reactionData for the given reaction.
+ * Sets the success-field to false if the reaction is unknown.
+ * 
+ * @param {Object} req http-request object
+ * @param {Object} res http-response object
+ * @param {Function} next Follow-up-function, called on successful completion
+ */
 function set(req, res, next) {
     var reactionName = req.params.name;
     var data = req.body;

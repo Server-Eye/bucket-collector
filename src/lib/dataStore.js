@@ -3,7 +3,7 @@ var buckets = require('./dataStore/buckets');
 var reactions = require('./dataStore/reactions');
 
 /**
- * Exports both buckets- and settings-interface in one module
+ * Exports buckets-, reaction-data- and settings-interface in one module
  * 
  * @type exports
  */
