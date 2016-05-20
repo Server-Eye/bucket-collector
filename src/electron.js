@@ -32,6 +32,8 @@ options.version(require('./package.json').version)
  */
 options.reactionDataDir = options.reactionDataDir || './reaction-data';
 options.bucketDataDir = options.bucketDataDir || './bucket-data';
+options.templateDir = options.templateDir || './templates';
+options.debugDir = options.debugDir || './debug';
 options.logDir = options.logDir || './logs';
 options.service = options.service || false;
 

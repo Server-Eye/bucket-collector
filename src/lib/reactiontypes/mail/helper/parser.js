@@ -74,53 +74,21 @@ function text(bucketmessage) {
 }
 
 function loadTemplates() {
-    fs.readFile(stateHtmlTemplate, 'utf-8', function(error, source) {
-        if (error) {
-            console.log('Could not load mailtemplate from ', stateHtmlTemplate);
-        } else {
-            htmlTemplates.STATE = handlebars.compile(source);
-        }
-    });
+    try {
+        htmlTemplates.STATE = handlebars.compile(fs.readFileSync(stateHtmlTemplate, 'utf-8') || "NO TEMPLATE LOADED");
 
-    fs.readFile(hintHtmlTemplate, 'utf-8', function(error, source) {
-        if (error) {
-            console.log('Could not load mailtemplate from ', hintHtmlTemplate);
-        } else {
-            htmlTemplates.HINT = handlebars.compile(source);
-        }
-    });
+        htmlTemplates.HINT = handlebars.compile(fs.readFileSync(hintHtmlTemplate, 'utf-8') || "NO TEMPLATE LOADED");
 
-    fs.readFile(stateTxtTemplate, 'utf-8', function(error, source) {
-        if (error) {
-            console.log('Could not load mailtemplate from ', stateTxtTemplate);
-        } else {
-            txtTemplates.STATE = handlebars.compile(source);
-        }
-    });
+        txtTemplates.STATE = handlebars.compile(fs.readFileSync(stateTxtTemplate, 'utf-8') || "NO TEMPLATE LOADED");
 
-    fs.readFile(hintTxtTemplate, 'utf-8', function(error, source) {
-        if (error) {
-            console.log('Could not load mailtemplate from ', hintTxtTemplate);
-        } else {
-            txtTemplates.HINT = handlebars.compile(source);
-        }
-    });
+        txtTemplates.HINT = handlebars.compile(fs.readFileSync(hintTxtTemplate, 'utf-8') || "NO TEMPLATE LOADED");
 
-    fs.readFile(stateSubjectTemplate, 'utf-8', function(error, source) {
-        if (error) {
-            console.log('Could not load mailtemplate from ', stateSubjectTemplate);
-        } else {
-            subjectTemplates.STATE = handlebars.compile(source);
-        }
-    });
+        subjectTemplates.STATE = handlebars.compile(fs.readFileSync(stateSubjectTemplate, 'utf-8') || "NO TEMPLATE LOADED");
 
-    fs.readFile(hintSubjectTemplate, 'utf-8', function(error, source) {
-        if (error) {
-            console.log('Could not load mailtemplate from ', hintSubjectTemplate);
-        } else {
-            subjectTemplates.HINT = handlebars.compile(source);
-        }
-    });
+        subjectTemplates.HINT = handlebars.compile(fs.readFileSync(hintSubjectTemplate, 'utf-8') || "NO TEMPLATE LOADED");
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function init(settings) {

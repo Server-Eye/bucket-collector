@@ -159,7 +159,7 @@ function setConfig(config, $) {
     } else {
         debugDir = path.join(__dirname, '../debug');
     }
-    appLogger.info("Trying to use debugdir from", templateDir);
+    appLogger.info("Trying to use debugdir from", debugDir);
     try {
         if (fs.statSync(templateDir).isDirectory()) {
             appLogger.info("Using templates from", debugDir);

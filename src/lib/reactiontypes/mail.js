@@ -15,6 +15,7 @@ function react(message) {
         actions[settings.action](message).then(function(res) {
             message.error = res.error;
             message.response = res.response;
+            console.log("MAIL: finished action " + settings.action);
             deferred.resolve(message);
         });
     } else {
