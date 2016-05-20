@@ -53,7 +53,7 @@
             };
 
             scope.getClass = function() {
-                return scope.scheme.multiple ? "col-sm-9" : "col-sm-12";
+                return scope.scheme.multiple ? "col-sm-10" : "col-sm-12";
             };
         }
     }

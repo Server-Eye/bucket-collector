@@ -8,7 +8,7 @@ form(name='form')
             span.glyphicon.glyphicon-warning-sign
         input.form-control(id='{{scheme.name}}', type='{{scheme.inputtype}}', placeholder='{{scheme.default}}', name='input', ng-class='getInputClass()', ng-model='data.input')
       div.col-sm-2(ng-if='scheme.multiple')
-        button.btn.btn-block(style="margin-top:25px;", type='button', ng-click='add()') add
+        button.btn.btn-block.btn-primary(style="margin-top:25px;", type='button', ng-click='add()') add
 ul.list-group(ng-if="scheme.multiple && (returnData.length > 0)")
   li.list-group-item(ng-repeat="value in returnData") 
     a(ng-click='remove(value)')
