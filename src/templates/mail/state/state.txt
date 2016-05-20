@@ -1,0 +1,4 @@
+Status {{#if state.error}}Fehler{{else}}OK{{/if}} gemeldet am {{state.dateString}}
+Kunde: {{customer.number}} - {{customer.name}}
+Sensor: {{container.name}}{{#if agent}} - {{agent.name}}{{/if}}
+{{state.message}}

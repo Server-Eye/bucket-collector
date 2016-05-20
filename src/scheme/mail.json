@@ -1,62 +1,94 @@
 {
-    "helpURL": "https://github.com/Server-Eye/bucket-collector/wiki/autotask",
+    "helpURL": "https://github.com/Server-Eye/bucket-collector/wiki/mail",
     "dataSets": [{
+        "caption": "Actiontype",
+        "displayName": "action",
+        "name": "action",
+        "helpText": "Select if you want to send mails or debug your mailtemplate. In debug-mode, mails are written into the template-folder.",
+        "type": "select",
+        "dataType": "string",
+        "required": true,
+        "multiple": false,
+        "data": {
+            "source": "reaction",
+            "method": "getActions",
+            "displayValue": "name",
+            "dataValue": "action"
+        }
+    }, {
+        "caption": "Send mail for ",
+        "displayName": "case",
+        "name": "cases",
+        "helpText": "Select if a mail should be sent in case of an ERROR, OK or HINT-message.",
+        "type": "select",
+        "dataType": "string",
+        "required": true,
+        "multiple": true,
+        "data": {
+            "source": "reaction",
+            "method": "getCases",
+            "displayValue": "name",
+            "dataValue": "case"
+        }
+    }, {
+        "caption": "Mailserver",
+        "displayName": "smtp server address",
+        "name": "host",
+        "helpText": "The address of the smtp server which the bucket-collector will use to send mails.",
+        "default": "smtp.something.com",
+        "type": "input",
+        "inputtype": "text",
+        "dataType": "string",
+        "required": true
+    }, {
+        "caption": "Mailserver Username",
         "displayName": "Username",
-        "caption": "Autotask-username",
-        "name": "username",
-        "helpText": "The user, which the bucket-collector will use to create and update tickets.",
+        "name": "user",
+        "helpText": "The user of the smtp server which the bucket-collector will use to send mails.",
         "default": "someone@something.com",
         "type": "input",
         "inputtype": "text",
         "dataType": "string",
         "required": true
     }, {
+        "caption": "Mailserver Password",
         "displayName": "Password",
-        "caption": "Autotask-password",
-        "name": "password",
+        "name": "pass",
         "helpText": "The password of the user given above.",
         "type": "input",
         "inputtype": "password",
         "dataType": "string",
         "required": true
     }, {
-        "displayName": "Default-Customer",
-        "caption": "Autotask default-customer",
-        "name": "defaultID",
-        "helpText": "The customer which will be used if the bucket-collector can not find a matching customer.",
-        "type": "select",
-        "dataType": "number",
-        "required": true,
-        "data": {
-            "source": "reaction",
-            "method": "getCustomers",
-            "displayValue": "AccountName",
-            "dataValue": "id"
-        }
+        "caption": "Sender",
+        "displayName": "Senderaddress",
+        "name": "from",
+        "helpText": "The address which is set as the sender.",
+        "default": "someone@something.com",
+        "type": "input",
+        "inputtype": "text",
+        "dataType": "string",
+        "required": true
     }, {
-        "displayName": "Customers",
-        "caption": "Server-Eye Autotask customer-matching",
-        "name": "customerIDs",
-        "helpText": "Assignment, which Server-Eye customer corresponds to which autotask customer",
-        "type": "assignment",
+        "caption": "Recipient addresses",
+        "displayName": "address",
+        "name": "to",
+        "helpText": "The addresses which are set as the recipient. If none are given the address of the bucketowner is used.",
+        "default": "someone@something.com",
+        "type": "input",
+        "inputtype": "text",
+        "dataType": "string",
         "multiple": true,
-        "dataType": "object",
-        "data": [{
-            "type": "select",
-            "source": "SE",
-            "method": "getCustomers",
-            "displayName": "Server-Eye customer",
-            "displayValue": "companyName",
-            "description": "server-eye customer",
-            "dataValue": "cId"
-        }, {
-            "type": "select",
-            "source": "reaction",
-            "method": "getCustomers",
-            "displayName": "Autotask-Customer",
-            "displayValue": "AccountName",
-            "description": "autotask-customer",
-            "dataValue": "id"
-        }]
+        "required": false
+    }, {
+        "caption": "BCC addresses",
+        "displayName": "address",
+        "name": "bcc",
+        "helpText": "The addresses which are set as the recipient. If none are given the address of the bucketowner is used.",
+        "type": "input",
+        "inputtype": "text",
+        "dataType": "string",
+        "multiple": true,
+        "required": false
     }]
 }

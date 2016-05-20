@@ -1,0 +1,100 @@
+<table width="100%" border="0" cellpadding="0" style="width:100%;background-color:#E8E8E8;">
+    <tbody>
+        <tr>
+            <td valign="top" style="padding:7.5pt;">
+                <table width="100%" border="0" cellpadding="0" style="width:100%;">
+                    <tbody>
+                        <tr>
+                            <td colspan="3" valign="top" style="padding:0.75pt;">
+                                <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif"><b>Status </b></font><font face="Arial,sans-serif" color="#4D5C7F">
+                                        <b>
+                                            {{#if state.error}}
+                                            Fehler
+                                            {{else}}
+                                            OK
+                                            {{/if}}
+                                        </b>
+                                        </font><font face="Arial,sans-serif"><b> gemeldet am </b></font><font face="Arial,sans-serif" color="#4D5C7F">
+                                        <b>
+                                            {{state.dateString}}
+                                        </b>
+                                        </font><font face="Arial,sans-serif" size="2"><span style="font-size:9pt;"><b> </b></span></font></span></font></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="125" valign="top" style="width:75pt;padding:0.75pt;">
+                                <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2"><span style="font-size:9pt;">Kunde:</span></font></span></font></div>
+                            </td>
+                            <td valign="top" style="padding:0.75pt;">
+                                <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2">
+                                        <span style="font-size:9pt;">
+                                            {{customer.number}} - {{customer.name}}
+                                        </span></font></span></font></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="padding:0.75pt;">
+                                <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2"><span style="font-size:9pt;">Sensor:</span></font></span></font></div>
+                            </td>
+                            <td valign="top" style="padding:0.75pt;">
+                                <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2">
+                                        <span style="font-size:9pt;">
+                                            {{container.name}}{{#if agent}} - {{agent.name}}{{/if}}
+                                        </span></font></span></font></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" valign="top" style="padding:0.75pt;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" valign="top" style="background-color:white;padding:7.5pt;"><span style="background-color:white;">
+                                    <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2">
+                                            <span style="font-size:9pt;">
+                                                {{state.message}}
+                                            </span></font></span></font></div>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" valign="top" style="padding:0.75pt;"></td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style="padding:0.75pt;">
+                                <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2"><span style="font-size:9pt;">Notiz:</span></font></span></font></div>
+                            </td>
+                            <td valign="top" style="padding:0.75pt;">
+                                <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2">
+                                        <span style="font-size:9pt;">
+                                            {{note.author}} - {{note.dateString}}
+                                        </span></font></span></font></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" valign="top" style="padding:0.75pt;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" valign="top" style="background-color:white;padding:7.5pt;"><span style="background-color:white;">
+                                    <div style="margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2">
+                                            <span style="font-size:9pt;">
+                                                {{note.message}}
+                                            </span></font></span></font></div>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" style="width:100%;">
+    <tbody><tr>
+            <td style="padding:7.5pt;">
+                <div align="center" style="text-align:center;margin:0;"><font face="Times New Roman,serif" size="3"><span style="font-size:12pt;"><font face="Arial,sans-serif" size="2" color="#A8A8A8"><span style="font-size:9pt;">Diese Nachricht wurde automatisch von </span></font><font face="Arial,sans-serif" size="2" color="#F18700"><span style="font-size:9pt;"><b>Server-Eye</b></span></font><font face="Arial,sans-serif" size="2" color="#A8A8A8"><span style="font-size:9pt;">
+                            generiert</span></font><font face="Arial,sans-serif" size="2" color="#A8A8A8"><span style="font-size:9pt;"><br>
+
+                        </span></font><a href="http://www.server-eye.de" target="_blank"><font face="Arial,sans-serif" size="2"><span style="font-size:9pt;">www.server-eye.de</span></font></a></span></font></div>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,1 @@
+Notiz zu: {{#if state.error}}Fehler: {{else}}OK: {{/if}}{{container.name}}{{#if agent}} - {{agent.name}}{{/if}}
