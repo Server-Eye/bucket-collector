@@ -1,6 +1,15 @@
 var Q = require("q");
 var _settings, mailOptions, transport;
 
+/**
+ * Calls checkMessagetype with the given bucketmessage.
+ * Tries to send a mail if the messagetype matches the active types.
+ * 
+ * Resolves with an object containing error-state and response.
+ * 
+ * @param {Object} bucketmessage
+ * @returns {promise}
+ */
 function sendMail(bucketmessage) {
     var deferred = Q.defer();
 
@@ -36,6 +45,12 @@ function sendMail(bucketmessage) {
     return deferred.promise;
 }
 
+/**
+ * Returns the messagetype of the given bucketmessage.
+ * 
+ * @param {object} bucketmessage
+ * @returns {String}
+ */
 function checkMessagetype(bucketmessage) {
     if (bucketmessage == "STATE") {
         if (bucketmessage.state.error) {
@@ -56,6 +71,12 @@ function checkMessagetype(bucketmessage) {
     return "UNKNOWNTYPE";
 }
 
+/**
+ * Initalizes sendMail-module.
+ * 
+ * @param {Object} settings
+ * @returns {function}
+ */
 function init(settings) {
     _settings = settings;
 

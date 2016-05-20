@@ -6,6 +6,14 @@ var actions = {
     'debug': require('./mail/debug')(_settings)
 };
 
+/**
+ * Reacts the given message by reactiontype and selected action in settings.
+ * Adds the received response to the given message object and sets the message-objects error-property.
+ * Always resolves with the given message-object.
+ * 
+ * @param {object} message
+ * @returns {promise}
+ */
 function react(message) {
     var deferred = Q.defer();
     var settings = _settings.get();
@@ -27,6 +35,12 @@ function react(message) {
     return deferred.promise;
 }
 
+/**
+ * Resolves all possible cases for a message. 
+ * Used in UI to select messagetypes.
+ * 
+ * @returns {promise}
+ */
 function getCases() {
     var deferred = Q.defer();
 
@@ -47,6 +61,15 @@ function getCases() {
     return deferred.promise;
 }
 
+/**
+ * Resolves all possible actions.
+ * Used in UI to select actions.
+ * 
+ * mail: Send mail.
+ * debug: Parses mailtemplates and writes result to degugDir.
+ * 
+ * @returns {promise}
+ */
 function getActions() {
     var deferred = Q.defer();
 

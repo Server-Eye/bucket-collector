@@ -26,6 +26,12 @@ var subjectTemplates = {
 
 var _settings;
 
+/**
+ * Parses mailSubject
+ * 
+ * @param {Object} bucketmessage
+ * @returns {String}
+ */
 function subject(bucketmessage) {
     var subject;
 
@@ -38,6 +44,12 @@ function subject(bucketmessage) {
     return subject;
 }
 
+/**
+ * Parses mailHtml
+ * 
+ * @param {Object} bucketmessage
+ * @returns {String}
+ */
 function html(bucketmessage) {
     var html;
 
@@ -58,6 +70,12 @@ function html(bucketmessage) {
     return html;
 }
 
+/**
+ * Parses mailText
+ * 
+ * @param {Object} bucketmessage
+ * @returns {String}
+ */
 function text(bucketmessage) {
     var text;
     if (bucketmessage.state.date) {
@@ -73,6 +91,9 @@ function text(bucketmessage) {
     return text;
 }
 
+/**
+ * Loads all mailtemplates from `templateDir`
+ */
 function loadTemplates() {
     try {
         htmlTemplates.STATE = handlebars.compile(fs.readFileSync(stateHtmlTemplate, 'utf-8') || "NO TEMPLATE LOADED");
@@ -91,6 +112,12 @@ function loadTemplates() {
     }
 }
 
+/**
+ * Initalizes parser-module.
+ * 
+ * @param {Object} settings
+ * @returns {Object}
+ */
 function init(settings) {
     _settings = settings;
 

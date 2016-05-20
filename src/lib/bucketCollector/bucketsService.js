@@ -44,7 +44,8 @@ function get(bId) {
 }
 
 /**
- * Loads new messages for the given bId from the server-eye API `/customer/bucket/:bId/empty`, resolves with a message-array or rejects with an error-message
+ * Loads new messages for the given bId from the server-eye API `/customer/bucket/:bId/empty`, resolves with a message-array or rejects with an error-message.
+ * Resolves with messages from `debugDir` if `-t` flag was set.
  * 
  * @param {String} bId
  * @return {promise}

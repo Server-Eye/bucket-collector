@@ -1,5 +1,11 @@
 var _settings, parser;
 
+/**
+ * Generates mailOptions with the given bucketmessage.
+ * 
+ * @param {Object} bucketmessage
+ * @returns {Object}
+ */
 function get(bucketmessage) {
     var settings = _settings.get();
     var mailOptions = {
@@ -26,6 +32,12 @@ function get(bucketmessage) {
     return mailOptions;
 }
 
+/**
+ * Initalizes mailOptions-module.
+ * 
+ * @param {Object} settings
+ * @returns {function}
+ */
 function init(settings) {
     _settings = settings;
 

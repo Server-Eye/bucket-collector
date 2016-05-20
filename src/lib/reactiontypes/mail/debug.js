@@ -4,7 +4,12 @@ var path = require("path");
 var debugDir = require('../../config').config.debugDir;
 var _settings, mailOptions;
 
-
+/**
+ * Parses template for the given bucketmessage and writes result to `debugDir`.
+ * 
+ * @param {Object} bucketmessage
+ * @returns {promise}
+ */
 function debug(bucketmessage) {
     var deferred = Q.defer();
 
@@ -28,6 +33,12 @@ function debug(bucketmessage) {
     return deferred.promise;
 }
 
+/**
+ * Initalizes debug-module.
+ * 
+ * @param {Object} settings
+ * @returns {function}
+ */
 function init(settings) {
     _settings = settings;
 

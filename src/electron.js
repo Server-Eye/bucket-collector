@@ -30,6 +30,7 @@ options.version(require('./package.json').version)
 /**
  * Sets default-values for the electron-app
  */
+
 options.reactionDataDir = options.reactionDataDir || './reaction-data';
 options.bucketDataDir = options.bucketDataDir || './bucket-data';
 options.templateDir = options.templateDir || './templates';

@@ -153,6 +153,7 @@ function setConfig(config, $) {
     }
     $.config.templateDir = templateDir;
 
+    //debugDir
     var debugDir;
     if (config.debugDir) {
         debugDir = path.resolve(config.debugDir);
@@ -171,11 +172,12 @@ function setConfig(config, $) {
     }
     $.config.debugDir = debugDir;
 
-
+    //webinterfacePort
     if (config.port) {
         $.config.webinterfacePort = config.port;
     }
 
+    //apiUrl
     $.config.apiUrl = "https://api.server-eye.de/2/";
 }
 

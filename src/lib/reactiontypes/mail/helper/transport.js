@@ -1,6 +1,11 @@
 var nodemailer = require('nodemailer');
 var _settings;
 
+/**
+ * Generates nodemailer-transport
+ * 
+ * @returns {Object}
+ */
 function get() {
     var settings = _settings.get();
 
@@ -13,6 +18,12 @@ function get() {
     });
 }
 
+/**
+ * Initalizes transport-module.
+ * 
+ * @param {Object} settings
+ * @returns {function}
+ */
 function init(settings) {
     _settings = settings;
 
