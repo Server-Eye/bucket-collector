@@ -2,9 +2,13 @@ var buckets = require('../dataStore').buckets;
 var settings = require('../dataStore').settings;
 var logger = require('../config').bucketLogger;
 var apiUrl = require('../config').config.apiUrl;
+var testMode = require('../config').config.test;
+var debugDir = require('../config').config.debugDir;
 var reactor = require('./reactor');
+
 var Q = require('q');
 var request = require('request');
+var path = require('path');
 
 /**
  * Calls `getNew`, resolves an array of the currently active messages for the requested bId
@@ -58,27 +62,39 @@ function getNew(bId) {
 
     buckets[bId].stats.lastChecked = new Date().getTime();
 
-    logger.debug("Loading new messages from bucket", bId);
+    if (testMode) {
+        logger.warn("LOADING TESTMESSAGES");
 
-    request(options, function(err, res, body) {
-        if (err) {
-            logger.warn("Could not load new messages from", bId, ":", err);
-            deferred.reject(err);
-        } else {
-            try {
-                var result = JSON.parse(body);
-                logger.debug(result.length.toString(), "new messages loaded from", bId);
+        var messages = require(path.join(debugDir, './bucketmessages/messages'));
+        messages.forEach(function(message) {
+            message.try = 0;
+        });
 
-                result.forEach(function(message) {
-                    message.try = 0;
-                });
-                deferred.resolve(result);
-            } catch (err) {
-                logger.warn("Error in parsing response for", bId, err);
-                deferred.reject(body);
+        deferred.resolve(JSON.parse(JSON.stringify(messages)));
+
+    } else {
+        logger.debug("Loading new messages from bucket", bId);
+
+        request(options, function(err, res, body) {
+            if (err) {
+                logger.warn("Could not load new messages from", bId, ":", err);
+                deferred.reject(err);
+            } else {
+                try {
+                    var result = JSON.parse(body);
+                    logger.debug(result.length.toString(), "new messages loaded from", bId);
+
+                    result.forEach(function(message) {
+                        message.try = 0;
+                    });
+                    deferred.resolve(result);
+                } catch (err) {
+                    logger.warn("Error in parsing response for", bId, err);
+                    deferred.reject(body);
+                }
             }
-        }
-    });
+        });
+    }
 
     return deferred.promise;
 }

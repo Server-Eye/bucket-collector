@@ -71,6 +71,12 @@ function setConfig(config, $) {
     bucketLogger.setLevel($.config.logLevel);
     reactionLogger.setLevel($.config.logLevel);
 
+    $.config.test = config.test;
+    if ($.config.test) {
+        appLogger.info("Starting in testmode!");
+    }
+
+
     //reactionData
     var reactionDataDir;
     if (config.reactionDataDir) {
@@ -128,6 +134,7 @@ function setConfig(config, $) {
     }
     $.config.reactionDir = reactionDir;
 
+    //templateDir
     var templateDir;
     if (config.templateDir) {
         templateDir = path.resolve(config.templateDir);
@@ -145,6 +152,25 @@ function setConfig(config, $) {
         appLogger.info(templateDir, 'created');
     }
     $.config.templateDir = templateDir;
+
+    var debugDir;
+    if (config.debugDir) {
+        debugDir = path.resolve(config.debugDir);
+    } else {
+        debugDir = path.join(__dirname, '../debug');
+    }
+    appLogger.info("Trying to use debugdir from", templateDir);
+    try {
+        if (fs.statSync(templateDir).isDirectory()) {
+            appLogger.info("Using templates from", debugDir);
+        }
+    } catch (e) {
+        appLogger.warn(debugDir, 'does not exist, creating directory');
+        fs.mkdirSync(debugDir);
+        appLogger.info(debugDir, 'created');
+    }
+    $.config.debugDir = debugDir;
+
 
     if (config.port) {
         $.config.webinterfacePort = config.port;

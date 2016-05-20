@@ -44,8 +44,13 @@ gulp.task('build', ['clean', 'install'], function () {
 gulp.task('clean-settings', function () {
     return del([
         'src/reaction-data',
-        'src/bucket-data',
-        'src/log'
+        'src/bucket-data'
+    ]);
+});
+
+gulp.task('clean-logs', function() {
+    return del([
+        'src/logs'
     ]);
 });
 
@@ -69,7 +74,13 @@ gulp.task('clean-docs', function () {
     ]);
 });
 
-gulp.task('clean', ['clean-settings', 'clean-install', 'clean-build', 'clean-docs', 'beautify'], function (cb) {
+gulp.task('clean-debug', function () {
+    return del([
+        'src/debug/*', '!src/debug/bucketmessages', '!src/debug/bucketmessages/messages.json'
+    ]);
+});
+
+gulp.task('clean', ['clean-settings', 'clean-logs', 'clean-install', 'clean-build', 'clean-docs', 'clean-debug', 'beautify'], function (cb) {
     cb();
 });
 

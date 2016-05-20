@@ -20,6 +20,7 @@ var ELECTRON_READY = false;
  */
 options.version(require('./package.json').version)
     .option('-d, --development', 'Starts the application in development mode, which enables additional logging')
+    .option('-t, --test', 'Starts the application in testmode. Loads bucketmessages from ./debug instead of the bucket-api.')
     .option('-r, --reactionDataDir [path]', 'Set the path where the raction-data is saved')
     .option('-b, --bucketDataDir [path]', 'Set the path where the runtime-data is saved')
     .option('-L, --logDir [path]', 'Set the path where the logfiles are saved')

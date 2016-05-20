@@ -53,7 +53,7 @@
                 if (scope.scheme.multiple) {
                     angular.forEach(scope.returnData, function(dataSet) {
                         var fullData = getFullDataSet(dataSet);
-                        if (fullData) {
+                        if (fullData && (scope.data.indexOf(fullData) < 0)) {
                             scope.data.push(fullData);
                         }
                     });

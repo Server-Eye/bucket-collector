@@ -30,13 +30,13 @@ function setData(reactionName, data) {
     if (!_reactions[reactionName]) {
         createData(reactionName);
     }
-    
+
     for (key in _reactions[reactionName]) {
         if (_reactions[reactionName].hasOwnProperty(key)) {
             delete _reactions[reactionName][key];
         }
     }
-    
+
     for (key in data) {
         if (data.hasOwnProperty(key)) {
             _reactions[reactionName][key] = data[key];
