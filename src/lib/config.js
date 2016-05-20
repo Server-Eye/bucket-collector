@@ -128,6 +128,24 @@ function setConfig(config, $) {
     }
     $.config.reactionDir = reactionDir;
 
+    var templateDir;
+    if (config.templateDir) {
+        templateDir = path.resolve(config.templateDir);
+    } else {
+        templateDir = path.join(__dirname, '../templates');
+    }
+    appLogger.info("Trying to use templates from", templateDir);
+    try {
+        if (fs.statSync(templateDir).isDirectory()) {
+            appLogger.info("Using templates from", templateDir);
+        }
+    } catch (e) {
+        appLogger.warn(templateDir, 'does not exist, creating directory');
+        fs.mkdirSync(templateDir);
+        appLogger.info(templateDir, 'created');
+    }
+    $.config.templateDir = templateDir;
+
     if (config.port) {
         $.config.webinterfacePort = config.port;
     }

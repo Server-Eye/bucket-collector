@@ -102,7 +102,7 @@ function loadReactions() {
         }
         if (fs.statSync(path.join(reactionDir, name)).isFile()) {
             var reactionTypeName = name.slice(0, name.length - 3);
-            logger.info('Loading reactiontype' + reactionTypeName, 'from', name);
+            logger.info('Loading reactiontype ' + reactionTypeName, 'from', name);
             reactor[reactionTypeName] = require(path.join(reactionDir, name));
             reactiontypes.push(reactionTypeName);
             count++;
