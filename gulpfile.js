@@ -8,37 +8,57 @@ var exec = require('child_process').execFile;
 var path = require('path');
 var packageJson = require('./src/package.json');
 
+var buildOptions = {
+    src: './src',
+    packageJson: packageJson,
+    release: './release',
+    cache: './cache',
+    version: 'v0.37.5',
+    packaging: false,
+    platforms: ['win32-ia32'], //, 'darwin-x64'],
+    platformResources: {
+        darwin: {
+            CFBundleDisplayName: packageJson.name,
+            CFBundleIdentifier: packageJson.name,
+            CFBundleName: packageJson.name,
+            CFBundleVersion: packageJson.version,
+            icon: 'se-icon.icns'
+        },
+        win: {
+            "version-string": packageJson.version,
+            "file-version": packageJson.version,
+            "product-version": packageJson.version,
+            "icon": 'se-icon.ico'
+        }
+    }
+};
+
+function getReleaseDir(platform) {
+    return   "./release/" + buildOptions.version + "/" + platform;
+}
+
+
 gulp.task('default', function () {
     return tasks.withFilters(null, 'default')();
 });
 
-gulp.task('build', ['clean', 'install'], function () {
+gulp.task('prebuild', ['clean', 'install'], function () {
     return gulp.src("")
-            .pipe(electron({
-                src: './src',
-                packageJson: packageJson,
-                release: './release',
-                cache: './cache',
-                version: 'v0.37.5',
-                packaging: false,
-                platforms: ['win32-ia32'], //, 'darwin-x64'],
-                platformResources: {
-                    darwin: {
-                        CFBundleDisplayName: packageJson.name,
-                        CFBundleIdentifier: packageJson.name,
-                        CFBundleName: packageJson.name,
-                        CFBundleVersion: packageJson.version,
-                        icon: 'se-icon.icns'
-                    },
-                    win: {
-                        "version-string": packageJson.version,
-                        "file-version": packageJson.version,
-                        "product-version": packageJson.version,
-                        "icon": 'se-icon.ico'
-                    }
-                }
-            }))
+            .pipe(electron(buildOptions))
             .pipe(gulp.dest(""));
+});
+
+gulp.task('build-win', ['prebuild'], function () {
+    gulp.src([
+        getReleaseDir('win32-ia32') + '/resources/app/templates/**/*.*',
+        getReleaseDir('win32-ia32') + '/resources/app/debug/**/*.*'
+    ], {
+        base: getReleaseDir('win32-ia32') + '/resources/app'
+    }).pipe(gulp.dest(getReleaseDir('win32-ia32')));
+});
+
+gulp.task('build', ['build-win'], function (cb) {
+    cb();
 });
 
 gulp.task('clean-settings', function () {
@@ -48,7 +68,7 @@ gulp.task('clean-settings', function () {
     ]);
 });
 
-gulp.task('clean-logs', function() {
+gulp.task('clean-logs', function () {
     return del([
         'src/logs'
     ]);
