@@ -65,11 +65,16 @@ function getNew(bId) {
 
     if (testMode) {
         logger.warn("LOADING TESTMESSAGES");
-        var messagepath = path.join(debugDir, './bucketmessages/messages.json');
+        var messagepath = path.join(debugDir, './bucketmessages/');
 
         logger.warn("Loading messages: ", messagepath);
 
-        var messages = require(messagepath);
+        var messages = [
+            require(path.join(messagepath, './state_error.json')),
+            require(path.join(messagepath, './hint_public.json')),
+            require(path.join(messagepath, './hint_private.json')),
+            require(path.join(messagepath, './state_ok.json'))
+        ];
 
         messages.forEach(function(message) {
             message.try = 0;

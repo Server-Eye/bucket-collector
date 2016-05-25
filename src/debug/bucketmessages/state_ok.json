@@ -1,0 +1,37 @@
+{
+    "container": {
+        "machineName": "TESTSERVER",
+        "name": "TESTSERVERNAME",
+        "cId": "12345678-abcd-1234-9876-abc123def456"
+    },
+    "state": {
+        "message": "This is an OK message.",
+        "error": false,
+        "sId": 99999999,
+        "date": 1461000000000
+    },
+    "notification": {
+        "phone": false,
+        "ticket": false,
+        "email": false,
+        "nId": "12345678-1234-1234-1234-1234567890ab"
+    },
+    "customer": {
+        "name": "TESTCUSTOMER",
+        "number": 11111111,
+        "cId": "11111111111111111111111111111111"
+    },
+    "type": "STATE",
+    "user": {
+        "prename": "Max",
+        "email": "max.mustermann@something.de",
+        "isGroup": false,
+        "surname": "Mustermann",
+        "uId": "12345678-1234-1234-4321-0987654321ab"
+    },
+    "agent": {
+        "aId": "99999999-9999-9999-9999-999999999999",
+        "name": "AGENTNAME",
+        "type": "22222222-2222-2222-2222-222222222222"
+    }
+}
