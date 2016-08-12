@@ -1,5 +1,6 @@
-var jsop = require('jsop');
+//var jsop = require('jsop');
 var path = require('path');
+var fs = require('fs');
 var reactionDataDir = require('../config').config.reactionDataDir;
 var logger = require('../config').bucketLogger;
 
@@ -13,7 +14,22 @@ var _reactions = {};
  */
 function getData(reactionName) {
     if (!_reactions[reactionName]) {
-        createData(reactionName);
+        try {
+            fs.accessSync(path.join(reactionDataDir, reactionName + '.json'), fs.constants.R_OK | fs.constants.W_OK);
+        } catch (e) {
+            logger.warn('Could not load ' + reactionName + '.json: ' + e);
+
+            _reactions[reactionName] = {};
+
+            fs.writeFileSync(path.join(reactionDataDir, reactionName + '.json'), JSON.stringify(_reactions[reactionName]), 'utf8');
+        }
+
+        try {
+            var str = fs.readFileSync(path.join(reactionDataDir, reactionName + '.json'), 'utf8');
+            _reactions[reactionName] = JSON.parse(str);
+        } catch (e) {
+            logger.error('Could not read ' + reactionName + '.json: ' + e);
+        }
     }
 
     return JSON.parse(JSON.stringify(_reactions[reactionName]));
@@ -28,7 +44,7 @@ function getData(reactionName) {
  */
 function setData(reactionName, data) {
     if (!_reactions[reactionName]) {
-        createData(reactionName);
+        _reactions[reactionName] = {};
     }
 
     for (key in _reactions[reactionName]) {
@@ -43,18 +59,17 @@ function setData(reactionName, data) {
         }
     }
 
+    updateFile(reactionName);
+
     return getData(reactionName);
 }
 
-/**
- * Creates a new reaction-data-file for the given name.
- * 
- * @param {string} reactionName
- * @returns {Object|Array}
- */
-function createData(reactionName) {
-    _reactions[reactionName] = jsop(path.join(reactionDataDir, reactionName + '.json'));
-    return _reactions[reactionName];
+function updateFile(reactionName) {
+    try {
+        fs.writeFileSync(path.join(reactionDataDir, reactionName + '.json'), JSON.stringify(_reactions[reactionName], null, 2), 'utf8');
+    } catch (e) {
+        logger.error('Could not update ' + reactionName + '.json: ' + e);
+    }
 }
 
 /**

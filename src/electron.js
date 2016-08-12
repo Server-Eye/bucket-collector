@@ -11,13 +11,14 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 var window = null;
 var request = require('request');
-var options = require('commander');
+var options = {}; //require('commander');
 var Q = require('q');
 var ELECTRON_READY = false;
 
 /**
  * Defines commandline-flags
  */
+
 options.version(require('./package.json').version)
     .option('-d, --development', 'Starts the application in development mode, which enables additional logging')
     .option('-t, --test', 'Starts the application in testmode. Loads bucketmessages from ./debug instead of the bucket-api.')

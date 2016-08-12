@@ -1,5 +1,6 @@
 var logger = require('../config').reactionLogger;
 var buckets = require('./bucketsService');
+var updateFile = require('../dataStore').buckets.updateFile;
 var settings = require('../dataStore').settings;
 var reactionDir = require('../config').config.reactionDir;
 
@@ -64,15 +65,18 @@ function react(bId, type) {
                         }
                     });
                 }
-                if (bucket.messages.success.length > 100) {
-                    bucket.messages.success.splice(0, bucket.messages.success.length - 100);
+                if (bucket.messages.success.length > 50) {
+                    bucket.messages.success.splice(0, bucket.messages.success.length - 50);
                 }
-                if (bucket.messages.failed.length > 100) {
-                    bucket.messages.failed.splice(0, bucket.messages.failed.length - 100);
+                if (bucket.messages.failed.length > 50) {
+                    bucket.messages.failed.splice(0, bucket.messages.failed.length - 50);
                 }
 
                 logger.info("Finished reaction for bucket", bId);
                 logger.debug(bucket.messages.active.length.toString(), "Message(s) in bucket", bId);
+
+                updateFile();
+
                 deferred.resolve();
             });
         }).fail(function(err) {

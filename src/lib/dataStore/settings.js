@@ -1,17 +1,50 @@
-var jsop = require('jsop');
 var path = require('path');
+var fs = require('fs');
+var logger = require('../config').appLogger;
 var dataDir = require('../config').config.bucketDataDir;
-var _settings = jsop(path.join(dataDir, 'settings.json'));
+var settingsPath = path.join(dataDir, 'settings.json');
+var _settings;
 
-if (!_settings.activeBucketIds || !_settings.activeBucketIds.length) {
-    _settings.activeBucketIds = [];
-}
-if (!_settings.interval) {
-    _settings.interval = 5;
+function init() {
+    try {
+        fs.accessSync(settingsPath, fs.constants.R_OK | fs.constants.W_OK);
+    } catch (e) {
+        logger.warn('Could not load settings.json: ' + e);
+        logger.warn('Resetting settings.json...');
+
+        _settings = {};
+
+        fs.writeFileSync(settingsPath, '{}', 'utf8');
+    }
+
+    var _settingsString = fs.readFileSync(settingsPath, 'utf8');
+    _settings = JSON.parse(_settingsString);
+
+    if (!_settings.activeBucketIds || !_settings.activeBucketIds.length) {
+        _settings.activeBucketIds = [];
+    }
+    if (!_settings.interval) {
+        _settings.interval = 5;
+    }
+
+    if (!_settings.maxRetries) {
+        _settings.maxRetries = 2;
+    }
+
+    fs.writeFileSync(settingsPath, JSON.stringify(_settings, null, 2), 'utf8');
 }
 
-if (!_settings.maxRetries) {
-    _settings.maxRetries = 2;
+init();
+
+
+function updateFile() {
+    fs.writeFile(settingsPath, JSON.stringify(_settings, null, 2), 'utf8', function(err) {
+        if (err) {
+            logger.error('Could not update settings.json: ' + e);
+        } else {
+            logger.debug('Updated settings.json');
+        }
+    });
 }
 
 /**
@@ -31,6 +64,7 @@ function getApiKey() {
  */
 function setApiKey(key) {
     _settings.apiKey = key;
+    updateFile();
     return key;
 }
 
@@ -55,6 +89,8 @@ function setAvailableTypes(aTypes) {
     else
         _settings.availableTypes = aTypes;
 
+    updateFile();
+
     return _settings.availableTypes;
 }
 
@@ -75,6 +111,9 @@ function getType() {
  */
 function setType(type) {
     _settings.type = type;
+
+    updateFile();
+
     return type;
 }
 
@@ -95,6 +134,9 @@ function getInterv() {
  */
 function setInterv(interval) {
     _settings.interval = interval;
+
+    updateFile();
+
     return interval;
 }
 
@@ -115,6 +157,9 @@ function getActiveBucketIds() {
  */
 function setActiveBucketIds(bidArr) {
     _settings.activeBucketIds = bidArr;
+
+    updateFile();
+
     return bidArr;
 }
 
@@ -135,6 +180,9 @@ function getMaxRetries() {
  */
 function setMaxRetries(maxRetries) {
     _settings.maxRetries = maxRetries;
+
+    updateFile();
+
     return maxRetries;
 }
 
@@ -164,7 +212,7 @@ function checkSettings() {
         return "No reactiontype-string set!";
     } else {
         if (_settings.availableTypes.indexOf(_settings.type) < 0) {
-            return "Set reactiontype is unknown!"
+            return "Set reactiontype is unknown!";
         }
     }
 

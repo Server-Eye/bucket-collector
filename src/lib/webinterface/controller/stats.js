@@ -1,4 +1,4 @@
-var buckets = require('../../dataStore').buckets;
+var buckets = require('../../dataStore').buckets.buckets;
 
 /**
  * Sends all failed messages for the bId given in the request-params, sends an error message if no bId or matching bucket is found.

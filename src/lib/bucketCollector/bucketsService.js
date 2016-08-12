@@ -1,4 +1,5 @@
-var buckets = require('../dataStore').buckets;
+var buckets = require('../dataStore').buckets.buckets;
+var updateFile = require('../dataStore').buckets.updateFile;
 var settings = require('../dataStore').settings;
 var logger = require('../config').bucketLogger;
 var apiUrl = require('../config').config.apiUrl;
@@ -37,6 +38,7 @@ function get(bId) {
         });
         bucket.stats.messages.failed++;
     }).finally(function() {
+        updateFile();
         deferred.resolve(bucket);
     });
 
