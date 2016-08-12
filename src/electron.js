@@ -6,12 +6,13 @@
  * @ignore
  */
 'use strict';
+
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 var window = null;
 var request = require('request');
-var options = {}; //require('commander');
+var options = require('commander');
 var Q = require('q');
 var ELECTRON_READY = false;
 
@@ -26,7 +27,10 @@ options.version(require('./package.json').version)
     .option('-b, --bucketDataDir [path]', 'Set the path where the runtime-data is saved')
     .option('-L, --logDir [path]', 'Set the path where the logfiles are saved')
     .option('-s, --service', 'Starts the application without the UI')
-    .parse(process.argv);
+    
+if(process.argv.length > 1){
+    options.parse(process.argv);
+}
 
 /**
  * Sets default-values for the electron-app
