@@ -18,12 +18,14 @@
             scope.data = scope.scheme.multiple ? [] : undefined;
 
             scope.select = function(data) {
-                scope.selected = data;
+                if (data) {
+                    scope.selected = data;
+                }
             };
 
             scope.add = function() {
                 if (scope.scheme.multiple) {
-                    if (scope.data.indexOf(scope.selected) <= -1) {
+                    if (scope.data.indexOf(scope.selected) <= -1 && scope.selected) {
                         scope.data.push(scope.selected);
                     }
                 } else {

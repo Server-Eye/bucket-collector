@@ -27,8 +27,8 @@ options.version(require('./package.json').version)
     .option('-b, --bucketDataDir [path]', 'Set the path where the runtime-data is saved')
     .option('-L, --logDir [path]', 'Set the path where the logfiles are saved')
     .option('-s, --service', 'Starts the application without the UI')
-    
-if(process.argv.length > 1){
+
+if (process.argv.length > 1) {
     options.parse(process.argv);
 }
 
