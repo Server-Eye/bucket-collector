@@ -15,6 +15,12 @@ node_modules
 # netbeans project folder
 /nbproject/
 
+# vscode folder
+/.vscode
+
+#typings folder
+/typings
+
 # bower components
 bower_components
 

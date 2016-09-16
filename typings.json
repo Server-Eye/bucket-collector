@@ -1,0 +1,18 @@
+{
+  "globalDependencies": {
+    "body-parser": "registry:dt/body-parser#0.0.0+20160619023215",
+    "commander": "registry:dt/commander#2.3.0+20160317120654",
+    "gulp": "registry:dt/gulp#3.8.0+20160907112908",
+    "handlebars": "registry:dt/handlebars#4.0.5+20160804082238",
+    "log4js": "registry:dt/log4js#0.0.0+20160608042355",
+    "node": "registry:dt/node#6.0.0+20160915134512",
+    "nodemailer": "registry:dt/nodemailer#1.3.2+20160811111312",
+    "q": "registry:dt/q#0.0.0+20160613154756",
+    "soap": "registry:dt/soap#0.0.0+20160830123121"
+  },
+  "dependencies": {
+    "express": "registry:npm/express#4.14.0+20160911114220",
+    "pug": "registry:npm/pug#2.0.0+20160913022035",
+    "request": "registry:npm/request#2.69.0+20160428223725"
+  }
+}
