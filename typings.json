@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "angular": "registry:dt/angular#1.5.0+20160909133806",
     "body-parser": "registry:dt/body-parser#0.0.0+20160619023215",
     "commander": "registry:dt/commander#2.3.0+20160317120654",
     "gulp": "registry:dt/gulp#3.8.0+20160907112908",

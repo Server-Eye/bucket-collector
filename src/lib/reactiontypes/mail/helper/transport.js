@@ -9,13 +9,18 @@ var _settings;
 function get() {
     var settings = _settings.get();
 
-    return nodemailer.createTransport({
-        host: settings.host,
-        auth: {
+    var config = {
+        host: settings.host
+    };
+
+    if(settings.user && settings.pass) {
+        config.auth = {
             user: settings.user,
             pass: settings.pass
         }
-    });
+    }
+
+    return nodemailer.createTransport(config);
 }
 
 /**

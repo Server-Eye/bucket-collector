@@ -44,21 +44,21 @@
         "caption": "Mailserver Username",
         "displayName": "Username",
         "name": "user",
-        "helpText": "The user of the smtp server which the bucket-collector will use to send mails.",
+        "helpText": "The user of the smtp server which the bucket-collector will use to send mails. (Leave empty if none is required)",
         "default": "someone@something.com",
         "type": "input",
         "inputtype": "text",
         "dataType": "string",
-        "required": true
+        "required": false
     }, {
         "caption": "Mailserver Password",
         "displayName": "Password",
         "name": "pass",
-        "helpText": "The password of the user given above.",
+        "helpText": "The password of the user given above. (Leave empty if none is required)",
         "type": "input",
         "inputtype": "password",
         "dataType": "string",
-        "required": true
+        "required": false
     }, {
         "caption": "Sender",
         "displayName": "Senderaddress",
