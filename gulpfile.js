@@ -13,7 +13,7 @@ var buildOptions = {
     packageJson: packageJson,
     release: './release',
     cache: './cache',
-    version: 'v1.3.3',
+    version: 'v1.6.14',
     packaging: false,
     platforms: ['win32-ia32'], //, 'darwin-x64'],
     platformResources: {
