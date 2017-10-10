@@ -19,6 +19,20 @@
         "inputtype": "password",
         "dataType": "string",
         "required": true
+    },{
+        "displayName": "Value",
+        "caption": "Close Tickets",
+        "name": "closeTickets",
+        "helpText": "Close tickets if agent is no longer in alarm-state",
+        "type": "select",
+        "dataType": "boolean",
+        "required": true,
+        "data": {
+            "source": "reaction",
+            "method":"getCloseOptions",
+            "displayValue": "name",
+            "dataValue": "value" 
+        }
     }, {
         "displayName": "Default-Customer",
         "caption": "Autotask default-customer",

@@ -13,7 +13,7 @@ function get() {
         host: settings.host
     };
 
-    if(settings.user && settings.pass) {
+    if (settings.user && settings.pass) {
         config.auth = {
             user: settings.user,
             pass: settings.pass

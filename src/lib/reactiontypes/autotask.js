@@ -46,9 +46,30 @@ function getCustomers() {
 }
 
 /**
+ * Resolves all possible options for closing tickets by agentState. 
+ * Used in UI to select messagetypes.
+ * 
+ * @returns {promise}
+ */
+function getCloseOptions() {
+    var deferred = Q.defer();
+
+    deferred.resolve([{
+        name: "Yes",
+        value: true
+    }, {
+        name: "No",
+        value: false
+    }]);
+
+    return deferred.promise;
+}
+
+/**
  * @ignore
  */
 (function($) {
     $.react = react;
     $.getCustomers = getCustomers;
+    $.getCloseOptions = getCloseOptions;
 })(exports);
