@@ -13,7 +13,7 @@
     "pug": "^2.0.0-alpha3",
     "q": "^1.0.1",
     "request": "^2.40.0",
-    "soap": "^0.13.0"
+    "soap": "^0.22.0"
   },
   "repository": {
     "type": "git",
