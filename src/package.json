@@ -1,35 +1,35 @@
 {
-  "name": "bucket-collector",
-  "version": "2.1.1",
-  "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty). Reacts the received messages depending on the selected reactiontype.",
-  "main": "electron.js",
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "commander": "^2.9.0",
-    "express": "^4.12.4",
-    "handlebars": "^4.0.5",
-    "log4js": "^0.6.26",
-    "nodemailer": "^2.3.2",
-    "pug": "^2.0.0-alpha3",
-    "q": "^1.0.1",
-    "request": "^2.40.0",
-    "soap": "^0.22.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Server-Eye/bucket-collector.git"
-  },
-  "keywords": [
-    "Server-Eye",
-    "bucket-collector"
-  ],
-  "author": "Roland Paltz",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Server-Eye/bucket-collector/issues"
-  },
-  "homepage": "https://github.com/Server-Eye/bucket-collector#readme",
-  "devDependencies": {
-    "electron": "^1.7.8"
-  }
+    "name": "bucket-collector",
+    "version": "2.2.0",
+    "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty). Reacts the received messages depending on the selected reactiontype.",
+    "main": "electron.js",
+    "dependencies": {
+        "body-parser": "^1.15.0",
+        "commander": "^2.9.0",
+        "express": "^4.12.4",
+        "handlebars": "^4.0.5",
+        "log4js": "^0.6.26",
+        "nodemailer": "^2.3.2",
+        "pug": "^2.0.0-alpha3",
+        "q": "^1.0.1",
+        "request": "^2.40.0",
+        "soap": "^0.22.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Server-Eye/bucket-collector.git"
+    },
+    "keywords": [
+        "Server-Eye",
+        "bucket-collector"
+    ],
+    "author": "Roland Paltz",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Server-Eye/bucket-collector/issues"
+    },
+    "homepage": "https://github.com/Server-Eye/bucket-collector#readme",
+    "devDependencies": {
+        "electron": "^1.7.8"
+    }
 }

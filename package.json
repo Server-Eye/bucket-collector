@@ -1,6 +1,6 @@
 {
   "name": "bucket-collector",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Uses the Server-Eye [Bucket-API](https://api.server-eye.de/docs/1/#/customer/get_bucket_empty) to get notification-messages from Server-Eye.",
   "main": "gulpfile.js",
   "scripts": {
@@ -14,7 +14,6 @@
   "license": "ISC",
   "devDependencies": {
     "bower": "^1.7.9",
-    "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-beautify": "^2.0.0",
     "gulp-install": "^0.6.0",
