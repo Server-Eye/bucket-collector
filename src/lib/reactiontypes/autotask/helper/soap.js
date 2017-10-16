@@ -97,6 +97,39 @@ function createTicket(message) {
 }
 
 /**
+ * Updates a ticket for the given message
+ * 
+ * @param {Object} message
+ * @return {promise}
+ */
+function updateTicket(message) {
+    var deferred = Q.defer();
+    getClient().then(function(_client) {
+        _client.ATWS.ATWSSoap.update(message.data, function(err, res) {
+            if (err) {
+                message.error = true;
+                message.response = err;
+            } else {
+                if (res.updateResult && res.updateResult.ReturnCode < 0) {
+                    message.error = true;
+                    message.response = res;
+                } else {
+                    message.error = false;
+                    message.response = res;
+                }
+            }
+            deferred.resolve(message);
+        });
+    }).fail(function(reason) {
+        message.error = true;
+        message.response = reason;
+        deferred.resolve(message);
+    });
+
+    return deferred.promise;
+}
+
+/**
  * Creates a ticketNote for the given message
  * 
  * @param {Object} message
@@ -206,7 +239,8 @@ function getTicketIdBySEStateId(seStateId) {
                     var errString = (typeof res.queryResult.Errors === 'string') ? res.queryResult.Errors : JSON.stringify(res.queryResult.Errors, null, 2);
                     deferred.reject(errString);
                 } else {
-                    deferred.resolve(getCurrentTicketId(parser.result(res)));
+                    var ticket = getCurrentTicket(parser.result(res));
+                    deferred.resolve(ticket.id);
                 }
             }
         });
@@ -222,27 +256,76 @@ function getTicketIdBySEStateId(seStateId) {
 }
 
 /**
- * Returns the most recent ticketId for the given tickets.
+ * Returns the ticket for the given seStateId
+ * 
+ * @param {String} seStateId
+ * @return {promise}
+ */
+function getTicketBySeStateId(seStateId) {
+    var deferred = Q.defer();
+    var query = {
+        Ticket: [{
+            ServerEyeStateID: {
+                equals: seStateId,
+                udf: true
+            },
+            Status: {
+                udf: false,
+                NotEqual: 5
+            }
+        }]
+    };
+
+    getClient().then(function(_client) {
+        _client.ATWS.ATWSSoap.query({
+            sXML: parser.query(query)
+        }, function(err, res) {
+            if (err) {
+                var errString = JSON.stringify(err, null, 2);
+                deferred.reject(errString);
+            } else {
+                if (res.queryResult && res.queryResult.ReturnCode < 0) {
+                    var errString = (typeof res.queryResult.Errors === 'string') ? res.queryResult.Errors : JSON.stringify(res.queryResult.Errors, null, 2);
+                    deferred.reject(errString);
+                } else {
+                    deferred.resolve(getCurrentTicket(parser.result(res)));
+                }
+            }
+        });
+    }).fail(function(reason) {
+        var resObj = {};
+        resObj.error = true;
+        resObj.response = reason;
+        deferred.resolve(resObj);
+    });
+
+    return deferred.promise;
+}
+
+/**
+ * Returns the most recent ticket for the given tickets.
  * 
  * @param {Array|Object} tickets
  * @return {String}
  */
-function getCurrentTicketId(tickets) {
+function getCurrentTicket(tickets) {
     if (!Array.isArray(tickets)) {
         tickets = [tickets];
     }
+
     var result = {
-        createDate: 0
+        createDate: 0,
+        ticket: null
     };
 
     tickets.forEach(function(ticket) {
         if (ticket.CreateDate > result.createDate) {
             result.createDate = ticket.CreateDate;
-            result.id = ticket.id;
+            result.ticket = ticket;
         }
     });
 
-    return result.id;
+    return result.ticket;
 }
 
 /**
@@ -256,9 +339,11 @@ function init(settings) {
 
     return {
         createTicket: createTicket,
+        getTicketBySeStateId: getTicketBySeStateId,
         getTicketIdBySEStateId: getTicketIdBySEStateId,
         createTicketNote: createTicketNote,
-        getCustomers: getCustomers
+        getCustomers: getCustomers,
+        updateTicket: updateTicket
     };
 }
 

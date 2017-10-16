@@ -72,6 +72,7 @@ function parseResultObj(obj) {
                             newObj[key] = Boolean(tmp.$value);
                             break;
                         case 'xsd:int':
+                            break;
                         case 'xsd:decimal':
                             newObj[key] = parseFloat(tmp.$value);
                             break;

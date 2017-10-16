@@ -55,10 +55,10 @@ function getCloseOptions() {
     var deferred = Q.defer();
 
     deferred.resolve([{
-        name: "Yes",
+        name: "Close Ticket",
         value: true
     }, {
-        name: "No",
+        name: "Write comment",
         value: false
     }]);
 

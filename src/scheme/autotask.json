@@ -19,19 +19,19 @@
         "inputtype": "password",
         "dataType": "string",
         "required": true
-    },{
+    }, {
         "displayName": "Value",
-        "caption": "Close Tickets",
+        "caption": "Handling of OK-Messages",
         "name": "closeTickets",
-        "helpText": "Close tickets if agent is no longer in alarm-state",
+        "helpText": "How should tickets be handled if the agent is no longer in an Alarm-State",
         "type": "select",
         "dataType": "boolean",
         "required": true,
         "data": {
             "source": "reaction",
-            "method":"getCloseOptions",
+            "method": "getCloseOptions",
             "displayValue": "name",
-            "dataValue": "value" 
+            "dataValue": "value"
         }
     }, {
         "displayName": "Default-Customer",
