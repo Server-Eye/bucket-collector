@@ -50,13 +50,13 @@ function state(message) {
 
         message.data = data;
 
-        soap.createTicket(message).then(function(result) {
+        soap.createTicket(message).then(function (result) {
             deferred.resolve(result);
         });
     } else {
         if (message.state && (message.state.error == false) && _settings.closeTickets) {
             //close ticket
-            soap.getTicketBySeStateId(message.seStateId).then(function(ticket) {
+            soap.getTicketBySeStateId(message.seStateId).then(function (ticket) {
                 if (!ticket) {
                     message.error = (ticket && ticket.error) ? ticket.error : "No matching ticket found";
                     message.response = (ticket && ticket.response) ? ticket.resonse : "No matching ticket found";
@@ -64,31 +64,30 @@ function state(message) {
                 } else {
                     var stateMessage = (message.state && message.state.message) ? message.state.message : "ERROR, NO MESSAGE IN BUCKETMESSAGE";
 
-                    ticket.Description = ticket.Description + '\r\nUpdate: ' + stateMessage;
-                    ticket.Status = 5;
+                    var ticketUpdate = {};
 
-                    delete ticket.CreateDate;
-                    delete ticket.LastActivityDate;
-
-                    ticket.DueDateTime = parser.formatDate(ticket.DueDateTime);
-                    ticket.id = parseInt(ticket.id);
-                    ticket.Priority = ticket.Priority || 3;
-                    ticket.QueueID = ticket.QueueID || 8;
-
-                    ticket.attributes = {
+                    ticketUpdate.id = parseInt(ticket.id);
+                    ticketUpdate.Description = ticket.Description + '\r\nUpdate: ' + stateMessage;
+                    ticketUpdate.DueDateTime = parser.formatDate(ticket.DueDateTime);
+                    ticketUpdate.TicketNumber = ticket.TicketNumber;
+                    ticketUpdate.Title = ticket.Title;
+                    ticketUpdate.Status = 5;
+                    ticketUpdate.Priority = ticket.Priority || 3;
+                    ticketUpdate.QueueID = ticket.QueueID || 8;
+                    ticketUpdate.AccountID = message.autotaskAccountID;
+                    ticketUpdate.attributes = {
                         'xsi:type': 'Ticket'
                     };
-                    ticket.AccountID = message.autotaskAccountID
 
                     var data = {
                         Entities: [{
-                            Entity: ticket
+                            Entity: ticketUpdate
                         }]
                     };
 
                     message.data = data;
 
-                    soap.updateTicket(message).then(function(result) {
+                    soap.updateTicket(message).then(function (result) {
                         deferred.resolve(result);
                     });
                 }
@@ -103,7 +102,7 @@ function state(message) {
                 surname: ""
             };
 
-            hint(message).then(function(result) {
+            hint(message).then(function (result) {
                 deferred.resolve(result);
             });
         }
