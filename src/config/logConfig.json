@@ -1,41 +1,56 @@
 {
-    "appenders": [{
-        "type": "file",
-        "filename": "bucket-collector.log",
-        "maxLogSize": 104857600,
-        "backups": 10,
-        "pollInterval": 0.1,
-        "category": "SETTINGS"
-    }, {
-        "type": "file",
-        "filename": "bucket-collector.log",
-        "maxLogSize": 104857600,
-        "backups": 10,
-        "pollInterval": 0.1,
-        "category": "WEB"
-    }, {
-        "type": "file",
-        "filename": "bucket-collector.log",
-        "maxLogSize": 104857600,
-        "backups": 10,
-        "pollInterval": 0.1,
-        "category": "BUCKET"
-    }, {
-        "type": "file",
-        "filename": "bucket-collector.log",
-        "maxLogSize": 104857600,
-        "backups": 10,
-        "pollInterval": 0.1,
-        "category": "REACTION"
-    }, {
-        "type": "file",
-        "filename": "bucket-collector.log",
-        "maxLogSize": 104857600,
-        "backups": 10,
-        "pollInterval": 0.1,
-        "category": "APP"
-    }, {
-        "type": "console"
-    }],
-    "replaceConsole": true
+    "appenders": {
+        "file": {
+            "type": "dateFile",
+            "filename": "bucket-collector.log",
+            "daysToKeep": 7
+        },
+        "console": {
+            "type": "console"
+        }
+    },
+    "categories": {
+        "default": {
+            "appenders": [
+                "file",
+                "console"
+            ],
+            "level": "info"
+        },
+        "SETTINGS": {
+            "appenders": [
+                "file",
+                "console"
+            ],
+            "level": "info"
+        },
+        "WEB": {
+            "appenders": [
+                "file",
+                "console"
+            ],
+            "level": "info"
+        },
+        "BUCKET": {
+            "appenders": [
+                "file",
+                "console"
+            ],
+            "level": "info"
+        },
+        "REACTION": {
+            "appenders": [
+                "file",
+                "console"
+            ],
+            "level": "info"
+        },
+        "APP": {
+            "appenders": [
+                "file",
+                "console"
+            ],
+            "level": "info"
+        }
+    }
 }

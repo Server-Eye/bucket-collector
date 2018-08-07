@@ -26,7 +26,12 @@ function initLoggers(config, $) {
     }
 
     var logConfig = require('../config/logConfig.json');
-    log4js.configure(logConfig, {
+
+    logConfig.appenders.file.filename = path.join(logDir, logConfig.appenders.file.filename);
+
+    log4js.configure({
+        appenders: logConfig.appenders,
+        categories: logConfig.categories,
         cwd: logDir
     });
     appLogger = log4js.getLogger("APP");
@@ -65,11 +70,11 @@ function setConfig(config, $) {
         $.config = require('../config/development/config.json');
     }
 
-    appLogger.setLevel($.config.logLevel);
-    settingsLogger.setLevel($.config.logLevel);
-    webLogger.setLevel($.config.logLevel);
-    bucketLogger.setLevel($.config.logLevel);
-    reactionLogger.setLevel($.config.logLevel);
+    appLogger.level = $.config.logLevel;
+    settingsLogger.level = $.config.logLevel;
+    webLogger.level = $.config.logLevel;
+    bucketLogger.level = $.config.logLevel;
+    reactionLogger.level = $.config.logLevel;
 
     $.config.test = config.test;
     if ($.config.test) {
@@ -188,7 +193,7 @@ function setConfig(config, $) {
  * @param {exports} $
  */
 (function getConfig($) {
-    $.setConfig = function(config) {
+    $.setConfig = function (config) {
         setConfig(config, $);
     };
 })(exports);
