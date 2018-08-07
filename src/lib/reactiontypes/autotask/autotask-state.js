@@ -50,13 +50,13 @@ function state(message) {
 
         message.data = data;
 
-        soap.createTicket(message).then(function (result) {
+        soap.createTicket(message).then(function(result) {
             deferred.resolve(result);
         });
     } else {
         if (message.state && (message.state.error == false) && _settings.closeTickets) {
             //close ticket
-            soap.getTicketBySeStateId(message.seStateId).then(function (ticket) {
+            soap.getTicketBySeStateId(message.seStateId).then(function(ticket) {
                 if (!ticket) {
                     message.error = (ticket && ticket.error) ? ticket.error : "No matching ticket found";
                     message.response = (ticket && ticket.response) ? ticket.resonse : "No matching ticket found";
@@ -87,7 +87,7 @@ function state(message) {
 
                     message.data = data;
 
-                    soap.updateTicket(message).then(function (result) {
+                    soap.updateTicket(message).then(function(result) {
                         deferred.resolve(result);
                     });
                 }
@@ -102,7 +102,7 @@ function state(message) {
                 surname: ""
             };
 
-            hint(message).then(function (result) {
+            hint(message).then(function(result) {
                 deferred.resolve(result);
             });
         }

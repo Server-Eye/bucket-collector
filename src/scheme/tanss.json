@@ -1,5 +1,5 @@
 {
-    "helpURL": "https://github.com/Server-Eye/bucket-collector/wiki/tanss",
+    "helpURL": "https://servereye.freshdesk.com/support/solutions/articles/14000077991-anbindung-server-eye-an-tanss-via-bucket-collector",
     "dataSets": [{
         "displayName": "Tanss-URL",
         "caption": "URL to the tanss-system",
@@ -30,7 +30,7 @@
         }, {
             "type": "input",
             "default": "1111-22223333-AAAABBBB-CCCC",
-            "helpHtml": "<span>These keys have to be generated. See <a href='https://s3-eu-west-1.amazonaws.com/uploads-eu.hipchat.com/43388/291062/5T7O0lo4NYPMK5J/FAQ_Tanssanbindung_neues_OCC.pdf'> HERE </a></span>",
+            "helpHtml": "<span>These keys have to be generated. See <a href='https://servereye.freshdesk.com/support/solutions/articles/14000077991-anbindung-server-eye-an-tanss-via-bucket-collector'> HERE </a></span>",
             "displayName": "ApiKey",
             "dataValue": "apiKey",
             "inputtype": "text",

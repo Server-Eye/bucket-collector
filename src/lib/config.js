@@ -193,7 +193,7 @@ function setConfig(config, $) {
  * @param {exports} $
  */
 (function getConfig($) {
-    $.setConfig = function (config) {
+    $.setConfig = function(config) {
         setConfig(config, $);
     };
 })(exports);

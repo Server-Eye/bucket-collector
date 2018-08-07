@@ -62,6 +62,69 @@ function getCases() {
 }
 
 /**
+ * Resolves all possible options for the secure-flag. 
+ * Used in UI to select secure-option.
+ * 
+ * @returns {promise}
+ */
+function getSecureOptions() {
+    var deferred = Q.defer();
+
+    deferred.resolve([{
+        value: "YES",
+        name: "Yes"
+    }, {
+        value: "NO",
+        name: "No"
+    }]);
+
+    return deferred.promise;
+}
+
+/**
+ * Resolves all possible options for the ignore-cert-flag. 
+ * Used in UI to select cert-option.
+ * 
+ * @returns {promise}
+ */
+function getCertOptions() {
+    var deferred = Q.defer();
+
+    deferred.resolve([{
+        value: "YES",
+        name: "Yes"
+    }, {
+        value: "NO",
+        name: "No"
+    }]);
+
+    return deferred.promise;
+}
+
+/**
+ * Resolves all possible options for the mail-content. 
+ * Used in UI to select content-option.
+ * 
+ * @returns {promise}
+ */
+function getContentOptions() {
+    var deferred = Q.defer();
+
+    deferred.resolve([{
+        value: 'html',
+        name: "HTML"
+    }, {
+        value: 'text',
+        name: "TEXT"
+    }, {
+        value: 'both',
+        name: "TEXT + HTML"
+    }]);
+
+    return deferred.promise;
+}
+
+/**
  * Resolves all possible actions.
  * Used in UI to select actions.
  * 
@@ -90,5 +153,8 @@ function getActions() {
 (function($) {
     $.getCases = getCases;
     $.getActions = getActions;
+    $.getContentOptions = getContentOptions;
+    $.getSecureOptions = getSecureOptions;
+    $.getCertOptions = getCertOptions;
     $.react = react;
 })(exports);

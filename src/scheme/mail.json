@@ -1,94 +1,161 @@
 {
     "helpURL": "https://github.com/Server-Eye/bucket-collector/wiki/mail",
     "dataSets": [{
-        "caption": "Actiontype",
-        "displayName": "action",
-        "name": "action",
-        "helpText": "Select if you want to send mails or debug your mailtemplate. In debug-mode, mails are written into the template-folder.",
-        "type": "select",
-        "dataType": "string",
-        "required": true,
-        "multiple": false,
-        "data": {
-            "source": "reaction",
-            "method": "getActions",
-            "displayValue": "name",
-            "dataValue": "action"
+            "caption": "Actiontype",
+            "displayName": "action",
+            "name": "action",
+            "helpText": "Select if you want to send mails or debug your mailtemplate. In debug-mode, mails are written into the template-folder.",
+            "type": "select",
+            "dataType": "string",
+            "required": true,
+            "multiple": false,
+            "data": {
+                "source": "reaction",
+                "method": "getActions",
+                "displayValue": "name",
+                "dataValue": "action"
+            }
+        },
+        {
+            "caption": "Send mail for ",
+            "displayName": "case",
+            "name": "cases",
+            "helpText": "Select if a mail should be sent in case of an ERROR, OK or HINT-message.",
+            "type": "select",
+            "dataType": "string",
+            "required": true,
+            "multiple": true,
+            "data": {
+                "source": "reaction",
+                "method": "getCases",
+                "displayValue": "name",
+                "dataValue": "case"
+            }
+        },
+        {
+            "caption": "Mail Content-Type",
+            "displayName": "Content-Type",
+            "name": "mailContent",
+            "helpText": "Select if the mails should contain HTML, TEXT or BOTH",
+            "type": "select",
+            "dataType": "string",
+            "required": true,
+            "multiple": false,
+            "data": {
+                "source": "reaction",
+                "method": "getContentOptions",
+                "displayValue": "name",
+                "dataValue": "value"
+            }
+        },
+        {
+            "caption": "Mailserver Address",
+            "displayName": "smtp server address",
+            "name": "host",
+            "helpText": "The address of the smtp server which the bucket-collector will use to send mails.",
+            "default": "smtp.something.com",
+            "type": "input",
+            "inputtype": "text",
+            "dataType": "string",
+            "required": true
+        },
+        {
+            "caption": "Mailserver Port",
+            "displayName": "smtp server port",
+            "name": "port",
+            "helpText": "The port which the bucket-collector will use to send mails. Defaults to 587",
+            "default": "smtp-port",
+            "type": "input",
+            "inputtype": "number",
+            "dataType": "number",
+            "required": true
+        },
+        {
+            "caption": "Mailserver Secure Connection",
+            "displayName": "Use secure connection via TLS",
+            "name": "secure",
+            "helpText": "Set to 'Yes' if you want to force the usage of TLS. You should use Port 465 in this case. If set to 'No', the connection is made using plaintext first. If your SMTP server supports the STARTTLS command the connection is upgraded to use TLS afterwards.",
+            "type": "select",
+            "dataType": "string",
+            "required": true,
+            "multiple": false,
+            "data": {
+                "source": "reaction",
+                "method": "getSecureOptions",
+                "displayValue": "name",
+                "dataValue": "value"
+            }
+        },
+        {
+            "caption": "Ignore certificates",
+            "displayName": "Ignore self-signed or invalid TLS certificates",
+            "name": "ignoreCerts",
+            "helpText": "Set to 'Yes' if you want to Ignore self-signed or invalid TLS certificates.",
+            "type": "select",
+            "dataType": "string",
+            "required": true,
+            "multiple": false,
+            "data": {
+                "source": "reaction",
+                "method": "getCertOptions",
+                "displayValue": "name",
+                "dataValue": "value"
+            }
+        },
+        {
+            "caption": "Mailserver Username",
+            "displayName": "Username",
+            "name": "user",
+            "helpText": "The user of the smtp server which the bucket-collector will use to send mails. (Leave empty if none is required)",
+            "default": "someone@something.com",
+            "type": "input",
+            "inputtype": "text",
+            "dataType": "string",
+            "required": false
+        },
+        {
+            "caption": "Mailserver Password",
+            "displayName": "Password",
+            "name": "pass",
+            "helpText": "The password of the user given above. (Leave empty if none is required)",
+            "type": "input",
+            "inputtype": "password",
+            "dataType": "string",
+            "required": false
+        },
+        {
+            "caption": "Sender",
+            "displayName": "Senderaddress",
+            "name": "from",
+            "helpText": "The address which is set as the sender.",
+            "default": "someone@something.com",
+            "type": "input",
+            "inputtype": "text",
+            "dataType": "string",
+            "required": true
+        },
+        {
+            "caption": "Recipient addresses",
+            "displayName": "address",
+            "name": "to",
+            "helpText": "The addresses which are set as the recipient. If none are given the address of the bucketowner is used.",
+            "default": "someone@something.com",
+            "type": "input",
+            "inputtype": "text",
+            "dataType": "string",
+            "multiple": true,
+            "required": false
+        },
+        {
+            "caption": "BCC addresses",
+            "displayName": "address",
+            "name": "bcc",
+            "helpText": "The addresses which are set as the recipient. If none are given the address of the bucketowner is used.",
+            "type": "input",
+            "inputtype": "text",
+            "dataType": "string",
+            "multiple": true,
+            "required": false
         }
-    }, {
-        "caption": "Send mail for ",
-        "displayName": "case",
-        "name": "cases",
-        "helpText": "Select if a mail should be sent in case of an ERROR, OK or HINT-message.",
-        "type": "select",
-        "dataType": "string",
-        "required": true,
-        "multiple": true,
-        "data": {
-            "source": "reaction",
-            "method": "getCases",
-            "displayValue": "name",
-            "dataValue": "case"
-        }
-    }, {
-        "caption": "Mailserver",
-        "displayName": "smtp server address",
-        "name": "host",
-        "helpText": "The address of the smtp server which the bucket-collector will use to send mails.",
-        "default": "smtp.something.com",
-        "type": "input",
-        "inputtype": "text",
-        "dataType": "string",
-        "required": true
-    }, {
-        "caption": "Mailserver Username",
-        "displayName": "Username",
-        "name": "user",
-        "helpText": "The user of the smtp server which the bucket-collector will use to send mails. (Leave empty if none is required)",
-        "default": "someone@something.com",
-        "type": "input",
-        "inputtype": "text",
-        "dataType": "string",
-        "required": false
-    }, {
-        "caption": "Mailserver Password",
-        "displayName": "Password",
-        "name": "pass",
-        "helpText": "The password of the user given above. (Leave empty if none is required)",
-        "type": "input",
-        "inputtype": "password",
-        "dataType": "string",
-        "required": false
-    }, {
-        "caption": "Sender",
-        "displayName": "Senderaddress",
-        "name": "from",
-        "helpText": "The address which is set as the sender.",
-        "default": "someone@something.com",
-        "type": "input",
-        "inputtype": "text",
-        "dataType": "string",
-        "required": true
-    }, {
-        "caption": "Recipient addresses",
-        "displayName": "address",
-        "name": "to",
-        "helpText": "The addresses which are set as the recipient. If none are given the address of the bucketowner is used.",
-        "default": "someone@something.com",
-        "type": "input",
-        "inputtype": "text",
-        "dataType": "string",
-        "multiple": true,
-        "required": false
-    }, {
-        "caption": "BCC addresses",
-        "displayName": "address",
-        "name": "bcc",
-        "helpText": "The addresses which are set as the recipient. If none are given the address of the bucketowner is used.",
-        "type": "input",
-        "inputtype": "text",
-        "dataType": "string",
-        "multiple": true,
-        "required": false
-    }]
+    ]
 }

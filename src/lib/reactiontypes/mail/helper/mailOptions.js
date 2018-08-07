@@ -25,8 +25,12 @@ function get(bucketmessage) {
         mailOptions.bcc = bcc;
     }
 
-    mailOptions.text = parser.text(bucketmessage);
-    mailOptions.html = parser.html(bucketmessage);
+    if (settings.mailContent == 'text' || settings.mailContent == 'both') {
+        mailOptions.text = parser.text(bucketmessage);
+    }
+    if (settings.mailContent == 'html' || settings.mailContent == 'both') {
+        mailOptions.html = parser.html(bucketmessage);
+    }
     mailOptions.subject = parser.subject(bucketmessage);
 
     return mailOptions;
