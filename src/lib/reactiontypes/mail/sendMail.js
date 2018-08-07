@@ -52,7 +52,7 @@ function sendMail(bucketmessage) {
  * @returns {String}
  */
 function checkMessagetype(bucketmessage) {
-    if (bucketmessage == "STATE") {
+    if (bucketmessage.type == "STATE") {
         if (bucketmessage.state.error) {
             return "ERROR";
         } else {
@@ -60,7 +60,7 @@ function checkMessagetype(bucketmessage) {
         }
     }
 
-    if (bucketmessage == "HINT") {
+    if (bucketmessage.type == "HINT") {
         if (bucketmessage.note.private) {
             return "PRIVATEHINT";
         } else {
