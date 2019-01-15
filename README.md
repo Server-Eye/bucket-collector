@@ -19,5 +19,15 @@ To update your installation of the bucket-collector follow these steps:
 4. Copy the directories from step 2 back into the installation-directory
 5. Start the new version of the bucket-collector. 
 
+## Important folders and files
+
+* `bucket-data`-directory
+  * Contains the configurationfiles of the bucket-collector itself
+* `reaction-data`-directory
+  * Contains the configurationfiles for each of the bucket-collectors reactions.
+  * Each file is named after it's corresponding reaction. So the configurationfile for the `tanss` reaction is found under `/reaction-data/tanss`
+* `logs`-directory
+  * Contains all of the bucket-collector's logfiles.
+
 
 **Check out our [wiki](https://github.com/Server-Eye/bucket-collector/wiki) for additional informations.**
